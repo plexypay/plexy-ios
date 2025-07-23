@@ -36,7 +36,8 @@ internal struct SessionRequest: APIRequest {
         try container.encode(currentConfiguration.amount, forKey: .amount)
         try container.encode(ConfigurationConstants.returnUrl.absoluteString, forKey: .returnUrl)
         try container.encode(ConfigurationConstants.reference, forKey: .reference)
-        try container.encode("iOS", forKey: .channel)
+        // assignment 4
+//        try container.encode("iOS", forKey: .channel)
         try container.encode(ConfigurationConstants.lineItems, forKey: .lineItems)
         try container.encode(ConfigurationConstants.mandate, forKey: .mandate)
         
@@ -68,10 +69,11 @@ internal struct SessionRequest: APIRequest {
         
         let configuration: AuthenticationData.AuthenticationConfiguration = ConfigurationConstants.current.threeDSConfigurationSettings.allowForceCardRedirectAction ?
             .cardRedirectAction : .nativeThreeDSAction
-        try container.encodeIfPresent(
-            AuthenticationData(configuration: configuration),
-            forKey: .authenticationData
-        )
+        // assignment 4
+//        try container.encodeIfPresent(
+//            AuthenticationData(configuration: configuration),
+//            forKey: .authenticationData
+//        )
     }
     
     internal enum CodingKeys: CodingKey {

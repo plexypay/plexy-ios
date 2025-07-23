@@ -23,7 +23,8 @@ internal final class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.prefersLargeTitles = true
         
         #if DEBUG
-            AdyenLogging.isEnabled = true
+            // assignment 0
+//            AdyenLogging.isEnabled = true
         #endif
         
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -35,16 +36,9 @@ internal final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     internal func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        RedirectComponent.applicationDidOpen(from: url)
+        // assignment 3
+//        RedirectComponent.applicationDidOpen(from: url)
         
-        #if canImport(PayKit)
-            NotificationCenter.default.post(
-                name: CashAppPay.RedirectNotification,
-                object: nil,
-                userInfo: [UIApplication.LaunchOptionsKey.url: url]
-            )
-        #endif
-        
-        return true
+        true
     }
 }

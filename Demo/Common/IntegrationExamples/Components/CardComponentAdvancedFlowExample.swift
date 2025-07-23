@@ -74,11 +74,25 @@ internal final class CardComponentAdvancedFlowExample: InitialDataAdvancedFlowPr
             throw IntegrationError.paymentMethodNotAvailable(paymentMethod: CardPaymentMethod.self)
         }
 
+        var configuration = ConfigurationConstants.current.cardConfiguration
+        // bonus excercise 1
+//        var style = configuration.style
+//        style.textField.text.color = UIColor(red: 163.0 / 255.0, green: 80.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)
+//        style.mainButtonItem.button.backgroundColor = .green
+//        style.textField.errorColor = UIColor(red: 64.0 / 255.0, green: 224.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
+//        configuration.style = style
+        
+        // bonus exercise 2
+//        configuration.showsStorePaymentMethodField = true
+//        configuration.showsHolderNameField = true
+//        configuration.showsSecurityCodeField = false
+        
         let component = CardComponent(
             paymentMethod: paymentMethod,
             context: context,
-            configuration: ConfigurationConstants.current.cardConfiguration
+            configuration: configuration
         )
+        
         component.cardComponentDelegate = self
         component.delegate = self
         return component
@@ -109,7 +123,8 @@ internal final class CardComponentAdvancedFlowExample: InitialDataAdvancedFlowPr
         switch result {
         case let .success(response):
             if let action = response.action {
-                adyenActionComponent.handle(action)
+                // assignment 2-1
+//                adyenActionComponent.handle(action)
             } else {
                 finish(with: response)
             }
@@ -158,26 +173,30 @@ internal final class CardComponentAdvancedFlowExample: InitialDataAdvancedFlowPr
 extension CardComponentAdvancedFlowExample: CardComponentDelegate {
 
     func didSubmit(lastFour: String, finalBIN: String, component: CardComponent) {
-        print("Card used: **** **** **** \(lastFour)")
-        print("Final BIN: \(finalBIN)")
+        // assignment 5
+//        print("Card used: **** **** **** \(lastFour)")
+//        print("Final BIN: \(finalBIN)")
     }
 
     internal func didChangeBIN(_ value: String, component: CardComponent) {
-        print("Current BIN: \(value)")
+        // assignment 5
+//        print("Current BIN: \(value)")
     }
 
     internal func didChangeCardBrand(_ value: [CardBrand]?, component: CardComponent) {
-        print("Current card type: \((value ?? []).reduce("") { "\($0), \($1)" })")
+        // assignment 5
+//        print("Current card type: \((value ?? []).reduce("") { "\($0), \($1)" })")
     }
 }
 
 extension CardComponentAdvancedFlowExample: PaymentComponentDelegate {
 
     internal func didSubmit(_ data: PaymentComponentData, from component: PaymentComponent) {
-        let request = PaymentsRequest(data: data)
-        apiClient.perform(request) { [weak self] result in
-            self?.paymentResponseHandler(result: result)
-        }
+        // assignment 1
+//        let request = PaymentsRequest(data: data)
+//        apiClient.perform(request) { [weak self] result in
+//            self?.paymentResponseHandler(result: result)
+//        }
     }
 
     internal func didFail(with error: Error, from component: PaymentComponent) {
@@ -197,15 +216,16 @@ extension CardComponentAdvancedFlowExample: ActionComponentDelegate {
     }
 
     internal func didProvide(_ data: ActionComponentData, from component: ActionComponent) {
-        (component as? PresentableComponent)?.viewController.view.isUserInteractionEnabled = false
-        let request = PaymentDetailsRequest(
-            details: data.details,
-            paymentData: data.paymentData,
-            merchantAccount: ConfigurationConstants.current.merchantAccount
-        )
-        apiClient.perform(request) { [weak self] result in
-            self?.paymentResponseHandler(result: result)
-        }
+        // assignment 2-2
+//        (component as? PresentableComponent)?.viewController.view.isUserInteractionEnabled = false
+//        let request = PaymentDetailsRequest(
+//            details: data.details,
+//            paymentData: data.paymentData,
+//            merchantAccount: ConfigurationConstants.current.merchantAccount
+//        )
+//        apiClient.perform(request) { [weak self] result in
+//            self?.paymentResponseHandler(result: result)
+//        }
     }
 }
 

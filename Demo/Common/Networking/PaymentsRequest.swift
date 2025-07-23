@@ -54,16 +54,18 @@ internal struct PaymentsRequest: APIRequest {
         try container.encodeIfPresent(data.socialSecurityNumber, forKey: .socialSecurityNumber)
         try container.encode(Locale.current.identifier, forKey: .shopperLocale)
         try container.encodeIfPresent(data.browserInfo, forKey: .browserInfo)
-        try container.encode("iOS", forKey: .channel)
+        // assignment 4
+//        try container.encode("iOS", forKey: .channel)
         try container.encode(ConfigurationConstants.reference, forKey: .reference)
         try container.encode(currentConfiguration.countryCode, forKey: .countryCode)
         try container.encode(ConfigurationConstants.returnUrl.absoluteString, forKey: .returnUrl)
         try container.encode(ConfigurationConstants.shopperReference, forKey: .shopperReference)
         let configuration: AdditionalData.AuthenticationConfiguration = currentConfiguration.threeDSConfigurationSettings.allowForceCardRedirectAction ? .cardRedirectAction : .nativeThreeDSAction
-        try container.encode(
-            AdditionalData(configuration: configuration),
-            forKey: .additionalData
-        )
+        // assignment 4
+//        try container.encode(
+//            AdditionalData(configuration: configuration),
+//            forKey: .additionalData
+//        )
         try container.encode(currentConfiguration.merchantAccount, forKey: .merchantAccount)
         try container.encodeIfPresent(data.order?.compactOrder, forKey: .order)
         try container.encodeIfPresent(data.installments, forKey: .installments)
