@@ -1,4 +1,4 @@
-github "adyen/adyen-3ds2-ios" == 2.4.2
+github "adyen/adyen-3ds2-ios" "3d71502e82e3e2da5cd6aea85dd92094d595f53e"
 github "adyen/adyen-networking-ios" == 3.0.1
 github "adyen/adyen-wechatpay-ios" == 2.1.0
 github "adyen/adyen-authentication-ios" == 3.1.0

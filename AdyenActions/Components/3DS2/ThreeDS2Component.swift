@@ -154,10 +154,14 @@ public final class ThreeDS2Component: ActionComponent {
     public func handle(_ threeDS2Action: ThreeDS2Action) {
         switch threeDS2Action {
         case let .fingerprint(fingerprintAction):
+            IssueDebuggingLogger.log(message: "ThreeDS2Action.fingerprint", object: self)
+
             threeDS2CompactFlowHandler.handle(fingerprintAction) { [weak self] result in
                 self?.didReceive(result, paymentData: nil)
             }
         case let .challenge(challengeAction):
+            IssueDebuggingLogger.log(message: "ThreeDS2Action.challenge", object: self)
+
             threeDS2CompactFlowHandler.handle(challengeAction) { [weak self] result in
                 self?.didReceive(result, paymentData: nil)
             }
@@ -170,6 +174,8 @@ public final class ThreeDS2Component: ActionComponent {
     ///
     /// - Parameter fingerprintAction: The fingerprint action as received from the Checkout API.
     public func handle(_ fingerprintAction: ThreeDS2FingerprintAction) {
+        IssueDebuggingLogger.log(message: "ThreeDS2FingerprintAction", object: self)
+
         threeDS2ClassicFlowHandler.handle(fingerprintAction) { [weak self] result in
             self?.didReceive(result, paymentData: fingerprintAction.paymentData)
         }
@@ -181,6 +187,8 @@ public final class ThreeDS2Component: ActionComponent {
     ///
     /// - Parameter challengeAction: The challenge action as received from the Checkout API.
     public func handle(_ challengeAction: ThreeDS2ChallengeAction) {
+        IssueDebuggingLogger.log(message: "ThreeDS2ChallengeAction", object: self)
+
         threeDS2ClassicFlowHandler.handle(challengeAction) { [weak self] result in
             self?.didReceive(result, paymentData: challengeAction.paymentData)
         }
@@ -219,10 +227,12 @@ public final class ThreeDS2Component: ActionComponent {
     }
 
     private func didFinish(data: ActionComponentData) {
+        IssueDebuggingLogger.log(message: "didFinish 🏁", object: self)
         delegate?.didProvide(data, from: self)
     }
 
     private func didFail(with error: Swift.Error) {
+        IssueDebuggingLogger.log(message: "didFail 🏁", object: self)
         delegate?.didFail(with: error, from: self)
     }
 
@@ -269,18 +279,22 @@ public final class ThreeDS2Component: ActionComponent {
 extension ThreeDS2Component: ActionComponentDelegate {
 
     public func didOpenExternalApplication(component: ActionComponent) {
+        IssueDebuggingLogger.log(message: "🏁")
         delegate?.didOpenExternalApplication(component: self)
     }
 
     public func didProvide(_ data: ActionComponentData, from component: ActionComponent) {
+        IssueDebuggingLogger.log(message: "🏁")
         delegate?.didProvide(data, from: self)
     }
 
     public func didComplete(from component: ActionComponent) {
+        IssueDebuggingLogger.log(message: "🏁")
         delegate?.didComplete(from: self)
     }
 
     public func didFail(with error: Swift.Error, from component: ActionComponent) {
+        IssueDebuggingLogger.log(message: "🏁")
         delegate?.didFail(with: error, from: self)
     }
 

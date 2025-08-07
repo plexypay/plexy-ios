@@ -10270,8 +10270,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Adyen/adyen-3ds2-ios";
 			requirement = {
-				kind = exactVersion;
-				version = 2.4.2;
+				kind = revision;
+				revision = 3d71502e82e3e2da5cd6aea85dd92094d595f53e;
 			};
 		};
 		F94D65E42B0365C30095D61E /* XCRemoteSwiftPackageReference "adyen-authentication-ios" */ = {

@@ -25,11 +25,14 @@ internal final class ThreeDSServiceLegacy: ThreeDSServiceable {
         parameters: FingerprintServiceParameters,
         completionHandler: @escaping (Result<AnyAuthenticationRequestParameters, ThreeDSServiceFingerprintError>) -> Void
     ) {
+        IssueDebuggingLogger.log(message: "", object: self)
         let serviceParameters = ADYServiceParameters(
             directoryServerIdentifier: parameters.directoryServerIdentifier,
             directoryServerPublicKey: parameters.directoryServerPublicKey,
             directoryServerRootCertificates: parameters.directoryServerRootCertificates
         )
+        IssueDebuggingLogger.log(message: "serviceParameters: isNil(\(serviceParameters == nil))", object: self)
+
         service.service(
             with: serviceParameters,
             appearanceConfiguration: parameters.appearanceConfiguration
@@ -37,10 +40,12 @@ internal final class ThreeDSServiceLegacy: ThreeDSServiceable {
             guard let self else { return }
             do {
                 let transaction = try service.transaction(withMessageVersion: parameters.threeDSMessageVersion)
+                IssueDebuggingLogger.log(message: "service.transaction(withMessageVersion: transaction", object: self)
                 self.transaction = transaction
                 completionHandler(.success(transaction.authenticationParameters))
                 
             } catch {
+                IssueDebuggingLogger.log(message: "service.transaction(withMessageVersion: Error: \(error)", object: self)
                 completionHandler(
                     .failure(.fingerprintingError(
                         errorPayload: self.opaqueErrorObject(error: error)
@@ -54,6 +59,7 @@ internal final class ThreeDSServiceLegacy: ThreeDSServiceable {
         with parameters: ChallengeParameters,
         completionHandler: @escaping (Result<AnyChallengeResult, ThreeDSServiceChallengeError>) -> Void
     ) {
+        IssueDebuggingLogger.log(message: "", object: self)
         let challengeParameters = ADYChallengeParameters(
             serverTransactionIdentifier: parameters.challengeToken.serverTransactionIdentifier,
             threeDSRequestorAppURL: parameters.threeDSRequestorAppURL,
@@ -63,6 +69,7 @@ internal final class ThreeDSServiceLegacy: ThreeDSServiceable {
         )
         
         guard let transaction else {
+            IssueDebuggingLogger.log(message: "transactionNotInitialized", object: self)
             return completionHandler(.failure(.transactionNotInitialized))
         }
         
@@ -80,10 +87,12 @@ internal final class ThreeDSServiceLegacy: ThreeDSServiceable {
                 }
                 
                 if isCancelled(error: error) {
+                    IssueDebuggingLogger.log(message: "isCancelled: \(error)", object: self)
                     return completionHandler(.failure(.cancelled(
                         errorPayload: opaqueErrorObject(error: error)
                     )))
                 } else {
+                    IssueDebuggingLogger.log(message: "\(error)", object: self)
                     return completionHandler(.failure(.challengeError(
                         errorPayload: opaqueErrorObject(error: error)
                     )))

@@ -5,6 +5,24 @@
 //
 
 import Foundation
+import os
+
+public enum IssueDebuggingLogger {
+    public static func log(message: String, filePath: String = #file, function: String = #function, object: AnyObject? = nil) {
+        let filename = URL(fileURLWithPath: filePath).lastPathComponent
+        var objectAddress = ""
+        if let object {
+            objectAddress = String(describing: Unmanaged.passUnretained(object).toOpaque())
+        }
+        if #available(iOS 14.0, *) {
+            let message = "Adyen:CO:\(filename):\(objectAddress):\(function):\(message)"
+            Logger().log("\(message, privacy: .public)")
+        } else {
+            print("\(message)")
+        }
+    }
+    
+}
 
 /// An object that provides helper functions for coding and decoding responses.
 @_spi(AdyenInternal)

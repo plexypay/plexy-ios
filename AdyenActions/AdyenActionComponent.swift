@@ -134,6 +134,7 @@ public final class AdyenActionComponent: ActionComponent, ActionHandlingComponen
             self.style = style
             self.threeDS = threeDS
             self.twint = twint
+            IssueDebuggingLogger.log(message: "")
         }
     }
     
@@ -150,6 +151,7 @@ public final class AdyenActionComponent: ActionComponent, ActionHandlingComponen
         context: AdyenContext,
         configuration: Configuration = Configuration()
     ) {
+        IssueDebuggingLogger.log(message: "")
         self.context = context
         self.configuration = configuration
     }
@@ -160,7 +162,7 @@ public final class AdyenActionComponent: ActionComponent, ActionHandlingComponen
     ///
     /// - Parameter action: The action to handle.
     public func handle(_ action: Action) {
-        
+        IssueDebuggingLogger.log(message: "", object: self)
         sendHandleEvent(for: action)
         
         switch action {
