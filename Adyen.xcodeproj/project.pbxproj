@@ -10271,7 +10271,7 @@
 			repositoryURL = "https://github.com/Adyen/adyen-3ds2-ios";
 			requirement = {
 				kind = revision;
-				revision = 3d71502e82e3e2da5cd6aea85dd92094d595f53e;
+				revision = a4d9215a2cadba3a2f7ea81552a765525cedb964;
 			};
 		};
 		F94D65E42B0365C30095D61E /* XCRemoteSwiftPackageReference "adyen-authentication-ios" */ = {
