@@ -24,6 +24,7 @@ internal struct PreselectedPaymentMethodAssembler: PreselectedPaymentMethodAssem
 
     private let context: AdyenContext
     private let configuration: DropInComponent.Configuration
+    private let componentDelegate: CheckoutComponentDelegate
     private let cardComponentDelegate: CardComponentDelegate?
     private let partialPaymentDelegate: PartialPaymentDelegate?
 
@@ -32,11 +33,13 @@ internal struct PreselectedPaymentMethodAssembler: PreselectedPaymentMethodAssem
     internal init(
         context: AdyenContext,
         configuration: DropInComponent.Configuration,
+        componentDelegate: CheckoutComponentDelegate,
         cardComponentDelegate: CardComponentDelegate?,
         partialPaymentDelegate: PartialPaymentDelegate?
     ) {
         self.context = context
         self.configuration = configuration
+        self.componentDelegate = componentDelegate
         self.cardComponentDelegate = cardComponentDelegate
         self.partialPaymentDelegate = partialPaymentDelegate
     }
@@ -50,6 +53,7 @@ internal struct PreselectedPaymentMethodAssembler: PreselectedPaymentMethodAssem
         let componentContainerAssembler = ComponentContainerAssembler(
             context: context,
             configuration: configuration,
+            componentDelegate: componentDelegate,
             cardComponentDelegate: cardComponentDelegate,
             partialPaymentDelegate: partialPaymentDelegate
         )

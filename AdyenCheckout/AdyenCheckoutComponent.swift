@@ -7,8 +7,6 @@
 @_spi(AdyenInternal) import Adyen
 import UIKit
 
-package typealias CheckoutComponentDelegate = (PaymentComponentDelegate & ActionComponentDelegate)
-
 // TODO: add description
 public final class AdyenCheckoutComponent {
     

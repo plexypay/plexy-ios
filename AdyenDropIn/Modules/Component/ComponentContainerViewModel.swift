@@ -48,6 +48,7 @@ internal class ComponentContainerViewModel: ComponentContainerViewModelProtocol 
     private let component: PresentableComponent
     private let context: AdyenContext
     private let configuration: DropInComponent.Configuration
+    private weak var componentDelegate: CheckoutComponentDelegate?
     private weak var cardComponentDelegate: CardComponentDelegate?
     private weak var partialPaymentDelegate: PartialPaymentDelegate?
 
@@ -58,6 +59,7 @@ internal class ComponentContainerViewModel: ComponentContainerViewModelProtocol 
         context: AdyenContext,
         delegate: ComponentContainerViewModelDelegate,
         configuration: DropInComponent.Configuration,
+        componentDelegate: CheckoutComponentDelegate?,
         cardComponentDelegate: CardComponentDelegate?,
         partialPaymentDelegate: PartialPaymentDelegate?
     ) {
@@ -65,6 +67,7 @@ internal class ComponentContainerViewModel: ComponentContainerViewModelProtocol 
         self.context = context
         self.delegate = delegate
         self.configuration = configuration
+        self.componentDelegate = componentDelegate
         self.cardComponentDelegate = cardComponentDelegate
         self.partialPaymentDelegate = partialPaymentDelegate
 
@@ -90,7 +93,7 @@ internal class ComponentContainerViewModel: ComponentContainerViewModelProtocol 
     // MARK: - Private
 
     private func setupComponent() {
-        (component as? PaymentComponent)?.delegate = self
+        (component as? PaymentComponent)?.delegate = componentDelegate
         (component as? CardComponent)?.cardComponentDelegate = cardComponentDelegate
         (component as? PartialPaymentComponent)?.partialPaymentDelegate = partialPaymentDelegate
         (component as? PartialPaymentComponent)?.readyToSubmitComponentDelegate = self

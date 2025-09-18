@@ -68,7 +68,11 @@ public final class DropInComponent: NSObject,
         paymentMethods: PaymentMethods,
         context: AdyenContext,
         configuration: Configuration = .init(),
-        title: String? = nil
+        title: String? = nil,
+        componentDelegate: CheckoutComponentDelegate,
+        cardComponentDelegate: CardComponentDelegate?,
+        partialPaymentDelegate: PartialPaymentDelegate?,
+        storedPaymentMethodsDelegate: StoredPaymentMethodsDelegate?
     ) {
         self.title = title ?? Bundle.main.displayName
         self.configuration = configuration
@@ -84,6 +88,7 @@ public final class DropInComponent: NSObject,
             paymentMethods: paymentMethods,
             context: context,
             configuration: configuration,
+            componentDelegate: componentDelegate,
             cardComponentDelegate: cardComponentDelegate,
             partialPaymentDelegate: partialPaymentDelegate
         )

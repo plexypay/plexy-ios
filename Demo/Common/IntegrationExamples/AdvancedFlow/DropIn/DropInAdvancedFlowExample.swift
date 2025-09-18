@@ -5,6 +5,7 @@
 //
 
 import AdyenActions
+import AdyenCheckout
 import AdyenComponents
 import AdyenDropIn
 
@@ -43,23 +44,43 @@ internal final class DropInAdvancedFlowExample: InitialDataAdvancedFlowProtocol 
     // MARK: - Presentation
 
     private func presentComponent(with paymentMethods: PaymentMethods) {
-        let dropIn = dropInComponent(from: paymentMethods)
-        presenter?.present(viewController: dropIn.viewController, completion: nil)
-        dropInComponent = dropIn
+        Task { @MainActor in
+            let dropIn = await dropInComponent(from: paymentMethods)
+            presenter?.present(viewController: dropIn.viewController, completion: nil)
+            dropInComponent = dropIn
+        }
     }
 
-    private func dropInComponent(from paymentMethods: PaymentMethods) -> DropInComponent {
+    private func dropInComponent(from paymentMethods: PaymentMethods) async -> DropInComponent {
         let configuration = dropInConfiguration(from: paymentMethods)
+        
+        let checkoutConfiguration = try! CheckoutConfiguration(
+            environment: ConfigurationConstants.componentsEnvironment,
+            amount: ConfigurationConstants.current.amount,
+            clientKey: ConfigurationConstants.clientKey,
+            analyticsConfiguration: .init(
+                isEnabled: ConfigurationConstants.current.analyticsSettings.isEnabled
+            )
+        ) {
+            BLIKComponentConfiguration()
+        }.onSubmit { _, _ in
+            print("⚠️⚠️ THIS IS A PAYMENT USING ADYEN CHECKOUT ⚠️⚠️")
+        }
+        
+        let adyenCheckout = try! await AdyenCheckout.setup(with: paymentMethods, configuration: checkoutConfiguration)
+        
         let component = DropInComponent(
             paymentMethods: paymentMethods,
             context: context,
             configuration: configuration,
-            title: ConfigurationConstants.appName
+            title: ConfigurationConstants.appName,
+            componentDelegate: adyenCheckout,
+            cardComponentDelegate: nil,
+            partialPaymentDelegate: self,
+            storedPaymentMethodsDelegate: self
         )
         
         component.delegate = self
-        component.partialPaymentDelegate = self
-        component.storedPaymentMethodsDelegate = self
 
         return component
     }

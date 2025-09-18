@@ -24,6 +24,7 @@ internal class DropInAssembler {
     private let context: AdyenContext
     private let configuration: DropInComponent.Configuration
     private let componentManager: ComponentManager
+    private let componentDelegate: CheckoutComponentDelegate
     private let cardComponentDelegate: CardComponentDelegate?
     private let partialPaymentDelegate: PartialPaymentDelegate?
 
@@ -33,12 +34,14 @@ internal class DropInAssembler {
         paymentMethods: PaymentMethods,
         context: AdyenContext,
         configuration: DropInComponent.Configuration,
+        componentDelegate: CheckoutComponentDelegate,
         cardComponentDelegate: CardComponentDelegate?,
         partialPaymentDelegate: PartialPaymentDelegate?
     ) {
         self.paymentMethods = paymentMethods
         self.context = context
         self.configuration = configuration
+        self.componentDelegate = componentDelegate
         self.cardComponentDelegate = cardComponentDelegate
         self.partialPaymentDelegate = partialPaymentDelegate
         self.componentManager = ComponentManager(
@@ -48,7 +51,7 @@ internal class DropInAssembler {
             partialPaymentEnabled: false, // TODO: - Set partial payment flow
             order: nil,
             supportsEditingStoredPaymentMethods: false, // TODO: - Support editing stored PMs
-            presentationDelegate: nil
+            presentationDelegate: nil // TODO: - Handle presentation
         )
     }
 
@@ -90,6 +93,7 @@ internal class DropInAssembler {
         PreselectedPaymentMethodAssembler(
             context: context,
             configuration: configuration,
+            componentDelegate: componentDelegate,
             cardComponentDelegate: cardComponentDelegate,
             partialPaymentDelegate: partialPaymentDelegate
         )
@@ -100,6 +104,7 @@ internal class DropInAssembler {
             componentManager: componentManager,
             context: context,
             configuration: configuration,
+            componentDelegate: componentDelegate,
             cardComponentDelegate: cardComponentDelegate,
             partialPaymentDelegate: partialPaymentDelegate
         )
@@ -109,6 +114,7 @@ internal class DropInAssembler {
         ComponentContainerAssembler(
             context: context,
             configuration: configuration,
+            componentDelegate: componentDelegate,
             cardComponentDelegate: cardComponentDelegate,
             partialPaymentDelegate: partialPaymentDelegate
         )

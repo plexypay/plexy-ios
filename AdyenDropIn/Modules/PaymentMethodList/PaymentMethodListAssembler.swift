@@ -21,6 +21,7 @@ internal struct PaymentMethodListAssembler: PaymentMethodListAssemblerProtocol {
     private let componentManager: ComponentManager
     private let context: AdyenContext
     private let configuration: DropInComponent.Configuration
+    private let componentDelegate: CheckoutComponentDelegate
     private let cardComponentDelegate: CardComponentDelegate?
     private let partialPaymentDelegate: PartialPaymentDelegate?
 
@@ -30,12 +31,14 @@ internal struct PaymentMethodListAssembler: PaymentMethodListAssemblerProtocol {
         componentManager: ComponentManager,
         context: AdyenContext,
         configuration: DropInComponent.Configuration,
+        componentDelegate: CheckoutComponentDelegate,
         cardComponentDelegate: CardComponentDelegate?,
         partialPaymentDelegate: PartialPaymentDelegate?
     ) {
         self.componentManager = componentManager
         self.context = context
         self.configuration = configuration
+        self.componentDelegate = componentDelegate
         self.cardComponentDelegate = cardComponentDelegate
         self.partialPaymentDelegate = partialPaymentDelegate
     }
@@ -46,6 +49,7 @@ internal struct PaymentMethodListAssembler: PaymentMethodListAssemblerProtocol {
         let componentContainerAssembler = ComponentContainerAssembler(
             context: context,
             configuration: configuration,
+            componentDelegate: componentDelegate,
             cardComponentDelegate: cardComponentDelegate,
             partialPaymentDelegate: partialPaymentDelegate
         )

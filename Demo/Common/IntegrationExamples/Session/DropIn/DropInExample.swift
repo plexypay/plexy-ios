@@ -7,6 +7,7 @@
 @_spi(AdyenInternal) import Adyen
 import AdyenActions
 import AdyenCard
+import AdyenCheckout
 import AdyenComponents
 import AdyenDropIn
 import AdyenNetworking
@@ -72,24 +73,42 @@ internal final class DropInExample: InitialDataFlowProtocol {
     // MARK: - Presentation
     
     private func presentComponent(with session: AdyenSession) {
-        let dropIn = dropInComponent(from: session)
-        presenter?.present(viewController: dropIn.viewController, completion: nil)
-        dropInComponent = dropIn
+        Task { @MainActor in
+            let dropIn = await dropInComponent(from: session)
+            presenter?.present(viewController: dropIn.viewController, completion: nil)
+            dropInComponent = dropIn
+        }
     }
 
-    private func dropInComponent(from session: AdyenSession) -> DropInComponent {
+    private func dropInComponent(from session: AdyenSession) async -> DropInComponent {
         let paymentMethods = session.state.paymentMethods
         let configuration = dropInConfiguration(from: paymentMethods)
+        
+        let checkoutConfiguration = try! CheckoutConfiguration(
+            environment: ConfigurationConstants.componentsEnvironment,
+            amount: ConfigurationConstants.current.amount,
+            clientKey: ConfigurationConstants.clientKey,
+            analyticsConfiguration: .init(
+                isEnabled: ConfigurationConstants.current.analyticsSettings.isEnabled
+            )
+        ) {
+            BLIKComponentConfiguration()
+        }
+        
+        let adyenCheckout = try! await AdyenCheckout.setup(with: paymentMethods, configuration: checkoutConfiguration)
+        
         let component = DropInComponent(
             paymentMethods: paymentMethods,
             context: context,
             configuration: configuration,
-            title: ConfigurationConstants.appName
+            title: ConfigurationConstants.appName,
+            componentDelegate: adyenCheckout,
+            cardComponentDelegate: nil,
+            partialPaymentDelegate: session,
+            storedPaymentMethodsDelegate: session
         )
         
         component.delegate = session
-        component.storedPaymentMethodsDelegate = session
-        component.partialPaymentDelegate = session
 
         return component
     }
