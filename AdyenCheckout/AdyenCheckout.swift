@@ -27,7 +27,21 @@ public final class AdyenCheckout: AdyenCheckoutProtocol {
     internal let configuration: CheckoutConfiguration
     internal weak var presentationDelegate: PresentationDelegate?
     
-    internal lazy var actionHandlingComponent: ActionHandlingComponent = {
+//    internal lazy var actionHandlingComponent: ActionHandlingComponent = {
+//        let handler = AdyenActionComponent(
+//            context: configuration.context,
+//            configuration: AdyenActionComponent.Configuration()
+//        )
+//        // TODO: create a way for CheckoutConfig to have AdyenActionComponent.Configuration
+//        // and it should provided if they want to have action handling
+//        // move AdyenActionComponent.Configuration to its own entity and make it public
+//        handler.delegate = self
+//        handler.presentationDelegate = presentationDelegate
+//        return handler
+//    }()
+    
+    internal var storedActionComponent: ActionHandlingComponent?
+    internal func createActionComponent() -> ActionHandlingComponent {
         let handler = AdyenActionComponent(
             context: configuration.context,
             configuration: AdyenActionComponent.Configuration()
@@ -38,7 +52,7 @@ public final class AdyenCheckout: AdyenCheckoutProtocol {
         handler.delegate = self
         handler.presentationDelegate = presentationDelegate
         return handler
-    }()
+    }
     
     // TODO: should we replace sessionId/sessionData params with a struct to future proof session init?
     /// Sets up the checkout object for the default flow

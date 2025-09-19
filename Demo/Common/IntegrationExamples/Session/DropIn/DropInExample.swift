@@ -165,8 +165,7 @@ extension DropInExample: PresentationDelegate {
     @MainActor
     internal func present(component: PresentableComponent) {
         // The implementation of this delegate method is not needed when using AdyenSession as the session handles the presentation
-        let dropIn = component as! DropInComponent
-        presenter?.present(viewController: dropIn.viewController, completion: nil)
+        presenter?.present(viewController: component.viewController, completion: nil)
     }
 }
 

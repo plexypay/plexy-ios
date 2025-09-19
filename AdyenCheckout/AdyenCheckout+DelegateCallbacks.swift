@@ -40,7 +40,8 @@ extension AdyenCheckout: PaymentComponentDelegate {
     
     private func handle(_ paymentsResponse: CheckoutPaymentsResponse) {
         if let action = paymentsResponse.action {
-            actionHandlingComponent.handle(action)
+            self.storedActionComponent = createActionComponent()
+            storedActionComponent?.handle(action)
         } else {
             // TODO: check for error cases here
             finish(with: CheckoutResult(resultCode: paymentsResponse.resultCode))
