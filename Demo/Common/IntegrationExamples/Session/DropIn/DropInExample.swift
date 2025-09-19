@@ -33,56 +33,37 @@ internal final class DropInExample: InitialDataFlowProtocol {
 
     internal func start() {
         presenter?.showLoadingIndicator()
-        loadSession { [weak self] response in
-            guard let self else { return }
-            
-            self.presenter?.hideLoadingIndicator()
-            
-            switch response {
-            case let .success(session):
-                self.session = session
-                self.presentComponent(with: session)
-                
-            case let .failure(error):
-                self.presentAlert(with: error)
+        
+        Task {
+            do {
+                let sessionResponse = try await requestSessionInitialInfo()
+                let component = await self.dropInComponent(from: sessionResponse)
+                self.dropInComponent = component
+                await hideLoading()
+                await present(component: component)
+            } catch {
+                await hideLoading()
+                await handleError(error)
             }
         }
     }
     
     // MARK: - Networking
 
-    private func loadSession(completion: @escaping (Result<AdyenSession, Error>) -> Void) {
-        requestSessionInitialInfo { [weak self] response in
-            guard let self else { return }
-            
-            switch response {
-            case let .success(model):
-//                AdyenSession.initialize(
-//                    with: config,
-//                    delegate: self,
-//                    presentationDelegate: self,
-//                    completion: completion
-//                )
-                break
-            case let .failure(error):
-                completion(.failure(error))
+    internal func requestSessionInitialInfo() async throws -> SessionResponse {
+        let request = SessionRequest()
+        return try await withCheckedThrowingContinuation { continuation in
+            apiClient.perform(request) { result in
+                continuation.resume(with: result)
             }
         }
     }
     
     // MARK: - Presentation
     
-    private func presentComponent(with session: AdyenSession) {
-        Task { @MainActor in
-            let dropIn = await dropInComponent(from: session)
-            presenter?.present(viewController: dropIn.viewController, completion: nil)
-            dropInComponent = dropIn
-        }
-    }
+    var adyenCheckout: AdyenCheckout?
 
-    private func dropInComponent(from session: AdyenSession) async -> DropInComponent {
-        let paymentMethods = session.state.paymentMethods
-        let configuration = dropInConfiguration(from: paymentMethods)
+    private func dropInComponent(from sessionResponse: SessionResponse) async -> DropInComponent {
         
         let checkoutConfiguration = try! CheckoutConfiguration(
             environment: ConfigurationConstants.componentsEnvironment,
@@ -94,21 +75,31 @@ internal final class DropInExample: InitialDataFlowProtocol {
         ) {
             BLIKComponentConfiguration()
         }
+        .onComplete { [weak self] result in
+            self?.dismissAndShowAlert(
+                result.resultCode.isSuccess,
+                result.resultCode.rawValue
+            )
+        }
         
-        let adyenCheckout = try! await AdyenCheckout.setup(with: paymentMethods, configuration: checkoutConfiguration)
+        let checkout = try! await AdyenCheckout.setup(with: sessionResponse.sessionId, sessionData: sessionResponse.sessionData, configuration: checkoutConfiguration, presentationDelegate: self)
+        
+        self.adyenCheckout = checkout
+        
+        let configuration = dropInConfiguration(from: checkout.paymentMethods!)
         
         let component = DropInComponent(
-            paymentMethods: paymentMethods,
+            paymentMethods: checkout.paymentMethods!,
             context: context,
             configuration: configuration,
             title: ConfigurationConstants.appName,
-            componentDelegate: adyenCheckout,
+            componentDelegate: checkout,
             cardComponentDelegate: nil,
             partialPaymentDelegate: session,
             storedPaymentMethodsDelegate: session
         )
         
-        component.delegate = session
+//        component.delegate = session
 
         return component
     }
@@ -123,17 +114,31 @@ internal final class DropInExample: InitialDataFlowProtocol {
     }
 
     // MARK: - Alert handling
-
-    private func presentAlert(with error: Error, retryHandler: (() -> Void)? = nil) {
-        presenter?.presentAlert(with: error, retryHandler: retryHandler)
+    
+    private func startLoading() {
+        presenter?.showLoadingIndicator()
     }
-
+    
+    @MainActor
+    private func handleError(_ error: Error) {
+        presenter?.presentAlert(withTitle: "Error", message: error.localizedDescription)
+    }
+    
+    @MainActor
+    private func hideLoading() {
+        presenter?.hideLoadingIndicator()
+    }
+    
     private func dismissAndShowAlert(_ success: Bool, _ message: String) {
         presenter?.dismiss {
             // Payment is processed. Add your code here.
             let title = success ? "Success" : "Error"
             self.presenter?.presentAlert(withTitle: title, message: message)
         }
+    }
+
+    private func presentAlert(with error: Error, retryHandler: (() -> Void)? = nil) {
+        presenter?.presentAlert(with: error, retryHandler: retryHandler)
     }
 
 }
@@ -157,8 +162,11 @@ extension DropInExample: AdyenSessionDelegate {
 }
 
 extension DropInExample: PresentationDelegate {
+    @MainActor
     internal func present(component: PresentableComponent) {
         // The implementation of this delegate method is not needed when using AdyenSession as the session handles the presentation
+        let dropIn = component as! DropInComponent
+        presenter?.present(viewController: dropIn.viewController, completion: nil)
     }
 }
 

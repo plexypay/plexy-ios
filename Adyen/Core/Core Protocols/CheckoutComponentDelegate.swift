@@ -6,4 +6,5 @@
 
 import Foundation
 
+// TODO: - Change to package
 public typealias CheckoutComponentDelegate = (PaymentComponentDelegate & ActionComponentDelegate)

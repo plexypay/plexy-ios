@@ -16,7 +16,7 @@ internal protocol DropInAssemblerProtocol {
     func resolveDropInRootView() -> UIViewController
 }
 
-internal class DropInAssembler {
+internal struct DropInAssembler {
 
     // MARK: - Properties
 
