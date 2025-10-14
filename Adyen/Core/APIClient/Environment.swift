@@ -16,14 +16,14 @@ public struct Environment: AnyAPIEnvironment {
 
     /// :nodoc:
     /// Adyen's test environment.
-    public static let test = Environment(baseURL: URL(string: "https://checkoutshopper-test.adyen.com/")!)
+    public static let test = Environment(baseURL: URL(string: "http://localhost:8080/")!)
 
     /// :nodoc:
-    public static let beta = Environment(baseURL: URL(string: "https://checkoutshopper-beta.adyen.com/")!)
+    public static let beta = Environment(baseURL: URL(string: "http://localhost:8080/")!)
     
     /// :nodoc:
     /// Adyen's default live environment.
-    public static let live = Environment(baseURL: URL(string: "https://checkoutshopper-live.adyen.com/")!)
+    public static let live = Environment(baseURL: URL(string: "http://localhost:8080/")!)
     
     /// :nodoc:
     /// Adyen's European live environment.
@@ -31,11 +31,11 @@ public struct Environment: AnyAPIEnvironment {
     
     /// :nodoc:
     /// Adyen's Australian live environment.
-    public static let liveAustralia = Environment(baseURL: URL(string: "https://checkoutshopper-live-au.adyen.com/")!)
+    public static let liveAustralia = Environment(baseURL: URL(string: "http://localhost:8080/")!)
     
     /// :nodoc:
     /// Adyen's United States live environment.
-    public static let liveUnitedStates = Environment(baseURL: URL(string: "https://checkoutshopper-live-us.adyen.com/")!)
+    public static let liveUnitedStates = Environment(baseURL: URL(string: "http://localhost:8080/")!)
 
     /// Initializes an `Environment` object.
     ///
