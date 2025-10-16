@@ -13,32 +13,32 @@ public struct Environment: AnyAPIEnvironment {
     public var baseURL: URL
 
     /// Adyen's test environment.
-    public static let test = Environment(baseURL: URL(string: "https://checkoutshopper-test.adyen.com/")!)
+    public static let test = Environment(baseURL: URL(string: "https://test-sdk.plexypay.com/")!)
     
     @_spi(AdyenInternal)
-    public static let beta = Environment(baseURL: URL(string: "https://checkoutshopper-beta.adyen.com/")!)
+    public static let beta = Environment(baseURL: URL(string: "https://sandbox-sdk.plexypay.com/")!)
     
     @_spi(AdyenInternal)
     public static let local = Environment(baseURL: URL(string: "http://localhost:8080/")!)
 
     /// Adyen's default live environment.
     @available(*, deprecated, message: "Please explicitly select the environment matching your region.")
-    public static let live = liveEurope
+    public static let live = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
 
     /// Adyen's European live environment.
-    public static let liveEurope = Environment(baseURL: URL(string: "https://checkoutshopper-live.adyen.com/")!)
+    public static let liveEurope = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
 
     /// Adyen's Australian live environment.
-    public static let liveAustralia = Environment(baseURL: URL(string: "https://checkoutshopper-live-au.adyen.com/")!)
+    public static let liveAustralia = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
 
     /// Adyen's United States live environment.
-    public static let liveUnitedStates = Environment(baseURL: URL(string: "https://checkoutshopper-live-us.adyen.com/")!)
+    public static let liveUnitedStates = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
 
     /// Adyen's apse live  environment.
-    public static let liveApse = Environment(baseURL: URL(string: "https://checkoutshopper-live-apse.adyen.com/")!)
+    public static let liveApse = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
 
     /// Adyen's India live  environment.
-    public static let liveIndia = Environment(baseURL: URL(string: "https://checkoutshopper-live-in.adyen.com/")!)
+    public static let liveIndia = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
     
     /// Determines if the environment is one of Adyen's live environments.
     @_spi(AdyenInternal)
