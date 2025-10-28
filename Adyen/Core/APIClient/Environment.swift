@@ -13,13 +13,13 @@ public struct Environment: AnyAPIEnvironment {
     public var baseURL: URL
 
     /// Adyen's test environment.
-    public static let test = Environment(baseURL: URL(string: "https://test-sdk.plexypay.com/")!)
+    public static let test = Environment(baseURL: URL(string: "http://localhost:8080/")!)
     
     @_spi(AdyenInternal)
     public static let beta = Environment(baseURL: URL(string: "https://sandbox-sdk.plexypay.com/")!)
     
     @_spi(AdyenInternal)
-    public static let local = Environment(baseURL: URL(string: "http://localhost:8080/")!)
+    public static let local: Environment = Environment(baseURL: URL(string: "http://localhost:8080/")!)
 
     /// Adyen's default live environment.
     @available(*, deprecated, message: "Please explicitly select the environment matching your region.")
