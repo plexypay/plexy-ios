@@ -26,7 +26,7 @@ public enum ClientKeyError: Error, LocalizedError {
 public final class ClientKeyValidator: RegularExpressionValidator {
 
     public init() {
-        let regex = #"^[a-z]{4,8}_[a-zA-Z0-9]{8,128}$"#
+        let regex = #"^[a-z]{2,8}_[a-zA-Z0-9]{8,128}$"#
         super.init(regularExpression: regex, minimumLength: 13, maximumLength: 140)
     }
 
