@@ -13,7 +13,7 @@ public struct Environment: AnyAPIEnvironment {
     public var baseURL: URL
 
     /// Adyen's test environment.
-    public static let test = Environment(baseURL: URL(string: "https://test-sdk.plexypay.com/")!)
+    public static let test = Environment(baseURL: URL(string: "https://sandbox-api.plexypay.com/v2/")!)
     
     @_spi(AdyenInternal)
     public static let beta = Environment(baseURL: URL(string: "https://sandbox-sdk.plexypay.com/")!)
