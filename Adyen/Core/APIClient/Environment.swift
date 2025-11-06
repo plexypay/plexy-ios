@@ -23,27 +23,27 @@ public struct Environment: AnyAPIEnvironment {
 
     /// Adyen's default live environment.
     @available(*, deprecated, message: "Please explicitly select the environment matching your region.")
-    public static let live = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
+    public static let live = Environment(baseURL: URL(string: "https://api.plexypay.com/v2")!)
 
     /// Adyen's European live environment.
-    public static let liveEurope = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
+    public static let liveEurope = Environment(baseURL: URL(string: "https://api.plexypay.com/v2")!)
 
     /// Adyen's Australian live environment.
-    public static let liveAustralia = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
+    public static let liveAustralia = Environment(baseURL: URL(string: "https://api.plexypay.com/v2")!)
 
     /// Adyen's United States live environment.
-    public static let liveUnitedStates = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
+    public static let liveUnitedStates = Environment(baseURL: URL(string: "https://api.plexypay.com/v2")!)
 
     /// Adyen's apse live  environment.
-    public static let liveApse = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
+    public static let liveApse = Environment(baseURL: URL(string: "https://api.plexypay.com/v2")!)
 
     /// Adyen's India live  environment.
-    public static let liveIndia = Environment(baseURL: URL(string: "https://sdk.plexypay.com/")!)
-    
+    public static let liveIndia = Environment(baseURL: URL(string: "https://api.plexypay.com/v2")!)
+
     /// Determines if the environment is one of Adyen's live environments.
     @_spi(AdyenInternal)
     public var isLive: Bool {
-        baseURL.absoluteString.hasPrefix("https://checkoutshopper-live")
+        baseURL.absoluteString.hasPrefix("https://api.plexypay.com/v2")
     }
 
     /// Initializes an `Environment` object.
