@@ -1,14 +1,14 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
-import AdyenActions
-import AdyenCard
-import AdyenComponents
-import AdyenDropIn
+import Plexy
+import PlexyActions
+import PlexyCard
+import PlexyComponents
+import PlexyDropIn
 import PassKit
 import UIKit
 
@@ -22,12 +22,12 @@ internal final class CardComponentAdvancedFlowExample: InitialDataAdvancedFlowPr
     
     internal lazy var apiClient = ApiClientHelper.generateApiClient()
     
-    internal lazy var context: AdyenContext = generateContext()
+    internal lazy var context: PlexyContext = generateContext()
 
     // MARK: - Action Handling
 
-    private lazy var adyenActionComponent: AdyenActionComponent = {
-        let handler = AdyenActionComponent(context: context)
+    private lazy var plexyActionComponent: PlexyActionComponent = {
+        let handler = PlexyActionComponent(context: context)
         handler.configuration.threeDS.delegateAuthentication = ConfigurationConstants.delegatedAuthenticationConfigurations
         handler.configuration.threeDS.requestorAppURL = ConfigurationConstants.returnUrl
         handler.delegate = self
@@ -109,7 +109,7 @@ internal final class CardComponentAdvancedFlowExample: InitialDataAdvancedFlowPr
         switch result {
         case let .success(response):
             if let action = response.action {
-                adyenActionComponent.handle(action)
+                plexyActionComponent.handle(action)
             } else {
                 finish(with: response)
             }

@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import Foundation
-#if canImport(AdyenAuthentication)
-    import AdyenAuthentication
+#if canImport(PlexyAuthentication)
+    import PlexyAuthentication
 
     @available(iOS 14.0, *)
     internal final class AuthenticationServiceMock: AuthenticationServiceProtocol {
@@ -40,7 +40,7 @@ import Foundation
             if let onAuthenticate {
                 return try await onAuthenticate(input)
             } else if isRegistration {
-                throw AdyenAuthenticationError.noStoredCredentialsMatch(nil)
+                throw PlexyAuthenticationError.noStoredCredentialsMatch(nil)
             } else {
                 // swiftlint:disable:next line_length
                 return "eyJycElkIjoiQjJOWVNTNTkzMi5jb20uYWR5ZW4uQ2hlY2tvdXREZW1vVUlLaXQiLCJ2ZXJzaW9uIjoxLCJkZXZpY2UiOiJpT1MiLCJhc3NlcnRpb25PYmplY3QiOiJvbWx6YVdkdVlYUjFjbVZZUnpCRkFpQmxObG9HV2thc0ZkMDJrK1NTd0hLY0oxWkdrczkxeUZjaG02b2Y3UEdnbEFJaEFKK1prNzFxdkJFaGllR0xqMzFXcG5tckdjWHlZV2VsYUREUnhhV2licGtLY1dGMWRHaGxiblJwWTJGMGIzSkVZWFJoV0NVdkxjTFU2NG4zZjRpaXdcL3BVWnpTcXVXV2lWZHhwNHhETDFNZ091NWdwWDBBQUFBQUIiLCJjcmVkZW50aWFsSWQiOiIyNmZ5M1NrSkIwZVFmcFFwZ3NkQ3R5dWt2TDBEVWdBRk51XC9FaGZRa1p2QT0ifQ"

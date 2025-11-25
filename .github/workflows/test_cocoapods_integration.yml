@@ -36,8 +36,8 @@ jobs:
         gem install cocoapods -v 1.10.2
         pod repo update
         
-        pod lib lint Adyen.podspec --allow-warnings --verbose
-        # pod lib lint AdyenCardScanner.podspec --allow-warnings --verbose
+        pod lib lint Plexy.podspec --allow-warnings --verbose
+        # pod lib lint PlexyCardScanner.podspec --allow-warnings --verbose
 
         Scripts/test-CocoaPods-integration.sh -w
         Scripts/test-CocoaPods-integration.sh

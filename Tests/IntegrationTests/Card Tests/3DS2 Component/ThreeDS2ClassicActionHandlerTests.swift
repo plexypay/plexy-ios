@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-import Adyen3DS2
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+import Plexy3DS2
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class ThreeDS2ClassicActionHandlerTests: XCTestCase {
@@ -73,7 +73,7 @@ class ThreeDS2ClassicActionHandlerTests: XCTestCase {
             delegatedAuthenticationSDKOutput: nil,
             deleteDelegatedAuthenticationCredential: nil
         )
-        let expectedFingerprint = try AdyenCoder.encodeBase64(fingerprint)
+        let expectedFingerprint = try PlexyCoder.encodeBase64(fingerprint)
         
         let resultExpectation = expectation(description: "Expect ThreeDS2ActionHandler completion closure to be called.")
         
@@ -224,7 +224,7 @@ class ThreeDS2ClassicActionHandlerTests: XCTestCase {
                             let threeDS2SDKError: String?
                         }
                         // Check if there is a threeDS2SDKError in the payload.
-                        let payload: Payload? = try? AdyenCoder.decodeBase64(threeDSResult.payload)
+                        let payload: Payload? = try? PlexyCoder.decodeBase64(threeDSResult.payload)
                         XCTAssertNotNil(payload?.threeDS2SDKError)
                     default:
                         XCTFail()

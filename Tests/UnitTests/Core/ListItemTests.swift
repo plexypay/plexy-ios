@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2024 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import XCTest
-@testable @_spi(AdyenInternal) import Adyen
+@testable @_spi(PlexyInternal) import Plexy
 
 final class ListItemTests: XCTestCase {
     // Checks COIOS-797: NSInternalInconsistencyException 1008: Item identifiers are not unique

@@ -3,7 +3,7 @@
     {
       "configuration" : {
         "merchantDisplayName" : "TestMerchantCheckout",
-        "merchantIdentifier" : "merchant.com.adyen.test"
+        "merchantIdentifier" : "merchant.com.plexy.test"
       },
       "details" : [
         {
@@ -119,7 +119,7 @@
     },
     {
       "configuration" : {
-        "merchantId" : "sell1_1287491142_biz@adyen.com",
+        "merchantId" : "sell1_1287491142_biz@plexy.com",
         "intent" : "capture"
       },
       "name" : "PayPal",
@@ -1126,7 +1126,7 @@
       "name" : "MasterCard"
     },
     {
-      "shopperEmail" : "buy1_1287492020_per@adyen.com",
+      "shopperEmail" : "buy1_1287492020_per@plexy.com",
       "id" : "8415628453182207",
       "supportedShopperInteractions" : [
         "ContAuth"

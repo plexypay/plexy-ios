@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenDropIn
-@testable @_spi(AdyenInternal) import AdyenTwint
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyDropIn
+@testable @_spi(PlexyInternal) import PlexyTwint
 import XCTest
 
 class TwintComponentTests: XCTestCase {
@@ -14,7 +14,7 @@ class TwintComponentTests: XCTestCase {
     private var paymentMethod: TwintPaymentMethod!
     private var delegate: PaymentComponentDelegateMock!
     private var sut: TwintComponent!
-    private var context: AdyenContext!
+    private var context: PlexyContext!
 
     override func setUp() {
         super.setUp()

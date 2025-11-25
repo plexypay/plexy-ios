@@ -1,19 +1,19 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenActions
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyActions
 import XCTest
 
 class QRCodeActionComponentTests: XCTestCase {
 
-    var context: AdyenContext!
+    var context: PlexyContext!
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -198,7 +198,7 @@ class QRCodeActionComponentTests: XCTestCase {
             payment: nil,
             logoUrl: LogoURLProvider.logoURL(withName: action.paymentMethodType.rawValue, environment: context.apiContext.environment),
             observedProgress: nil,
-            expiration: AdyenObservable(nil),
+            expiration: PlexyObservable(nil),
             style: QRCodeView.Model.Style(
                 copyCodeButton: .init(title: .init(font: UIFont(), color: .red)),
                 saveAsImageButton: .init(title: .init(font: UIFont(), color: .red)),
@@ -226,7 +226,7 @@ class QRCodeActionComponentTests: XCTestCase {
             payment: nil,
             logoUrl: LogoURLProvider.logoURL(withName: action.paymentMethodType.rawValue, environment: context.apiContext.environment),
             observedProgress: nil,
-            expiration: AdyenObservable(nil),
+            expiration: PlexyObservable(nil),
             style: QRCodeView.Model.Style(
                 copyCodeButton: .init(title: .init(font: UIFont(), color: .red)),
                 saveAsImageButton: .init(title: .init(font: UIFont(), color: .red)),

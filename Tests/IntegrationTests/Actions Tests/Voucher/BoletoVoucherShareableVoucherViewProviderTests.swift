@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
+@_spi(PlexyInternal) import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
 import XCTest
 
 class BoletoVoucherShareableVoucherViewProviderTests: XCTestCase {
@@ -16,7 +16,7 @@ class BoletoVoucherShareableVoucherViewProviderTests: XCTestCase {
             environment: Dummy.apiContext.environment
         )
 
-        let boletoDecoded = try AdyenCoder.decode(boletoAction) as BoletoVoucherAction
+        let boletoDecoded = try PlexyCoder.decode(boletoAction) as BoletoVoucherAction
         let action: VoucherAction = .boletoBancairoSantander(boletoDecoded)
 
         let sut = viewProvider.provideView(with: action, logo: nil)
@@ -24,19 +24,19 @@ class BoletoVoucherShareableVoucherViewProviderTests: XCTestCase {
         let viewController = ADYViewController(view: sut)
         viewController.loadViewIfNeeded()
 
-        let textLabel: UILabel! = sut.findView(by: "adyen.voucher.textLabel")
+        let textLabel: UILabel! = sut.findView(by: "plexy.voucher.textLabel")
         XCTAssertEqual(textLabel.text, "Thank you for your purchase, please use the following information to complete your payment.")
 
-        let amountLabel: UILabel! = sut.findView(by: "adyen.voucher.amountLabel")
+        let amountLabel: UILabel! = sut.findView(by: "plexy.voucher.amountLabel")
         XCTAssertEqual(amountLabel.text, AmountFormatter.formatted(
             amount: boletoDecoded.totalAmount.value,
             currencyCode: boletoDecoded.totalAmount.currencyCode
         ))
 
-        let expiryKeyLabel: UILabel! = sut.findView(by: "adyen.voucher.expirationKeyLabel")
+        let expiryKeyLabel: UILabel! = sut.findView(by: "plexy.voucher.expirationKeyLabel")
         XCTAssertEqual(expiryKeyLabel.text, "Expiration Date")
 
-        let expiryValueLabel: UILabel! = sut.findView(by: "adyen.voucher.expirationValueLabel")
+        let expiryValueLabel: UILabel! = sut.findView(by: "plexy.voucher.expirationValueLabel")
         XCTAssertEqual(expiryValueLabel.text, "30/05/2021")
     }
 }

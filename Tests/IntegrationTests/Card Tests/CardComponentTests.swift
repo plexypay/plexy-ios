@@ -1,18 +1,18 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
-@testable import AdyenDropIn
-@testable import AdyenEncryption
+@_spi(PlexyInternal) @testable import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
+@testable import PlexyDropIn
+@testable import PlexyEncryption
 import XCTest
 
 class CardComponentTests: XCTestCase {
 
-    var context: AdyenContext {
+    var context: PlexyContext {
         Dummy.context
     }
 
@@ -45,7 +45,7 @@ class CardComponentTests: XCTestCase {
     }
     
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -68,7 +68,7 @@ class CardComponentTests: XCTestCase {
 
         var configuration = CardComponent.Configuration()
         configuration.showsHolderNameField = true
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
         let sut = CardComponent(
             paymentMethod: method,
             context: context,
@@ -97,7 +97,7 @@ class CardComponentTests: XCTestCase {
         
         var configuration = CardComponent.Configuration()
         configuration.showsHolderNameField = true
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
         let sut = CardComponent(
             paymentMethod: method,
             context: context,
@@ -106,18 +106,18 @@ class CardComponentTests: XCTestCase {
 
         let items = sut.cardViewController.items
         XCTAssertEqual(items.expiryDateItem.title, localizedString(.cardExpiryItemTitle, nil))
-        XCTAssertEqual(items.expiryDateItem.placeholder, localizedString(LocalizationKey(key: "adyen_card_expiryItem_placeholder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(items.expiryDateItem.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_card_expiryItem_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.expiryDateItem.placeholder, localizedString(LocalizationKey(key: "plexy_card_expiryItem_placeholder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.expiryDateItem.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_card_expiryItem_invalid"), sut.configuration.localizationParameters))
 
-        XCTAssertEqual(items.securityCodeItem.title, localizedString(LocalizationKey(key: "adyen_card_cvcItem_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.securityCodeItem.title, localizedString(LocalizationKey(key: "plexy_card_cvcItem_title"), sut.configuration.localizationParameters))
         XCTAssertNil(items.securityCodeItem.placeholder)
-        XCTAssertEqual(items.securityCodeItem.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_card_cvcItem_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.securityCodeItem.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_card_cvcItem_invalid"), sut.configuration.localizationParameters))
 
-        XCTAssertEqual(items.holderNameItem.title, localizedString(LocalizationKey(key: "adyen_card_nameItem_title"), sut.configuration.localizationParameters))
-        XCTAssertEqual(items.holderNameItem.placeholder, localizedString(LocalizationKey(key: "adyen_card_nameItem_placeholder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(items.holderNameItem.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_card_nameItem_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.holderNameItem.title, localizedString(LocalizationKey(key: "plexy_card_nameItem_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.holderNameItem.placeholder, localizedString(LocalizationKey(key: "plexy_card_nameItem_placeholder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.holderNameItem.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_card_nameItem_invalid"), sut.configuration.localizationParameters))
 
-        XCTAssertEqual(items.storeDetailsItem.title, localizedString(LocalizationKey(key: "adyen_card_storeDetailsButton"), sut.configuration.localizationParameters))
+        XCTAssertEqual(items.storeDetailsItem.title, localizedString(LocalizationKey(key: "plexy_card_storeDetailsButton"), sut.configuration.localizationParameters))
 
         XCTAssertEqual(items.button.title, localizedSubmitButtonTitle(with: payment.amount, style: .immediate, sut.configuration.localizationParameters))
     }
@@ -167,28 +167,28 @@ class CardComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
         
-        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem")
-        let cardNumberItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem.titleLabel")
-        let cardNumberItemTextField: UITextField? = sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem.textField")
+        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem")
+        let cardNumberItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem.titleLabel")
+        let cardNumberItemTextField: UITextField? = sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem.textField")
 
-        let holderNameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.holderNameItem")
-        let holderNameItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.holderNameItem.titleLabel")
-        let holderNameItemTextField: UITextField? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.holderNameItem.textField")
+        let holderNameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.holderNameItem")
+        let holderNameItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.holderNameItem.titleLabel")
+        let holderNameItemTextField: UITextField? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.holderNameItem.textField")
 
-        let expiryDateItemView: FormTextInputItemView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.expiryDateItem")
-        let expiryDateItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.expiryDateItem.titleLabel")
-        let expiryDateItemTextField: UITextField? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.expiryDateItem.textField")
+        let expiryDateItemView: FormTextInputItemView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.expiryDateItem")
+        let expiryDateItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.expiryDateItem.titleLabel")
+        let expiryDateItemTextField: UITextField? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.expiryDateItem.textField")
 
-        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem")
-        let securityCodeItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem.titleLabel")
-        let securityCodeItemTextField: UITextField? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem.textField")
-        let securityCodeCvvHint: UIView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem.cvvHintIcon")
+        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem")
+        let securityCodeItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem.titleLabel")
+        let securityCodeItemTextField: UITextField? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem.textField")
+        let securityCodeCvvHint: UIView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem.cvvHintIcon")
 
-        let storeDetailsItemView: FormToggleItemView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.storeDetailsItem")
-        let storeDetailsItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.storeDetailsItem.titleLabel")
+        let storeDetailsItemView: FormToggleItemView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.storeDetailsItem")
+        let storeDetailsItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.storeDetailsItem.titleLabel")
 
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.payButtonItem.button")
-        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.payButtonItem.button.titleLabel")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.payButtonItem.button")
+        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.payButtonItem.button.titleLabel")
 
         /// Test card number field
         wait(until: cardNumberItemView!, at: \.backgroundColor, is: UIColor.blue)
@@ -266,7 +266,7 @@ class CardComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
         
-        XCTAssertNil(sut.viewController.view.findView(with: "AdyenCard.CardComponent.Test name"))
+        XCTAssertNil(sut.viewController.view.findView(with: "PlexyCard.CardComponent.Test name"))
         XCTAssertEqual(sut.viewController.title, method.name)
     }
 
@@ -281,7 +281,7 @@ class CardComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
         
-        let securityCodeView: FormCardSecurityCodeItemView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem")
+        let securityCodeView: FormCardSecurityCodeItemView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem")
 
         XCTAssertNil(securityCodeView)
     }
@@ -296,7 +296,7 @@ class CardComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
         
-        let securityCodeView: FormCardSecurityCodeItemView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem")
+        let securityCodeView: FormCardSecurityCodeItemView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem")
 
         XCTAssertNotNil(securityCodeView)
     }
@@ -311,9 +311,9 @@ class CardComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
         
-        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem")
-        let securityCodeCvvHint: FormCardSecurityCodeItemView.HintView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem.cvvHintIcon")
-        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem")
+        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem")
+        let securityCodeCvvHint: FormCardSecurityCodeItemView.HintView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem.cvvHintIcon")
+        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem")
 
         XCTAssertNotNil(securityCodeCvvHint)
         XCTAssertFalse(securityCodeCvvHint!.showFront)
@@ -410,9 +410,9 @@ class CardComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
         
-        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem")
-        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem")
-        let securityCodeCvvHint: FormCardSecurityCodeItemView.HintView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem.cvvHintIcon")
+        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem")
+        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem")
+        let securityCodeCvvHint: FormCardSecurityCodeItemView.HintView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem.cvvHintIcon")
 
         XCTAssertNotNil(securityCodeCvvHint)
         self.populate(textItemView: securityCodeItemView!, with: "12345")
@@ -451,8 +451,8 @@ class CardComponentTests: XCTestCase {
 
         presentOnRoot(component.viewController)
 
-        let switchView: UISwitch = try XCTUnwrap(component.viewController.view.findView(with: "AdyenCard.CardComponent.storeDetailsItem.switch"))
-        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem> = try XCTUnwrap(component.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem"))
+        let switchView: UISwitch = try XCTUnwrap(component.viewController.view.findView(with: "PlexyCard.CardComponent.storeDetailsItem.switch"))
+        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem> = try XCTUnwrap(component.viewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem"))
 
         wait(until: switchView, at: \.onTintColor, is: tintColor)
         wait(until: securityCodeItemView, at: \.titleLabel.textColor, is: titleColor)
@@ -483,7 +483,7 @@ class CardComponentTests: XCTestCase {
         // Then
         let view: UIView = sut.viewController.view
 
-        let securityCodeItemView: FormCardSecurityCodeItemView = try XCTUnwrap(view.findView(with: "AdyenCard.CardComponent.securityCodeItem"))
+        let securityCodeItemView: FormCardSecurityCodeItemView = try XCTUnwrap(view.findView(with: "PlexyCard.CardComponent.securityCodeItem"))
         XCTAssertEqual(securityCodeItemView.titleLabel.textColor, .gray)
 
         populate(textItemView: securityCodeItemView, with: "123")
@@ -545,7 +545,7 @@ class CardComponentTests: XCTestCase {
 
     func testStoredCardPaymentLocalization() throws {
         var configuration = CardComponent.Configuration()
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
         let sut = CardComponent(
             paymentMethod: storedMethod,
             context: context,
@@ -565,7 +565,7 @@ class CardComponentTests: XCTestCase {
     func testStoredCardPaymentLocalizationWithNoCVV() throws {
         var configuration = CardComponent.Configuration()
         configuration.stored.showsSecurityCodeField = false
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
         let sut = CardComponent(
             paymentMethod: storedMethod,
             context: context,
@@ -642,9 +642,9 @@ class CardComponentTests: XCTestCase {
         )
         setupRootViewController(sut.viewController)
 
-        let cardNumberItemView: FormCardNumberItemView? = sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem")
+        let cardNumberItemView: FormCardNumberItemView? = sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem")
         XCTAssertNotNil(cardNumberItemView)
-        let textItemView: FormTextItemView<FormCardNumberItem>? = cardNumberItemView!.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem")
+        let textItemView: FormTextItemView<FormCardNumberItem>? = cardNumberItemView!.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem")
         XCTAssertNotNil(textItemView)
         let cardLogoView = cardNumberItemView!.detectedBrandsView
         XCTAssertNotNil(cardLogoView)
@@ -666,7 +666,7 @@ class CardComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
 
-        let cardNumberItemView: FormCardNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem"))
+        let cardNumberItemView: FormCardNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem"))
         let cardLogoView = cardNumberItemView.detectedBrandsView
         let cardNumberItem = cardNumberItemView.item
         
@@ -722,10 +722,10 @@ class CardComponentTests: XCTestCase {
 
         fillCard(on: view, with: Dummy.visaCard)
 
-        let storeDetailsItemView: FormToggleItemView = try XCTUnwrap(view.findView(with: "AdyenCard.CardComponent.storeDetailsItem"))
+        let storeDetailsItemView: FormToggleItemView = try XCTUnwrap(view.findView(with: "PlexyCard.CardComponent.storeDetailsItem"))
         storeDetailsItemView.accessibilityActivate()
 
-        let billingAddressView: FormAddressPickerItemView = try XCTUnwrap(view.findView(by: "AdyenCard.CardComponent.billingAddress"))
+        let billingAddressView: FormAddressPickerItemView = try XCTUnwrap(view.findView(by: "PlexyCard.CardComponent.billingAddress"))
         billingAddressView.item.value = expectedVerificationAddress
 
         tapSubmitButton(on: view)
@@ -744,8 +744,8 @@ class CardComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
 
-        let cardNumberItemView: FormCardNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem"))
-        let expiryDateItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.CardComponent.expiryDateItem"))
+        let cardNumberItemView: FormCardNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem"))
+        let expiryDateItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.CardComponent.expiryDateItem"))
 
         // no focus change without panglength till max (19)
         
@@ -800,8 +800,8 @@ class CardComponentTests: XCTestCase {
         setupRootViewController(component.viewController)
         
         let view: UIView = viewController.view
-        let expiryDateItemView: FormTextInputItemView = try XCTUnwrap(view.findView(with: "AdyenCard.CardComponent.expiryDateItem"))
-        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem> = try XCTUnwrap(view.findView(with: "AdyenCard.CardComponent.securityCodeItem"))
+        let expiryDateItemView: FormTextInputItemView = try XCTUnwrap(view.findView(with: "PlexyCard.CardComponent.expiryDateItem"))
+        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem> = try XCTUnwrap(view.findView(with: "PlexyCard.CardComponent.securityCodeItem"))
         
         expiryDateItemView.becomeFirstResponder()
         self.append(textItemView: expiryDateItemView, with: "3")
@@ -852,7 +852,7 @@ class CardComponentTests: XCTestCase {
         
         self.fillCard(on: sut.viewController.view, with: Dummy.visaCard)
 
-        let postalCodeItemView: FormTextItemView<FormPostalCodeItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.CardComponent.postalCodeItem"))
+        let postalCodeItemView: FormTextItemView<FormPostalCodeItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.CardComponent.postalCodeItem"))
         XCTAssertEqual(postalCodeItemView.titleLabel.text, "Postal code")
         XCTAssertTrue(postalCodeItemView.alertLabel.isHidden)
         
@@ -902,8 +902,8 @@ class CardComponentTests: XCTestCase {
             delegateExpectation.fulfill()
         }
         
-        let taxNumberItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.CardComponent.additionalAuthCodeItem"))
-        let passwordItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.CardComponent.additionalAuthPasswordItem"))
+        let taxNumberItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.CardComponent.additionalAuthCodeItem"))
+        let passwordItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.CardComponent.additionalAuthPasswordItem"))
         
         wait(until: taxNumberItemView, at: \.isHidden, is: true)
         wait(until: passwordItemView, at: \.isHidden, is: true)
@@ -960,7 +960,7 @@ class CardComponentTests: XCTestCase {
             delegateExpectation.fulfill()
         }
 
-        let brazilSSNItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.CardComponent.socialSecurityNumberItem"))
+        let brazilSSNItemView: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.CardComponent.socialSecurityNumberItem"))
         XCTAssertTrue(brazilSSNItemView.isHidden)
 
         fillCard(on: sut.viewController.view, with: Dummy.visaCard)
@@ -990,7 +990,7 @@ class CardComponentTests: XCTestCase {
             configuration: configuration
         )
         
-        let brazilSSNItemView: FormTextInputItemView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.socialSecurityNumberItem")
+        let brazilSSNItemView: FormTextInputItemView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.socialSecurityNumberItem")
         XCTAssertNil(brazilSSNItemView)
         
         // config is always hide, so item is not added to view
@@ -1012,7 +1012,7 @@ class CardComponentTests: XCTestCase {
             configuration: configuration
         )
         
-        let brazilSSNItemView: FormTextInputItemView? = sut.viewController.view.findView(with: "AdyenCard.CardComponent.socialSecurityNumberItem")
+        let brazilSSNItemView: FormTextInputItemView? = sut.viewController.view.findView(with: "PlexyCard.CardComponent.socialSecurityNumberItem")
         XCTAssertFalse(brazilSSNItemView!.isHidden)
         
         // config is always show, so bin response is ignored
@@ -1059,7 +1059,7 @@ class CardComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
         
-        let supportedCardLogosItemId = "AdyenCard.CardComponent.numberContainerItem.supportedCardLogosItem"
+        let supportedCardLogosItemId = "PlexyCard.CardComponent.numberContainerItem.supportedCardLogosItem"
         
         let supportedCardLogosItem: FormCardLogosItemView = try XCTUnwrap(sut.viewController.view.findView(with: supportedCardLogosItemId))
         XCTAssertFalse(supportedCardLogosItem.isHidden)
@@ -1197,7 +1197,7 @@ class CardComponentTests: XCTestCase {
         )
         setupRootViewController(sut.viewController)
         
-        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.installmentsItem")
+        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.installmentsItem")
         XCTAssertEqual(installmentItemView!.titleLabel.text, "Number of installments")
         XCTAssertEqual(installmentItemView!.inputControl.label, "One time payment")
         XCTAssertFalse(installmentItemView!.isHidden)
@@ -1240,7 +1240,7 @@ class CardComponentTests: XCTestCase {
         )
         setupRootViewController(sut.viewController)
         
-        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.installmentsItem")
+        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.installmentsItem")
         XCTAssertEqual(installmentItemView!.titleLabel.text, "Number of installments")
         XCTAssertEqual(installmentItemView!.inputControl.label, "One time payment")
         XCTAssertFalse(installmentItemView!.isHidden)
@@ -1279,7 +1279,7 @@ class CardComponentTests: XCTestCase {
         )
         setupRootViewController(sut.viewController)
         
-        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.installmentsItem")
+        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.installmentsItem")
         XCTAssertEqual(installmentItemView!.titleLabel.text, "Number of installments")
         XCTAssertEqual(installmentItemView!.inputControl.label, "One time payment")
         XCTAssertTrue(installmentItemView!.isHidden)
@@ -1331,7 +1331,7 @@ class CardComponentTests: XCTestCase {
         )
         setupRootViewController(sut.viewController)
         
-        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.installmentsItem")
+        let installmentItemView: BaseFormPickerItemView<InstallmentElement>? = sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.installmentsItem")
         XCTAssertEqual(installmentItemView!.titleLabel.text, "Number of installments")
         XCTAssertEqual(installmentItemView!.inputControl.label, "One time payment")
         XCTAssertTrue(installmentItemView!.isHidden)
@@ -1380,8 +1380,8 @@ class CardComponentTests: XCTestCase {
         
         let numberItem = sut.cardViewController.items.numberContainerItem.numberItem
         
-        let cardNumberItemView: FormCardNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem"))
-        let logoItemView: FormCardLogosItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenCard.CardComponent.numberContainerItem.supportedCardLogosItem"))
+        let cardNumberItemView: FormCardNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem"))
+        let logoItemView: FormCardLogosItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyCard.CardComponent.numberContainerItem.supportedCardLogosItem"))
 
         XCTAssertFalse(logoItemView.isHidden)
 
@@ -1486,7 +1486,7 @@ class CardComponentTests: XCTestCase {
     func testCoBadgedCardsShouldSendDisplayedAnalyticsInfo() throws {
         // Given
         let analyticsProviderMock = AnalyticsProviderMock()
-        let context = AdyenContext(
+        let context = PlexyContext(
             apiContext: Dummy.apiContext,
             payment: Dummy.payment,
             analyticsProvider: analyticsProviderMock
@@ -1511,7 +1511,7 @@ class CardComponentTests: XCTestCase {
     func testCoBadgedCardsShouldSendSelectedAnalyticsInfo() throws {
         // Given
         let analyticsProviderMock = AnalyticsProviderMock()
-        let context = AdyenContext(
+        let context = PlexyContext(
             apiContext: Dummy.apiContext,
             payment: Dummy.payment,
             analyticsProvider: analyticsProviderMock
@@ -2220,7 +2220,7 @@ class CardComponentTests: XCTestCase {
     func testCardHolderNameValidatorWithEmptyName() {
         var configuration = CardComponent.Configuration()
         configuration.showsHolderNameField = true
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
 
         let sut = CardComponent(
             paymentMethod: method,
@@ -2234,7 +2234,7 @@ class CardComponentTests: XCTestCase {
 
     func testPayButtonLocaleBasedFormating() {
         let amount = Amount(value: 1234567, currencyCode: "USD")
-        let context = AdyenContext(apiContext: Dummy.apiContext, payment: Payment(amount: amount, countryCode: "US"))
+        let context = PlexyContext(apiContext: Dummy.apiContext, payment: Payment(amount: amount, countryCode: "US"))
 
         // When
         var configuration = CardComponent.Configuration()
@@ -2252,7 +2252,7 @@ class CardComponentTests: XCTestCase {
 
     func testPayButtonEnforceedLocaleBasedFormating() {
         let amount = Amount(value: 1234567, currencyCode: "USD")
-        let context = AdyenContext(apiContext: Dummy.apiContext, payment: Payment(amount: amount, countryCode: "US"))
+        let context = PlexyContext(apiContext: Dummy.apiContext, payment: Payment(amount: amount, countryCode: "US"))
 
         // When
         var configuration = CardComponent.Configuration()
@@ -2271,7 +2271,7 @@ class CardComponentTests: XCTestCase {
     func testCardHolderNameValidatorWithMinimumLength() {
         var configuration = CardComponent.Configuration()
         configuration.showsHolderNameField = true
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
 
         let sut = CardComponent(
             paymentMethod: method,
@@ -2541,18 +2541,18 @@ class CardComponentTests: XCTestCase {
     }
 
     private enum CardViewIdentifier {
-        static let holdername = "AdyenCard.CardComponent.holderNameItem"
-        static let billingAddress = "AdyenCard.CardComponent.billingAddress"
-        static let zipCode = "AdyenCard.CardComponent.postalCodeItem"
-        static let fullAddressZipCode = "AdyenCard.CardComponent.billingAddress.postalCode"
-        static let city = "AdyenCard.CardComponent.billingAddress.city"
-        static let houseNumberOrName = "AdyenCard.CardComponent.billingAddress.houseNumberOrName"
-        static let street = "AdyenCard.CardComponent.billingAddress.street"
-        static let stateOrProvince = "AdyenCard.CardComponent.billingAddress.stateOrProvince"
-        static let socialSecurityNumber = "AdyenCard.CardComponent.socialSecurityNumberItem"
-        static let securityCode = "AdyenCard.CardComponent.securityCodeItem"
-        static let expiryDate = "AdyenCard.CardComponent.expiryDateItem"
-        static let cardNumber = "AdyenCard.FormCardNumberContainerItem.numberItem"
+        static let holdername = "PlexyCard.CardComponent.holderNameItem"
+        static let billingAddress = "PlexyCard.CardComponent.billingAddress"
+        static let zipCode = "PlexyCard.CardComponent.postalCodeItem"
+        static let fullAddressZipCode = "PlexyCard.CardComponent.billingAddress.postalCode"
+        static let city = "PlexyCard.CardComponent.billingAddress.city"
+        static let houseNumberOrName = "PlexyCard.CardComponent.billingAddress.houseNumberOrName"
+        static let street = "PlexyCard.CardComponent.billingAddress.street"
+        static let stateOrProvince = "PlexyCard.CardComponent.billingAddress.stateOrProvince"
+        static let socialSecurityNumber = "PlexyCard.CardComponent.socialSecurityNumberItem"
+        static let securityCode = "PlexyCard.CardComponent.securityCodeItem"
+        static let expiryDate = "PlexyCard.CardComponent.expiryDateItem"
+        static let cardNumber = "PlexyCard.FormCardNumberContainerItem.numberItem"
     }
 
     private var shopperInformation: PrefilledShopperInformation {
@@ -2583,9 +2583,9 @@ extension UIView {
 extension CardComponentTests {
 
     func fillCard(on view: UIView, with card: Card) {
-        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem")
-        let expiryDateItemView: FormTextInputItemView? = view.findView(with: "AdyenCard.CardComponent.expiryDateItem")
-        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = view.findView(with: "AdyenCard.CardComponent.securityCodeItem")
+        let cardNumberItemView: FormTextItemView<FormCardNumberItem>? = view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem")
+        let expiryDateItemView: FormTextInputItemView? = view.findView(with: "PlexyCard.CardComponent.expiryDateItem")
+        let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem>? = view.findView(with: "PlexyCard.CardComponent.securityCodeItem")
 
         populate(textItemView: cardNumberItemView!, with: card.number ?? "")
         populate(textItemView: expiryDateItemView!, with: "\(card.expiryMonth ?? "") \(card.expiryYear ?? "")")
@@ -2593,7 +2593,7 @@ extension CardComponentTests {
     }
 
     func tapSubmitButton(on view: UIView) {
-        let payButtonItemViewButton: UIControl? = view.findView(with: "AdyenCard.CardComponent.payButtonItem.button")
+        let payButtonItemViewButton: UIControl? = view.findView(with: "PlexyCard.CardComponent.payButtonItem.button")
         payButtonItemViewButton?.sendActions(for: .touchUpInside)
     }
 }

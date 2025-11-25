@@ -1,15 +1,15 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-#if canImport(AdyenCardScanner)
-    @testable import AdyenCard
-    @testable import AdyenCardScanner
+#if canImport(PlexyCardScanner)
+    @testable import PlexyCard
+    @testable import PlexyCardScanner
 
     internal class CardScannerProviderSpy: CardScannerProviding {
-        private var completion: ((Result<AdyenCardScanner.CardScanDetails, Error>) -> Void)?
+        private var completion: ((Result<PlexyCardScanner.CardScanDetails, Error>) -> Void)?
 
         func createCardScanner(
             completion: @escaping (Result<CardScannerCardDetails, Error>) -> Void

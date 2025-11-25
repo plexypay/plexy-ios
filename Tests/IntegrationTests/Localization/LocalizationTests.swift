@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2020 Adyen N.V.
+// Copyright (c) 2020 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 import XCTest
 
 class LocalizationTests: XCTestCase {
@@ -96,31 +96,31 @@ class LocalizationTests: XCTestCase {
     
     /// Default Separator
     func testLocalizationWithCustomRecognizedTableNameAndDefaultSeparator() {
-        let parameters = LocalizationParameters(tableName: "AdyenUIHost")
+        let parameters = LocalizationParameters(tableName: "PlexyUIHost")
         XCTAssertEqual(localizedString(.dropInStoredTitle, parameters, "test"), "Test-Confirm test payment")
         XCTAssertEqual(localizedString(.cardStoredTitle, parameters), "Test-Verify your card")
 
         XCTAssertNil(parameters.bundle)
         XCTAssertNil(parameters.keySeparator)
-        XCTAssertEqual(parameters.tableName, "AdyenUIHost")
+        XCTAssertEqual(parameters.tableName, "PlexyUIHost")
         XCTAssertNil(parameters.locale)
     }
 
     /// Unrecognized Separator
     func testLocalizationWithCustomRecognizedTableNameAndCustomUnrecognizedSeparator() {
-        let parameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: "*")
+        let parameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: "*")
         XCTAssertEqual(localizedString(.dropInStoredTitle, parameters, "test"), "Test-Confirm test payment")
         XCTAssertEqual(localizedString(.cardStoredTitle, parameters), "Test-Verify your card")
 
         XCTAssertNil(parameters.bundle)
         XCTAssertEqual(parameters.keySeparator, "*")
-        XCTAssertEqual(parameters.tableName, "AdyenUIHost")
+        XCTAssertEqual(parameters.tableName, "PlexyUIHost")
         XCTAssertNil(parameters.locale)
     }
 
     /// Recognized Separator
     func testLocalizationWithCustomRecognizedTableNameAndCustomRecognizedSeparator() {
-        let parameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        let parameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
         XCTAssertEqual(localizedString(.dropInStoredTitle, parameters, "test"), "Test-Confirm test payment")
         XCTAssertEqual(localizedString(.cardStoredTitle, parameters), "Test-Verify your card")
     }
@@ -130,14 +130,14 @@ class LocalizationTests: XCTestCase {
     func testLocalizationWithCustomRecognizedTableNameAndDefaultSeparatorAndCustomBundle() {
         let parameters = LocalizationParameters(
             bundle: Bundle(for: LocalizationTests.self),
-            tableName: "AdyenTests"
+            tableName: "PlexyTests"
         )
         XCTAssertEqual(localizedString(.dropInStoredTitle, parameters, "test"), "TestBundle-Confirm test payment")
         XCTAssertEqual(localizedString(.cardStoredTitle, parameters), "TestBundle-Verify your card")
 
         XCTAssertEqual(parameters.bundle, Bundle(for: LocalizationTests.self))
         XCTAssertNil(parameters.keySeparator)
-        XCTAssertEqual(parameters.tableName, "AdyenTests")
+        XCTAssertEqual(parameters.tableName, "PlexyTests")
         XCTAssertNil(parameters.locale)
     }
 
@@ -163,7 +163,7 @@ class LocalizationTests: XCTestCase {
     func testLocalizationWithCustomRecognizedTableNameAndCustomRecognizedSeparatorAndCustomBundle() {
         let parameters = LocalizationParameters(
             bundle: Bundle(for: LocalizationTests.self),
-            tableName: "AdyenTestsCustomSeparator",
+            tableName: "PlexyTestsCustomSeparator",
             keySeparator: "_"
         )
         XCTAssertEqual(localizedString(.dropInStoredTitle, parameters, "test"), "TestBundle-Confirm test payment")

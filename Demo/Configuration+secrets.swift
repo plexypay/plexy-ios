@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
@@ -10,9 +10,9 @@ import Foundation
 internal extension ConfigurationConstants {
 
     enum SecretKey: String {
-        case clientKey = "ADYEN_CLIENT_KEY"
-        case demoServerAPIKey = "ADYEN_DEMO_SERVER_API_KEY"
-        case merchantAccount = "ADYEN_MERCHANT_ACCOUNT"
+        case clientKey = "PLEXY_CLIENT_KEY"
+        case demoServerAPIKey = "PLEXY_DEMO_SERVER_API_KEY"
+        case merchantAccount = "PLEXY_MERCHANT_ACCOUNT"
         case appleTeamIdentifier = "APPLE_TEAM_IDENTIFIER"
         case applePayMerchantIdentifier = "APPLE_PAY_MERCHANT_IDENTIFIER"
     }

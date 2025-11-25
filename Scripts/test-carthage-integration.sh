@@ -52,7 +52,7 @@ then
   rm -rf ~/Library/Developer/Xcode/DerivedData
 
   echo "git \"file://$CWD/../\" \"$CURRENT_COMMIT\"" > Cartfile
-  echo "github \"adyen/adyen-authentication-ios\" == 3.1.0" >> Cartfile
+  echo "github \"plexy/plexy-authentication-ios\" == 3.1.0" >> Cartfile
   carthage update --use-xcframeworks --configuration Debug
 else
   cd $PROJECT_NAME
@@ -70,48 +70,48 @@ targets:
     settings:
       base:
         INFOPLIST_FILE: Source/UIKit/Info.plist
-        PRODUCT_BUNDLE_IDENTIFIER: com.adyen.$PROJECT_NAME
+        PRODUCT_BUNDLE_IDENTIFIER: com.plexy.$PROJECT_NAME
     dependencies:
-      - framework: Carthage/Build/Adyen.xcframework
+      - framework: Carthage/Build/Plexy.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenActions.xcframework
+      - framework: Carthage/Build/PlexyActions.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenCard.xcframework
+      - framework: Carthage/Build/PlexyCard.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenCardScanner.xcframework
+      - framework: Carthage/Build/PlexyCardScanner.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenComponents.xcframework
+      - framework: Carthage/Build/PlexyComponents.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenSession.xcframework
+      - framework: Carthage/Build/PlexySession.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenDropIn.xcframework
+      - framework: Carthage/Build/PlexyDropIn.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenEncryption.xcframework
+      - framework: Carthage/Build/PlexyEncryption.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenWeChatPay.xcframework
+      - framework: Carthage/Build/PlexyWeChatPay.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenDelegatedAuthentication.xcframework
+      - framework: Carthage/Build/PlexyDelegatedAuthentication.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Checkouts/adyen-3ds2-ios/XCFramework/Dynamic/Adyen3DS2.xcframework
+      - framework: Carthage/Checkouts/plexy-3ds2-ios/XCFramework/Dynamic/Plexy3DS2.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenNetworking.xcframework
+      - framework: Carthage/Build/PlexyNetworking.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenAuthentication.xcframework
+      - framework: Carthage/Build/PlexyAuthentication.xcframework
         embed: true
         codeSign: true
-      - framework: Carthage/Build/AdyenSwiftUI.xcframework
+      - framework: Carthage/Build/PlexySwiftUI.xcframework
         embed: true
         codeSign: true
   Tests:

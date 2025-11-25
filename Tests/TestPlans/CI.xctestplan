@@ -21,14 +21,14 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Adyen.xcodeproj",
+        "containerPath" : "container:Plexy.xcodeproj",
         "identifier" : "B62D48AB2BBE8D79001EF01A",
         "name" : "UnitTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Adyen.xcodeproj",
+        "containerPath" : "container:Plexy.xcodeproj",
         "identifier" : "E2C0E03B22097917008616F6",
         "name" : "IntegrationUIKitTests"
       }

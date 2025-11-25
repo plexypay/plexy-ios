@@ -26,7 +26,7 @@ jobs:
       run: |
         xcodebuild test -project "${project}" -scheme "${scheme}" ${params} -destination "name=iPhone 16,OS=18.6" -destination "name=iPad (10th generation),OS=18.6" | xcpretty --utf --color
       env:
-        project: 'Adyen.xcodeproj'
+        project: 'Plexy.xcodeproj'
         params: '-skipPackagePluginValidation'
         scheme: 'GenerateSnapshots'
         

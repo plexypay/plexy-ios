@@ -35,7 +35,7 @@ jobs:
         cd ${validationProjectName}
         xcodebuild clean build -scheme "${validationProjectName}" -destination 'generic/platform=iOS Simulator' | xcpretty --utf --color && exit ${PIPESTATUS[0]}
       env:
-        project: 'Adyen.xcodeproj'
+        project: 'Plexy.xcodeproj'
         archivePath: 'LibraryEvolutionValidationArchive.xcarchive'
-        scheme: 'AdyenDropIn'
+        scheme: 'PlexyDropIn'
         validationProjectName: 'LibraryEvolutionValidation'

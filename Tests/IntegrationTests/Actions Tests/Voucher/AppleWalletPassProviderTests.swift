@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenActions
-@testable import AdyenNetworking
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyActions
+@testable import PlexyNetworking
 import XCTest
 
 class AppleWalletPassProviderTests: XCTestCase {
 
-    var context: AdyenContext!
+    var context: PlexyContext!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -20,7 +20,7 @@ class AppleWalletPassProviderTests: XCTestCase {
 
     override func tearDownWithError() throws {
         context = nil
-        AdyenAssertion.listener = nil
+        PlexyAssertion.listener = nil
         try super.tearDownWithError()
     }
 

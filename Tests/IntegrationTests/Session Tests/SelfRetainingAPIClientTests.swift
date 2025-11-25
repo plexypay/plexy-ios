@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import AdyenNetworking
-@testable import AdyenSession
+import PlexyNetworking
+@testable import PlexySession
 import XCTest
-@_spi(AdyenInternal) import Adyen
+@_spi(PlexyInternal) import Plexy
 
 extension SessionSetupResponse: Equatable {
     public static func == (lhs: SessionSetupResponse, rhs: SessionSetupResponse) -> Bool {

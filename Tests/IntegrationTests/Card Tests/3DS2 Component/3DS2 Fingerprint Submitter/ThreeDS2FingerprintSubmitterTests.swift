@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 extension RedirectAction: Equatable {
@@ -27,7 +27,7 @@ class ThreeDS2FingerprintSubmitterTests: XCTestCase {
         let apiClient = APIClientMock()
         let sut = ThreeDS2FingerprintSubmitter(context: Dummy.context, apiClient: apiClient)
 
-        let mockedRedirectAction = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "data")
+        let mockedRedirectAction = RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "data")
         let mockedAction = Action.redirect(mockedRedirectAction)
         let mockedResponse = Submit3DS2FingerprintResponse(result: .action(mockedAction))
         apiClient.mockedResults = [.success(mockedResponse)]

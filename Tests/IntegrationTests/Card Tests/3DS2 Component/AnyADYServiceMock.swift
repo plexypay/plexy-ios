@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen3DS2
-@_spi(AdyenInternal) @testable import AdyenActions
+import Plexy3DS2
+@_spi(PlexyInternal) @testable import PlexyActions
 import Foundation
 
 final class AnyADYServiceMock: AnyADYService {

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
+@_spi(PlexyInternal) import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
 import PassKit
 import UIKit
 import XCTest
@@ -172,7 +172,7 @@ class VoucherViewTests: XCTestCase {
             identifier: "identifier",
             amount: "100",
             currency: "EUR",
-            logoUrl: URL(string: "https://adyen.com")!,
+            logoUrl: URL(string: "https://plexy.com")!,
             mainButton: "Main Button",
             secondaryButtonTitle: "Secondary Button",
             codeConfirmationTitle: "Code Copied!",

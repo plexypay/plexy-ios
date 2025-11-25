@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-@_spi(AdyenInternal) import AdyenActions
-import AdyenDropIn
+@_spi(PlexyInternal) import Plexy
+@_spi(PlexyInternal) import PlexyActions
+import PlexyDropIn
 
 class DropInDelegateMock: DropInComponentDelegate {
     

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class ApplePayDetailsTest: XCTestCase {
@@ -21,7 +21,7 @@ class ApplePayDetailsTest: XCTestCase {
             shippingMethod: nil
         )
         
-        let data = try AdyenCoder.encode(sut.encodable) as Data
+        let data = try PlexyCoder.encode(sut.encodable) as Data
         
         let resultJson = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? [String: Any]
         

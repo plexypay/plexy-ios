@@ -27,7 +27,7 @@ If applicable, add screenshots to help explain your problem.
  - Device: [e.g. iPhone6]
  - iOS Version: [e.g. iOS8.1]
  - SDK Version: [e.g. 3.3.0]
- - Adyen API Version: [e.g 67]
+ - Plexy API Version: [e.g 67]
  - Package management system: [e.g. SPM]
  - Xcode version: [e.g 14.3]
  - Mac OS type: [e.g. M1 / Intel]

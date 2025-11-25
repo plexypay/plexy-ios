@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class FormCardNumberItemViewTests: XCTestCase {
@@ -13,7 +13,7 @@ class FormCardNumberItemViewTests: XCTestCase {
     var scanButtonTapped = false
     
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -269,7 +269,7 @@ private extension FormCardNumberItemViewTests {
     
     func setupSut(
         validator: Validator = ValidatorMock(),
-        formatter: Adyen.Formatter = CardNumberFormatter()
+        formatter: Plexy.Formatter = CardNumberFormatter()
     ) -> FormCardNumberItemView {
         let item = FormCardNumberItem(cardTypeLogos: [
             .init(url: Self.url, type: .visa),

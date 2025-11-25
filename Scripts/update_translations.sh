@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 echo "# Clone the translations repo"
-git clone --progress --verbose https://gitlab.is.adyen.com/adyen/streams/checkout/translations.git ./translations
+git clone --progress --verbose https://gitlab.is.plexy.com/plexy/streams/checkout/translations.git ./translations
 
 # Get into the iOS translation folder
 cd translations/iOS
@@ -19,4 +19,4 @@ rm -rf ./translations
 
 echo ""
 echo "# Generating localization keys"
-./Scripts/generate_localization_keys.swift ./Adyen/Assets/en-US.lproj/Localizable.strings ./Adyen/Assets/Generated/LocalizationKey.swift
+./Scripts/generate_localization_keys.swift ./Plexy/Assets/en-US.lproj/Localizable.strings ./Plexy/Assets/Generated/LocalizationKey.swift

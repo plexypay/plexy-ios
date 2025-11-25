@@ -1,31 +1,31 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
-import AdyenNetworking
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
+import PlexyNetworking
 import SafariServices
 import XCTest
 
 class RedirectComponentTests: XCTestCase {
     
     override func setUp(completion: @escaping (Error?) -> Void) {
-        UIApplication.shared.adyen.mainKeyWindow?.rootViewController?.dismiss(animated: false) {
+        UIApplication.shared.plexy.mainKeyWindow?.rootViewController?.dismiss(animated: false) {
             super.setUp(completion: completion)
         }
     }
     
     override func tearDown(completion: @escaping (Error?) -> Void) {
-        UIApplication.shared.adyen.mainKeyWindow?.rootViewController?.dismiss(animated: false) {
+        UIApplication.shared.plexy.mainKeyWindow?.rootViewController?.dismiss(animated: false) {
             super.tearDown(completion: completion)
         }
     }
 
     func testUIConfiguration() {
-        let action = RedirectAction(url: URL(string: "https://adyen.com")!, paymentData: "data")
+        let action = RedirectAction(url: URL(string: "https://plexy.com")!, paymentData: "data")
         let style = RedirectComponentStyle(
             preferredBarTintColor: UIColor.red,
             preferredControlTintColor: UIColor.black,
@@ -204,7 +204,7 @@ class RedirectComponentTests: XCTestCase {
             XCTFail("delegate.didOpenExternalApplication() must not to be called")
         }
 
-        let action = RedirectAction(url: URL(string: "https://www.adyen.com?returnUrlQueryString=anything")!, paymentData: "test_data")
+        let action = RedirectAction(url: URL(string: "https://www.plexy.com?returnUrlQueryString=anything")!, paymentData: "test_data")
         sut.handle(action)
         
         try waitUntilTopPresenter(isOfType: SFSafariViewController.self)
@@ -216,7 +216,7 @@ class RedirectComponentTests: XCTestCase {
         let delegate = ActionComponentDelegateMock()
         sut.delegate = delegate
 
-        let action = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "test_data")
+        let action = RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "test_data")
         sut.handle(action)
 
         let waitExpectation = expectation(description: "Expect in app browser to be presented and then dismissed")
@@ -241,7 +241,7 @@ class RedirectComponentTests: XCTestCase {
         sut.presentationDelegate = presentationDelegate
         let delegate = ActionComponentDelegateMock()
         sut.delegate = delegate
-        let action = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "test_data")
+        let action = RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "test_data")
 
         let presentExpectation = expectation(description: "Expect in app browser to be presented")
         presentationDelegate.doPresent = { component in
@@ -262,7 +262,7 @@ class RedirectComponentTests: XCTestCase {
         wait(for: .seconds(1))
 
         // and redirect received
-        XCTAssertTrue(RedirectComponent.applicationDidOpen(from: URL(string: "https://www.adyen.com?redirectResult=XXX")!))
+        XCTAssertTrue(RedirectComponent.applicationDidOpen(from: URL(string: "https://www.plexy.com?redirectResult=XXX")!))
 
         // Then
         waitForExpectations(timeout: 5, handler: nil)

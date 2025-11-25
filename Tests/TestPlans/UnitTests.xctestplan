@@ -23,7 +23,7 @@
         "PaymentMethodTests\/testDecodingPaymentMethods()"
       ],
       "target" : {
-        "containerPath" : "container:Adyen.xcodeproj",
+        "containerPath" : "container:Plexy.xcodeproj",
         "identifier" : "B62D48AB2BBE8D79001EF01A",
         "name" : "UnitTests"
       }

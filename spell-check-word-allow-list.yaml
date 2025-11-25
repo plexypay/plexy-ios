@@ -6,7 +6,7 @@ whiteList:
   - kcp
   - Prefilled
   - prefill
-  - docs.adyen.com
+  - docs.plexy.com
   - Cartebancaire
   - cartebancaire
   - americanExpress
@@ -113,8 +113,8 @@ whiteList:
   - checkoutshopper
   - Btn
   - btn
-  - adyen
-  - Adyen
+  - plexy
+  - Plexy
   - Ady
   - enc
   - Cryptor

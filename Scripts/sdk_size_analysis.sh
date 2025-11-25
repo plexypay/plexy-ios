@@ -34,8 +34,8 @@ echo "--- Starting Local SDK Size Analysis Script ---"
 # Config
 # ----------------------------
 
-PROJECT_NAME="Adyen.xcodeproj"
-TOP_LEVEL_SCHEME="AdyenUIHost"
+PROJECT_NAME="Plexy.xcodeproj"
+TOP_LEVEL_SCHEME="PlexyUIHost"
 BUILD_CONFIGURATION="Release"
 BUILD_OUTPUT_DIR="${PWD}/sdk_size_output"
 

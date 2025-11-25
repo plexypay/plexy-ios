@@ -1,38 +1,38 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import Foundation
 
-#if canImport(AdyenAuthentication)
-    @_spi(AdyenInternal) @testable import Adyen
-    import Adyen3DS2
-    @_spi(AdyenInternal) @testable import AdyenActions
-    import AdyenAuthentication
+#if canImport(PlexyAuthentication)
+    @_spi(PlexyInternal) @testable import Plexy
+    import Plexy3DS2
+    @_spi(PlexyInternal) @testable import PlexyActions
+    import PlexyAuthentication
     import Foundation
     import UIKit
 
     final class ThreeDS2DAScreenPresenterMock: ThreeDS2PlusDAScreenPresenterProtocol {
     
-        func showDeletionConfirmation(component: any Adyen.Component, handler: @escaping VoidHandler) {
+        func showDeletionConfirmation(component: any Plexy.Component, handler: @escaping VoidHandler) {
             handler()
         }
         
         func showAuthenticationError(
-            component: any Adyen.Component,
+            component: any Plexy.Component,
             handler: @escaping VoidHandler,
             troubleshootingHandler: @escaping VoidHandler
         ) {
             handler()
         }
     
-        func showRegistrationError(component: any Adyen.Component, handler: VoidHandler) {
+        func showRegistrationError(component: any Plexy.Component, handler: VoidHandler) {
             handler()
         }
     
-        var presentationDelegate: (any Adyen.PresentationDelegate)?
+        var presentationDelegate: (any Plexy.PresentationDelegate)?
     
         enum ShowRegistrationScreenMockState {
             case register
@@ -41,12 +41,12 @@ import Foundation
     
         let showRegistrationReturnState: ShowRegistrationScreenMockState
         var onShowRegistrationScreen: ((
-            (number: String?, type: Adyen.CardType?)
+            (number: String?, type: Plexy.CardType?)
         ) -> Void)?
 
         func showRegistrationScreen(
-            component: any Adyen.Component,
-            cardDetails: (number: String?, type: Adyen.CardType?),
+            component: any Plexy.Component,
+            cardDetails: (number: String?, type: Plexy.CardType?),
             registerDelegatedAuthenticationHandler: @escaping VoidHandler,
             fallbackHandler: @escaping VoidHandler
         ) {
@@ -68,14 +68,14 @@ import Foundation
         let showApprovalScreenReturnState: ShowApprovalScreenMockState
     
         var onShowApprovalScreen: ((
-            (number: String?, type: Adyen.CardType?),
-            Adyen.Amount?
+            (number: String?, type: Plexy.CardType?),
+            Plexy.Amount?
         ) -> Void)?
         
         func showApprovalScreen(
-            component: any Adyen.Component,
-            cardDetails: (number: String?, type: Adyen.CardType?),
-            amount: Adyen.Amount?,
+            component: any Plexy.Component,
+            cardDetails: (number: String?, type: Plexy.CardType?),
+            amount: Plexy.Amount?,
             approveAuthenticationHandler: @escaping VoidHandler,
             fallbackHandler: @escaping VoidHandler,
             removeCredentialsHandler: @escaping VoidHandler

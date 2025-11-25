@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021 Adyen N.V.
+// Copyright (c) 2021 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-@_spi(AdyenInternal)
+@_spi(PlexyInternal)
 extension UIView {
     
     /// Attaches top, bottom, left and right anchors of this view to the corresponding anchors inside the specified view.

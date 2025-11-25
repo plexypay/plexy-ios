@@ -20,10 +20,10 @@ platform :ios, '11.0'
 target '$PROJECT_NAME' do
   use_frameworks!
 
-  pod 'Adyen', :path => '../'
-  pod 'Adyen/WeChatPay', :path => '../'
-  pod 'Adyen/SwiftUI', :path => '../'
-  pod 'Adyen/Session', :path => '../'
+  pod 'Plexy', :path => '../'
+  pod 'Plexy/WeChatPay', :path => '../'
+  pod 'Plexy/SwiftUI', :path => '../'
+  pod 'Plexy/Session', :path => '../'
 end
 " >> Podfile
 

@@ -5,7 +5,7 @@
 
 
 ## 5.3.0
-- The `didComplete` method signature of `AdyenSessionDelegate` has changed. You must replace `didComplete(with resultCode: SessionPaymentResultCode, component: Component, session: AdyenSession)` with `didComplete(with result: AdyenSessionResult, component: Component, session: AdyenSession)`. Use the `resultCode` inside of the `AdyenSessionResult` if needed.
+- The `didComplete` method signature of `PlexySessionDelegate` has changed. You must replace `didComplete(with resultCode: SessionPaymentResultCode, component: Component, session: PlexySession)` with `didComplete(with result: PlexySessionResult, component: Component, session: PlexySession)`. Use the `resultCode` inside of the `PlexySessionResult` if needed.
 
 
 ## 5.2.0
@@ -45,7 +45,7 @@
 - `StoredCardPaymentMethod.brands` is now a strongly typed Array of `CardType`.
 - `StoredCardPaymentMethod.brand` is now a strongly typed `CardType`.
 - `PaymentMethods` now has a convenient function `overrideDisplayInformation(ofPaymentMethod:with:)` to override a specific payment method title/subtitle in the DropIn list.
-- Every component needs to be initialized with an `AdyenContext` instance that defines the behavior for a payment flow.
+- Every component needs to be initialized with an `PlexyContext` instance that defines the behavior for a payment flow.
 - `AnalyticsConfiguration` is the object that defines the behavior of analytics within the SDK. Merchants can enable/disable analytics.
 - `CardComponentDelegate.didChangeBIN(:component:)` provides the 8 digit bin in case the PAN is greater than 16 digits.
 - `CardComponentDelegate.didSubmit(lastFour:finalBIN:component)` now has a new parameter `finalBIN` that provides the final BIN after shopper submits the card details.

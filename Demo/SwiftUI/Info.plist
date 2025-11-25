@@ -53,7 +53,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.adyen.AdyenUIHost</string>
+			<string>com.plexy.PlexyUIHost</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>ui-host</string>

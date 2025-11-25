@@ -1,4 +1,4 @@
-name: 🫛 Publish Adyen.podspec
+name: 🫛 Publish Plexy.podspec
 on:
   workflow_dispatch:
   workflow_call:
@@ -21,9 +21,9 @@ jobs:
       with:
         xcode-version: '16.4'
 
-    - name: Publish Adyen.podspec
+    - name: Publish Plexy.podspec
       run: |
         gem install cocoapods
-        pod trunk push Adyen.podspec --allow-warnings
+        pod trunk push Plexy.podspec --allow-warnings
       env:
         COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}

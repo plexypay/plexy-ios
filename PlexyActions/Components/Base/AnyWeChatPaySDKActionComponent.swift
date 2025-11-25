@@ -1,0 +1,33 @@
+//
+// Copyright (c) 2022 Plexy N.V.
+//
+// This file is open source and available under the MIT license. See the LICENSE file for more info.
+//
+
+@_spi(PlexyInternal) import Plexy
+import Foundation
+
+/// Represents any structure/class that can be initialized without any parameters.
+public protocol APIContextInitializable {
+    /// Initializer that takes an `APIContext`.
+    init(context: PlexyContext)
+}
+
+/// Describes the expected interface from any ActionComponent that handles WeChat Pay sdk action.
+public protocol AnyWeChatPaySDKActionComponent: ActionComponent, DeviceDependent, APIContextInitializable {
+
+    /// Handles the action.
+    ///
+    /// - Parameter action: The WeChat Pay action.
+    func handle(_ action: WeChatPaySDKAction)
+
+}
+
+/// Loads the concrete WeChatPaySDKActionComponent Class dynamically.
+@_spi(PlexyInternal)
+public func loadTheConcreteWeChatPaySDKActionComponentClass() -> AnyWeChatPaySDKActionComponent.Type? {
+    [
+        "PlexyWeChatPay.WeChatPaySDKActionComponent",
+        "Plexy.WeChatPaySDKActionComponent"
+    ].compactMap { NSClassFromString($0) as? AnyWeChatPaySDKActionComponent.Type }.first
+}

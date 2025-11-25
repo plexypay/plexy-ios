@@ -32,15 +32,15 @@
       }
     ],
     "targetForVariableExpansion" : {
-      "containerPath" : "container:Adyen.xcodeproj",
+      "containerPath" : "container:Plexy.xcodeproj",
       "identifier" : "F9CCA3B4296ECB3E00AD643D",
-      "name" : "AdyenUIHostUITests"
+      "name" : "PlexyUIHostUITests"
     }
   },
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Adyen.xcodeproj",
+        "containerPath" : "container:Plexy.xcodeproj",
         "identifier" : "F9CCA3B4296ECB3E00AD643D",
         "name" : "SnapshotsTests"
       }

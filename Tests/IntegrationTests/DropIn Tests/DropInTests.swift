@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable import PlexyDropIn
 import SafariServices
 import XCTest
 
@@ -123,7 +123,7 @@ class DropInTests: XCTestCase {
         """
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.openAppDetector = MockOpenExternalAppDetector(didOpenExternalApp: false)
             $0.imageLoader = ImageLoaderMock()
         } perform: {
@@ -312,7 +312,7 @@ class DropInTests: XCTestCase {
         config.allowPreselectedPaymentView = false
 
         var paymentMethods = try JSONDecoder().decode(PaymentMethods.self, from: DropInTests.paymentMethods.data(using: .utf8)!)
-        let storedPaymentMethod = try AdyenCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
+        let storedPaymentMethod = try PlexyCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
         paymentMethods.stored = [storedPaymentMethod]
         
         let sut = DropInComponent(
@@ -348,7 +348,7 @@ class DropInTests: XCTestCase {
         config.allowPreselectedPaymentView = false
 
         var paymentMethods = try JSONDecoder().decode(PaymentMethods.self, from: DropInTests.paymentMethods.data(using: .utf8)!)
-        let storedPaymentMethod = try AdyenCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
+        let storedPaymentMethod = try PlexyCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
         paymentMethods.stored = [storedPaymentMethod]
         
         let sut = DropInComponent(
@@ -383,7 +383,7 @@ class DropInTests: XCTestCase {
         config.allowPreselectedPaymentView = false
 
         var paymentMethods = try JSONDecoder().decode(PaymentMethods.self, from: DropInTests.paymentMethods.data(using: .utf8)!)
-        let storedPaymentMethod = try AdyenCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
+        let storedPaymentMethod = try PlexyCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
         paymentMethods.stored = [storedPaymentMethod]
         
         let sut = DropInComponent(
@@ -418,7 +418,7 @@ class DropInTests: XCTestCase {
         config.allowPreselectedPaymentView = false
 
         var paymentMethods = try JSONDecoder().decode(PaymentMethods.self, from: DropInTests.paymentMethods.data(using: .utf8)!)
-        let storedPaymentMethod = try AdyenCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
+        let storedPaymentMethod = try PlexyCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
         paymentMethods.stored = [storedPaymentMethod]
         
         let sut = DropInComponent(

@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-#if canImport(AdyenCardScanner)
-    @testable import AdyenCard
-    @_spi(AdyenInternal) import Adyen
-    @testable import AdyenCardScanner
+#if canImport(PlexyCardScanner)
+    @testable import PlexyCard
+    @_spi(PlexyInternal) import Plexy
+    @testable import PlexyCardScanner
     import XCTest
 
     class CardScannerControllerTests: XCTestCase {
@@ -19,7 +19,7 @@
             try super.tearDownWithError()
         }
 
-        // This test requires AdyenCardScanner framework to be imported for the test target
+        // This test requires PlexyCardScanner framework to be imported for the test target
         func test_scannerIsAvailable() {
             let (sut, _, _) = makeSUT()
             XCTAssertTrue(sut.isScannerAvailable)
@@ -118,7 +118,7 @@
         func test_controller_returnsSimplifiedScannerError() {
             // Given
             let expectation = XCTestExpectation(description: "Card scanner should complete the flow")
-            let mockError = AdyenCardScanner.CardScannerError(kind: .authorizationDenied)
+            let mockError = PlexyCardScanner.CardScannerError(kind: .authorizationDenied)
             let expectedError = CardScannerController.CardScannerError.scanningError
             let (sut, _, cardScanner) = makeSUT()
 

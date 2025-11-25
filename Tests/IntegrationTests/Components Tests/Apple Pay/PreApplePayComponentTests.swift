@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenComponents
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyComponents
+@testable import PlexyDropIn
 import PassKit
 import XCTest
 
@@ -15,7 +15,7 @@ class PreApplePayComponentTests: XCTestCase {
     var analyticsProviderMock: AnalyticsProviderMock!
     let amount = Dummy.payment.amount
     var paymentMethod = ApplePayPaymentMethod(type: .applePay, name: "test_name", brands: nil)
-    var context: AdyenContext!
+    var context: PlexyContext!
     var paymentComponentDelegate: PaymentComponentDelegateMock!
     var sut: PreApplePayComponent!
     lazy var applePayPayment = Dummy.createTestApplePayPayment()
@@ -108,8 +108,8 @@ class PreApplePayComponentTests: XCTestCase {
         
         wait(for: .milliseconds(300))
         
-        XCTAssertTrue(UIApplication.shared.adyen.mainKeyWindow?.rootViewController?.presentedViewController is PKPaymentAuthorizationViewController)
-        UIApplication.shared.adyen.mainKeyWindow?.rootViewController?.presentedViewController?.dismiss(animated: false, completion: nil)
+        XCTAssertTrue(UIApplication.shared.plexy.mainKeyWindow?.rootViewController?.presentedViewController is PKPaymentAuthorizationViewController)
+        UIApplication.shared.plexy.mainKeyWindow?.rootViewController?.presentedViewController?.dismiss(animated: false, completion: nil)
 
         sut.finalizeIfNeeded(with: false) {
             dismissExpectation.fulfill()

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
 import UIKit
 import XCTest
 
@@ -16,7 +16,7 @@ class VoucherComponentTests: XCTestCase {
     var presentationDelegate: PresentationDelegateMock!
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -32,7 +32,7 @@ class VoucherComponentTests: XCTestCase {
     }
 
     func testDokuVoucherComponent() throws {
-        let action = try AdyenCoder.decode(dokuIndomaretAction) as VoucherAction
+        let action = try PlexyCoder.decode(dokuIndomaretAction) as VoucherAction
 
         let presentationDelegateExpectation = expectation(description: "Expect presentationDelegate.present() to be called.")
         presentationDelegate.doPresent = { [self] component in
@@ -54,7 +54,7 @@ class VoucherComponentTests: XCTestCase {
     }
     
     func testEContextATMVoucherComponent() throws {
-        let action = try AdyenCoder.decode(econtextATMAction) as VoucherAction
+        let action = try PlexyCoder.decode(econtextATMAction) as VoucherAction
         
         let presentationDelegateExpectation = expectation(description: "Expect presentationDelegate.present() to be called.")
         presentationDelegate.doPresent = { [self] component in
@@ -76,7 +76,7 @@ class VoucherComponentTests: XCTestCase {
     }
     
     func testBoletoVoucherComponent() throws {
-        let action = try AdyenCoder.decode(boletoAction) as VoucherAction
+        let action = try PlexyCoder.decode(boletoAction) as VoucherAction
         
         let presentationDelegateExpectation = expectation(description: "Expect presentationDelegate.present() to be called.")
         presentationDelegate.doPresent = { [self] component in
@@ -98,7 +98,7 @@ class VoucherComponentTests: XCTestCase {
     }
     
     func testOXXOVoucherComponent() throws {
-        let action = try AdyenCoder.decode(oxxoAction) as VoucherAction
+        let action = try PlexyCoder.decode(oxxoAction) as VoucherAction
         
         let presentationDelegateExpectation = expectation(description: "Expect presentationDelegate.present() to be called.")
         presentationDelegate.doPresent = { [self] component in
@@ -113,7 +113,7 @@ class VoucherComponentTests: XCTestCase {
             
             checkViewModel(view!.model, forAction: action)
             
-            let optionsButton: UIButton! = component.viewController.view.findView(with: "AdyenActions.VoucherComponent.voucherView.secondaryButton")
+            let optionsButton: UIButton! = component.viewController.view.findView(with: "PlexyActions.VoucherComponent.voucherView.secondaryButton")
             XCTAssertNotNil(optionsButton)
             XCTAssertEqual(optionsButton.titleLabel?.text, "More options")
             
@@ -142,7 +142,7 @@ class VoucherComponentTests: XCTestCase {
     }
     
     func testMultibancoVoucherComponent() throws {
-        let action = try AdyenCoder.decode(multibancoVoucher) as VoucherAction
+        let action = try PlexyCoder.decode(multibancoVoucher) as VoucherAction
         
         let presentationDelegateExpectation = expectation(description: "Expect presentationDelegate.present() to be called.")
         presentationDelegate.doPresent = { [self] component in
@@ -157,7 +157,7 @@ class VoucherComponentTests: XCTestCase {
             
             checkViewModel(view!.model, forAction: action)
             
-            let optionsButton: UIButton! = component.viewController.view.findView(with: "AdyenActions.VoucherComponent.voucherView.secondaryButton")
+            let optionsButton: UIButton! = component.viewController.view.findView(with: "PlexyActions.VoucherComponent.voucherView.secondaryButton")
             XCTAssertNotNil(optionsButton)
             XCTAssertEqual(optionsButton.titleLabel?.text, "More options")
             
@@ -183,7 +183,7 @@ class VoucherComponentTests: XCTestCase {
     }
     
     func testEContextStoresVoucherComponent() throws {
-        let action = try AdyenCoder.decode(econtextStoresAction) as VoucherAction
+        let action = try PlexyCoder.decode(econtextStoresAction) as VoucherAction
         
         let presentationDelegateExpectation = expectation(description: "Expect presentationDelegate.present() to be called.")
         presentationDelegate.doPresent = { [self] component in

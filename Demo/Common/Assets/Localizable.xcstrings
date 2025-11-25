@@ -10,10 +10,10 @@
     "(Requires API version 70 or higher)" : {
 
     },
-    "adyen.card.stored.title" : {
+    "plexy.card.stored.title" : {
       "extractionState" : "manual"
     },
-    "adyen.dropIn.stored.title" : {
+    "plexy.dropIn.stored.title" : {
       "extractionState" : "manual",
       "localizations" : {
         "hi" : {

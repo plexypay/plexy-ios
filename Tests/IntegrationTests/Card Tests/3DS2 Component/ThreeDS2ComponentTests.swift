@@ -1,27 +1,27 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
-@_spi(AdyenInternal) import Adyen
-import Adyen3DS2
+@_spi(PlexyInternal) import Plexy
+import Plexy3DS2
 
 @available(iOS 16.0, *)
 class ThreeDS2ComponentTests: XCTestCase {
 
     func testFullFlowRedirectSuccess() throws {
 
-        let mockedAction = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "data")
+        let mockedAction = RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "data")
 
         let mockedDetails = try RedirectDetails(returnURL: Dummy.returnUrl)
         let mockedData = ActionComponentData(details: mockedDetails, paymentData: "data")
 
         let threeDSActionHandler = AnyThreeDS2ActionHandlerMock()
-        threeDSActionHandler.mockedFingerprintResult = .success(.action(.redirect(RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "data"))))
+        threeDSActionHandler.mockedFingerprintResult = .success(.action(.redirect(RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "data"))))
 
         let redirectComponent = AnyRedirectComponentMock()
         redirectComponent.onHandle = { [weak redirectComponent] action in
@@ -58,7 +58,7 @@ class ThreeDS2ComponentTests: XCTestCase {
     }
 
     func testFullFlowRedirectFailure() throws {
-        let mockedAction = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "data")
+        let mockedAction = RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "data")
 
         let threeDS2ActionHandler = AnyThreeDS2ActionHandlerMock()
         threeDS2ActionHandler.mockedFingerprintResult = .success(.action(.redirect(mockedAction)))
@@ -432,7 +432,7 @@ class ThreeDS2ComponentTests: XCTestCase {
         waitForExpectations(timeout: 2, handler: nil)
     }
 
-    #if canImport(AdyenAuthentication)
+    #if canImport(PlexyAuthentication)
         /// A positive flow, when DA is registered on the device, & user taps on approve - PresentationDelegateMock. We expect the approval flow to succeed.
         func testDelegatedAuthenticationApprovalFlow() {
             enum TestData {

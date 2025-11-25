@@ -1,14 +1,14 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import Foundation
 
-import Adyen
-import AdyenActions
-import AdyenComponents
+import Plexy
+import PlexyActions
+import PlexyComponents
 
 internal final class InstantPaymentComponentAdvancedFlow: InitialDataAdvancedFlowProtocol {
 
@@ -20,12 +20,12 @@ internal final class InstantPaymentComponentAdvancedFlow: InitialDataAdvancedFlo
     
     internal lazy var apiClient = ApiClientHelper.generateApiClient()
     
-    internal lazy var context: AdyenContext = generateContext()
+    internal lazy var context: PlexyContext = generateContext()
 
     // MARK: - Action Handling
 
-    private lazy var adyenActionComponent: AdyenActionComponent = {
-        let handler = AdyenActionComponent(context: context)
+    private lazy var plexyActionComponent: PlexyActionComponent = {
+        let handler = PlexyActionComponent(context: context)
         handler.delegate = self
         handler.presentationDelegate = self
         return handler
@@ -83,7 +83,7 @@ internal final class InstantPaymentComponentAdvancedFlow: InitialDataAdvancedFlo
         switch result {
         case let .success(response):
             if let action = response.action {
-                adyenActionComponent.handle(action)
+                plexyActionComponent.handle(action)
             } else {
                 finish(with: response)
             }

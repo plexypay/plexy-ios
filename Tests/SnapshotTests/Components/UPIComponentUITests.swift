@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
-import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
+import PlexyDropIn
 import XCTest
 
 class UPIComponentUITests: XCTestCase {
@@ -16,7 +16,7 @@ class UPIComponentUITests: XCTestCase {
         name: "upi",
         apps: upiApps
     )
-    private var context: AdyenContext { Dummy.context }
+    private var context: PlexyContext { Dummy.context }
     private var style: FormComponentStyle { FormComponentStyle() }
     private var upiApps: [Issuer] = [
         Issuer(identifier: "bhim", name: "BHIM"),
@@ -112,7 +112,7 @@ class UPIComponentUITests: XCTestCase {
             configuration: config
         )
         
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.upiFlowSelectionSegmentedControlItem"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.upiFlowSelectionSegmentedControlItem"))
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.sendActions(for: .valueChanged)
         
@@ -162,7 +162,7 @@ class UPIComponentUITests: XCTestCase {
         
         assertViewControllerImage(matching: sut.viewController, named: "upi_intent")
 
-        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.continueButton.button"))
+        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.continueButton.button"))
         continueButton.sendActions(for: .touchUpInside)
     
         waitForExpectations(timeout: 10, handler: nil)
@@ -196,11 +196,11 @@ class UPIComponentUITests: XCTestCase {
         }
         
         // Switch to UPI-ID segment
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.upiFlowSelectionSegmentedControlItem"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.upiFlowSelectionSegmentedControlItem"))
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.sendActions(for: .valueChanged)
 
-        let virtualPaymentAddressItem: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.virtualPaymentAddressInputItem"))
+        let virtualPaymentAddressItem: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.virtualPaymentAddressInputItem"))
         
         self.populate(textItemView: virtualPaymentAddressItem, with: "testvpa@icici")
         
@@ -209,7 +209,7 @@ class UPIComponentUITests: XCTestCase {
         
         self.assertViewControllerImage(matching: sut.viewController, named: "prefilled_vpa")
         
-        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.continueButton.button"))
+        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.continueButton.button"))
         continueButton.sendActions(for: .touchUpInside)
 
         waitForExpectations(timeout: 10, handler: nil)
@@ -224,10 +224,10 @@ class UPIComponentUITests: XCTestCase {
             configuration: config
         )
         
-        let errorItem = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.errorItem") as? FormErrorItemView)
+        let errorItem = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.errorItem") as? FormErrorItemView)
         XCTAssertTrue(errorItem.isHidden)
         
-        let continueButton: SubmitButton = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.continueButton.button"))
+        let continueButton: SubmitButton = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.continueButton.button"))
         
         // Tapping button with no apps selected - error should be shown
         
@@ -238,7 +238,7 @@ class UPIComponentUITests: XCTestCase {
         
         // Switching tabs - error should be reset/hidden
         
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.upiFlowSelectionSegmentedControlItem"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.upiFlowSelectionSegmentedControlItem"))
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.sendActions(for: .valueChanged)
         

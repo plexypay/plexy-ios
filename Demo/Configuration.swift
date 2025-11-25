@@ -1,14 +1,14 @@
 //
-// Copyright (c) 2017 Adyen N.V.
+// Copyright (c) 2017 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-import AdyenActions
-import AdyenCard
-import AdyenComponents
-import AdyenDropIn
+@_spi(PlexyInternal) import Plexy
+import PlexyActions
+import PlexyCard
+import PlexyComponents
+import PlexyDropIn
 import Foundation
 import PassKit
 
@@ -16,14 +16,14 @@ internal enum ConfigurationConstants {
     // swiftlint:disable explicit_acl
     // swiftlint:disable line_length
     
-    /// Please use your own web server between your app and adyen checkout API.
+    /// Please use your own web server between your app and plexy checkout API.
     static let demoServerEnvironment = DemoCheckoutAPIEnvironment.test
     
     static let classicAPIEnvironment = DemoClassicAPIEnvironment.test
     
     static let componentsEnvironment = Environment.test
     
-    static let appName = "Adyen Demo"
+    static let appName = "Plexy Demo"
     
     static let reference = "Test Order Reference - iOS UIHost"
     
@@ -71,7 +71,7 @@ internal enum ConfigurationConstants {
     ]
     
     static var delegatedAuthenticationConfigurations: ThreeDS2Component.Configuration.DelegatedAuthentication {
-        .init(relyingPartyIdentifier: "test-authentication-adyen.netlify.app")
+        .init(relyingPartyIdentifier: "test-authentication-plexy.netlify.app")
     }
 
     static var shippingMethods: [PKShippingMethod] = {

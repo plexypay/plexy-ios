@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2022 Adyen N.V.
+// Copyright (c) 2022 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import XCTest
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 
 class AtomeComponentUITests: XCTestCase {
 
     private var paymentMethod: PaymentMethod!
-    private var context: AdyenContext!
+    private var context: PlexyContext!
     private var style: FormComponentStyle!
 
     override func setUpWithError() throws {
@@ -62,7 +62,7 @@ class AtomeComponentUITests: XCTestCase {
             configuration: config
         )
         
-        XCTAssertNotNil(sut.viewController.view.findView(by: "AdyenComponents.AtomeComponent.addressItem"))
+        XCTAssertNotNil(sut.viewController.view.findView(by: "PlexyComponents.AtomeComponent.addressItem"))
         
         assertViewControllerImage(matching: sut.viewController, named: "UI_configuration")
     }
@@ -143,15 +143,15 @@ class AtomeComponentUITests: XCTestCase {
     // MARK: - Private
 
     private enum AtomeViewIdentifier {
-        static let firstName = "AdyenComponents.AtomeComponent.firstNameItem"
-        static let lastName = "AdyenComponents.AtomeComponent.lastNameItem"
-        static let phone = "AdyenComponents.AtomeComponent.phoneNumberItem"
-        static let billingAddress = "AdyenComponents.AtomeComponent.addressItem"
-        static let streetName = "AdyenComponents.AtomeComponent.addressItem.street"
-        static let apartmentName = "AdyenComponents.AtomeComponent.addressItem.apartment"
-        static let houseNumberOrName = "AdyenComponents.AtomeComponent.addressItem.houseNumberOrName"
-        static let postalCode = "AdyenComponents.AtomeComponent.addressItem.postalCode"
-        static let payButton = "AdyenComponents.AtomeComponent.payButtonItem.button"
+        static let firstName = "PlexyComponents.AtomeComponent.firstNameItem"
+        static let lastName = "PlexyComponents.AtomeComponent.lastNameItem"
+        static let phone = "PlexyComponents.AtomeComponent.phoneNumberItem"
+        static let billingAddress = "PlexyComponents.AtomeComponent.addressItem"
+        static let streetName = "PlexyComponents.AtomeComponent.addressItem.street"
+        static let apartmentName = "PlexyComponents.AtomeComponent.addressItem.apartment"
+        static let houseNumberOrName = "PlexyComponents.AtomeComponent.addressItem.houseNumberOrName"
+        static let postalCode = "PlexyComponents.AtomeComponent.addressItem.postalCode"
+        static let payButton = "PlexyComponents.AtomeComponent.payButtonItem.button"
         static let inputOTP = "Input OTP"
     }
 

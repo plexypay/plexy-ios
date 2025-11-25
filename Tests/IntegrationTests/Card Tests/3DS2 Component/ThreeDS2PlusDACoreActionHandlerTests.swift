@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import XCTest
 
-#if canImport(AdyenAuthentication)
-    @_spi(AdyenInternal) @testable import Adyen
-    import Adyen3DS2
-    @_spi(AdyenInternal) @testable import AdyenActions
-    import AdyenAuthentication
+#if canImport(PlexyAuthentication)
+    @_spi(PlexyInternal) @testable import Plexy
+    import Plexy3DS2
+    @_spi(PlexyInternal) @testable import PlexyActions
+    import PlexyAuthentication
     import Foundation
     import UIKit
 
@@ -22,7 +22,7 @@ import XCTest
 
         var challengeAction: ThreeDS2ChallengeAction!
         
-        static let relyingPartyIdentifier = "test-authentication-adyen.netlify.app"
+        static let relyingPartyIdentifier = "test-authentication-plexy.netlify.app"
         
         static var delegatedAuthenticationConfigurations: ThreeDS2Component.Configuration.DelegatedAuthentication {
             .init(relyingPartyIdentifier: relyingPartyIdentifier)
@@ -107,7 +107,7 @@ import XCTest
             sut.handle(fingerprintAction, event: analyticsEvent) { fingerprintResult in
                 switch fingerprintResult {
                 case let .success(fingerprintString):
-                    let fingerprint: ThreeDS2Component.Fingerprint = try! AdyenCoder.decodeBase64(fingerprintString)
+                    let fingerprint: ThreeDS2Component.Fingerprint = try! PlexyCoder.decodeBase64(fingerprintString)
                     XCTAssertEqual(fingerprint, expectedFingerprint)
                 case .failure:
                     XCTFail()
@@ -268,7 +268,7 @@ import XCTest
                         let threeDS2SDKError: String?
                     }
 
-                    let payload: Payload? = try? AdyenCoder.decodeBase64(result.payload)
+                    let payload: Payload? = try? PlexyCoder.decodeBase64(result.payload)
                     XCTAssertNotNil(payload?.threeDS2SDKError)
                 case .failure:
                     XCTFail()
@@ -364,7 +364,7 @@ import XCTest
             authenticationServiceMock.onAuthenticate = { input in
                 "OnAuthenticate"
             }
-            var capturedCardDetails: (number: String?, type: Adyen.CardType?)?
+            var capturedCardDetails: (number: String?, type: Plexy.CardType?)?
             var capturedAmount: Amount?
             let presenterMock = ThreeDS2DAScreenPresenterMock(
                 showRegistrationReturnState: .fallback,
@@ -627,7 +627,7 @@ import XCTest
             ))
             
             let presenterMock = ThreeDS2DAScreenPresenterMock(showRegistrationReturnState: .fallback, showApprovalScreenReturnState: .fallback)
-            var capturedCardDetails: (number: String?, type: Adyen.CardType?)?
+            var capturedCardDetails: (number: String?, type: Plexy.CardType?)?
             presenterMock.onShowRegistrationScreen = {
                 capturedCardDetails = $0
             }
@@ -659,7 +659,7 @@ import XCTest
         }
     }
 
-    internal struct DeviceSupportCheckerMock: AdyenAuthentication.DeviceSupportCheckerProtocol {
+    internal struct DeviceSupportCheckerMock: PlexyAuthentication.DeviceSupportCheckerProtocol {
         var isDeviceSupported: Bool
     
         func checkSupport() throws -> String {

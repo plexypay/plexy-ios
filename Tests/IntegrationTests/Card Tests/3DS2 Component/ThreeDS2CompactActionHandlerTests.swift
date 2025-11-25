@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-import Adyen3DS2
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+import Plexy3DS2
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class ThreeDS2CompactActionHandlerTests: XCTestCase {
@@ -190,7 +190,7 @@ class ThreeDS2CompactActionHandlerTests: XCTestCase {
                             let threeDS2SDKError: String?
                         }
                         // Check if there is a threeDS2SDKError in the payload.
-                        let payload: Payload? = try? AdyenCoder.decodeBase64(threeDSResult.payload)
+                        let payload: Payload? = try? PlexyCoder.decodeBase64(threeDSResult.payload)
                         XCTAssertNotNil(payload?.threeDS2SDKError)
                         
                         let errorEvent = analyticsProviderMock.errors[0]
@@ -407,7 +407,7 @@ class ThreeDS2CompactActionHandlerTests: XCTestCase {
     func testFingerprintFlow3DS1Fallback() throws {
         let submitter = AnyThreeDS2FingerprintSubmitterMock()
 
-        let redirectAction = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "data")
+        let redirectAction = RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "data")
         submitter.mockedResult = .success(.action(.redirect(redirectAction)))
 
         let service = ThreeDSServiceableMock()
@@ -477,7 +477,7 @@ class ThreeDS2CompactActionHandlerTests: XCTestCase {
         let errorPayload = "Error Payload"
         
         submitter.onSubmitFingerprint = { fingerprint, paymentData, completion in
-            let fingerprint: ThreeDS2Component.Fingerprint? = try? AdyenCoder.decodeBase64(fingerprint)
+            let fingerprint: ThreeDS2Component.Fingerprint? = try? PlexyCoder.decodeBase64(fingerprint)
             XCTAssertNotNil(fingerprint, "Should be able to decode the fingerprint successfully")
             XCTAssertEqual(fingerprint?.threeDS2SDKError, errorPayload)
             completion(.failure(Dummy.error))

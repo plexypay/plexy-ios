@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class QiwiWalletComponentTests: XCTestCase {
 
-    var context: AdyenContext!
+    var context: PlexyContext!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -27,7 +27,7 @@ class QiwiWalletComponentTests: XCTestCase {
     let payment = Payment(amount: Amount(value: 2, currencyCode: "EUR"), countryCode: "DE")
     
     func testLocalizationWithCustomTableName() throws {
-        let config = QiwiWalletComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil))
+        let config = QiwiWalletComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil))
         let sut = QiwiWalletComponent(paymentMethod: method, context: context, configuration: config)
         
         XCTAssertEqual(sut.phoneItem?.phonePrefixItem.selectableValues, phoneExtensions)
@@ -44,19 +44,19 @@ class QiwiWalletComponentTests: XCTestCase {
     }
     
     func testLocalizationWithCustomKeySeparator() throws {
-        let config = QiwiWalletComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_"))
+        let config = QiwiWalletComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_"))
         let sut = QiwiWalletComponent(paymentMethod: method, context: context, configuration: config)
         
         XCTAssertEqual(sut.phoneItem?.phonePrefixItem.selectableValues, phoneExtensions)
         
-        XCTAssertEqual(sut.phoneItem?.title, localizedString(LocalizationKey(key: "adyen_phoneNumber_title"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.phoneItem?.placeholder, localizedString(LocalizationKey(key: "adyen_phoneNumber_placeholder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.phoneItem?.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_phoneNumber_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.phoneItem?.title, localizedString(LocalizationKey(key: "plexy_phoneNumber_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.phoneItem?.placeholder, localizedString(LocalizationKey(key: "plexy_phoneNumber_placeholder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.phoneItem?.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_phoneNumber_invalid"), sut.configuration.localizationParameters))
         XCTAssertEqual(sut.phoneItem?.prefix, "+1")
         XCTAssertEqual(sut.phoneItem?.phonePrefixItem.selectableValues, phoneExtensions)
         XCTAssertEqual(sut.phoneItem?.phonePrefixItem.value?.identifier, "US")
         
-        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "adyen_continueTo"), sut.configuration.localizationParameters, method.name))
+        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "plexy_continueTo"), sut.configuration.localizationParameters, method.name))
     }
     
     func testUIConfiguration() {
@@ -91,15 +91,15 @@ class QiwiWalletComponentTests: XCTestCase {
         
         wait(for: .milliseconds(300))
         
-        let phoneNumberView: FormPhoneNumberItemView? = sut.viewController.view.findView(with: "AdyenComponents.QiwiWalletComponent.phoneNumberItem")
-        let phoneNumberViewTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.QiwiWalletComponent.phoneNumberItem.titleLabel")
-        let phoneNumberViewTextField: UITextField? = sut.viewController.view.findView(with: "AdyenComponents.QiwiWalletComponent.phoneNumberItem.textField")
+        let phoneNumberView: FormPhoneNumberItemView? = sut.viewController.view.findView(with: "PlexyComponents.QiwiWalletComponent.phoneNumberItem")
+        let phoneNumberViewTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.QiwiWalletComponent.phoneNumberItem.titleLabel")
+        let phoneNumberViewTextField: UITextField? = sut.viewController.view.findView(with: "PlexyComponents.QiwiWalletComponent.phoneNumberItem.textField")
         
-        let phoneExtensionView: FormPhoneExtensionPickerItemView? = sut.viewController.view.findView(with: "Adyen.FormPhoneNumberItem.phoneExtensionPickerItem")
-        let phoneExtensionViewLabel: UILabel? = sut.viewController.view.findView(with: "Adyen.FormPhoneNumberItem.phoneExtensionPickerItem.label")
+        let phoneExtensionView: FormPhoneExtensionPickerItemView? = sut.viewController.view.findView(with: "Plexy.FormPhoneNumberItem.phoneExtensionPickerItem")
+        let phoneExtensionViewLabel: UILabel? = sut.viewController.view.findView(with: "Plexy.FormPhoneNumberItem.phoneExtensionPickerItem.label")
         
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenComponents.QiwiWalletComponent.payButtonItem.button")
-        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.QiwiWalletComponent.payButtonItem.button.titleLabel")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyComponents.QiwiWalletComponent.payButtonItem.button")
+        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.QiwiWalletComponent.payButtonItem.button.titleLabel")
         
         /// Test phone number field
         XCTAssertEqual(phoneNumberView?.backgroundColor, .red)
@@ -132,7 +132,7 @@ class QiwiWalletComponentTests: XCTestCase {
         
         wait(for: .milliseconds(300))
         
-        XCTAssertNil(sut.viewController.view.findView(with: "AdyenComponents.CardComponent.Test name"))
+        XCTAssertNil(sut.viewController.view.findView(with: "PlexyComponents.CardComponent.Test name"))
         XCTAssertEqual(sut.viewController.title, self.method.name)
     }
     
@@ -167,9 +167,9 @@ class QiwiWalletComponentTests: XCTestCase {
 
         wait(for: .milliseconds(300))
         
-        let phoneNumberView: FormPhoneNumberItemView? = sut.viewController.view.findView(with: "AdyenComponents.QiwiWalletComponent.phoneNumberItem")
+        let phoneNumberView: FormPhoneNumberItemView? = sut.viewController.view.findView(with: "PlexyComponents.QiwiWalletComponent.phoneNumberItem")
 
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenComponents.QiwiWalletComponent.payButtonItem.button")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyComponents.QiwiWalletComponent.payButtonItem.button")
 
         self.populate(textItemView: phoneNumberView!, with: "7455573152")
 

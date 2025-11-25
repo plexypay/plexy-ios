@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
+@testable import PlexyDropIn
 import XCTest
 
 class SEPADirectDebitComponentTests: XCTestCase {
 
-    var context: AdyenContext!
+    var context: PlexyContext!
     let method = SEPADirectDebitPaymentMethod(type: .sepaDirectDebit, name: "test_name")
 
     override func setUpWithError() throws {
@@ -35,7 +35,7 @@ class SEPADirectDebitComponentTests: XCTestCase {
     func testLocalizationWithCustomTableName() throws {
         let sut = SEPADirectDebitComponent(paymentMethod: method, context: context)
         
-        sut.configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        sut.configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
         
         XCTAssertEqual(sut.nameItem.title, localizedString(.sepaNameItemTitle, sut.configuration.localizationParameters))
         XCTAssertEqual(sut.nameItem.placeholder, localizedString(.sepaNameItemPlaceholder, sut.configuration.localizationParameters))
@@ -67,14 +67,14 @@ class SEPADirectDebitComponentTests: XCTestCase {
     func testLocalizationWithCustomKeySeparator() throws {
         let sut = SEPADirectDebitComponent(paymentMethod: method, context: context)
         
-        sut.configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        sut.configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
         
-        XCTAssertEqual(sut.nameItem.title, localizedString(LocalizationKey(key: "adyen_sepa_nameItem_title"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.nameItem.placeholder, localizedString(LocalizationKey(key: "adyen_sepa_nameItem_placeholder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.nameItem.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_sepa_nameItem_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.nameItem.title, localizedString(LocalizationKey(key: "plexy_sepa_nameItem_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.nameItem.placeholder, localizedString(LocalizationKey(key: "plexy_sepa_nameItem_placeholder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.nameItem.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_sepa_nameItem_invalid"), sut.configuration.localizationParameters))
         
-        XCTAssertEqual(sut.ibanItem.title, localizedString(LocalizationKey(key: "adyen_sepa_ibanItem_title"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.ibanItem.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_sepa_ibanItem_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.ibanItem.title, localizedString(LocalizationKey(key: "plexy_sepa_ibanItem_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.ibanItem.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_sepa_ibanItem_invalid"), sut.configuration.localizationParameters))
         
         XCTAssertEqual(sut.button.title, localizedSubmitButtonTitle(with: Dummy.payment.amount, style: .immediate, sut.configuration.localizationParameters))
     }
@@ -116,16 +116,16 @@ class SEPADirectDebitComponentTests: XCTestCase {
         
         wait(for: .milliseconds(300))
         
-        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.nameItem")
-        let nameItemViewTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.nameItem.titleLabel")
-        let nameItemViewTextField: UITextField? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.nameItem.textField")
+        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.nameItem")
+        let nameItemViewTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.nameItem.titleLabel")
+        let nameItemViewTextField: UITextField? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.nameItem.textField")
         
-        let ibanItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.ibanItem")
-        let ibanItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.ibanItem.titleLabel")
-        let ibanItemTextField: UITextField? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.ibanItem.textField")
+        let ibanItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.ibanItem")
+        let ibanItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.ibanItem.titleLabel")
+        let ibanItemTextField: UITextField? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.ibanItem.textField")
         
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.payButtonItem.button")
-        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.payButtonItem.button.titleLabel")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.payButtonItem.button")
+        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.payButtonItem.button.titleLabel")
         
         /// Test card number field
         XCTAssertEqual(nameItemView?.backgroundColor, .red)
@@ -166,7 +166,7 @@ class SEPADirectDebitComponentTests: XCTestCase {
         
         wait(for: .milliseconds(300))
         
-        XCTAssertNil(sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.Test name"))
+        XCTAssertNil(sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.Test name"))
         XCTAssertEqual(sut.viewController.title, sepaPaymentMethod.name)
     }
     
@@ -198,9 +198,9 @@ class SEPADirectDebitComponentTests: XCTestCase {
 
         wait(for: .milliseconds(300))
         
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.payButtonItem.button")
-        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.nameItem")
-        let ibanItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.ibanItem")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.payButtonItem.button")
+        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.nameItem")
+        let ibanItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.ibanItem")
 
         payButtonItemViewButton?.sendActions(for: .touchUpInside)
 
@@ -230,9 +230,9 @@ class SEPADirectDebitComponentTests: XCTestCase {
 
         wait(for: .milliseconds(300))
         
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.payButtonItem.button")
-        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.nameItem")
-        let ibanItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.ibanItem")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.payButtonItem.button")
+        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.nameItem")
+        let ibanItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.ibanItem")
 
         self.populate(textItemView: ibanItemView!, with: "NL13TEST0123456789")
         self.populate(textItemView: nameItemView!, with: "A. Klaassen")
@@ -281,8 +281,8 @@ class SEPADirectDebitComponentTests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let ibanItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.ibanItem"))
-        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.nameItem"))
+        let ibanItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.ibanItem"))
+        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.nameItem"))
 
         self.populate(textItemView: ibanItemView, with: "NL13TEST0123456789")
         self.populate(textItemView: nameItemView, with: "A. Klaassen")
@@ -307,8 +307,8 @@ class SEPADirectDebitComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        let ibanItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.ibanItem"))
-        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.SEPADirectDebitComponent.nameItem"))
+        let ibanItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.ibanItem"))
+        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.SEPADirectDebitComponent.nameItem"))
 
         self.populate(textItemView: ibanItemView, with: "NL13TEST0123456789")
         self.populate(textItemView: nameItemView, with: "A. Klaassen")

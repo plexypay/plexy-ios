@@ -1,0 +1,63 @@
+//
+// Copyright (c) 2020 Plexy N.V.
+//
+// This file is open source and available under the MIT license. See the LICENSE file for more info.
+//
+
+@_spi(PlexyInternal) import Plexy
+import PlexyNetworking
+import Foundation
+
+/// Any action that has payment data
+internal protocol PaymentDataAware {
+    var paymentData: String { get }
+}
+
+/// A component that handles Await action's.
+internal protocol AnyPollingHandler: ActionComponent, Cancellable {
+    func handle(_ action: PaymentDataAware)
+}
+
+internal protocol AnyPollingHandlerProvider {
+
+    func handler(for paymentMethodType: AwaitPaymentMethod) -> AnyPollingHandler
+    
+    func handler(for qrPaymentMethodType: QRCodePaymentMethod) -> AnyPollingHandler
+}
+
+internal struct PollingHandlerProvider: AnyPollingHandlerProvider {
+
+    private let context: PlexyContext
+
+    private let apiClient: AnyRetryAPIClient
+
+    internal init(context: PlexyContext) {
+        self.context = context
+        self.apiClient = RetryAPIClient(
+            apiClient: APIClient(apiContext: context.apiContext),
+            scheduler: BackoffScheduler(queue: .main)
+        )
+    }
+
+    internal func handler(for paymentMethodType: AwaitPaymentMethod) -> AnyPollingHandler {
+        switch paymentMethodType {
+        case .mbway, .blik, .upicollect, .upiIntent, .twint, .payTo:
+            return createPollingComponent()
+        }
+    }
+    
+    internal func handler(for qrPaymentMethodType: QRCodePaymentMethod) -> AnyPollingHandler {
+        switch qrPaymentMethodType {
+        case .pix, .promptPay, .duitNow, .payNow, .upiQRCode:
+            return createPollingComponent()
+        }
+    }
+
+    private func createPollingComponent() -> AnyPollingHandler {
+        PollingComponent(
+            context: context,
+            apiClient: apiClient
+        )
+    }
+    
+}

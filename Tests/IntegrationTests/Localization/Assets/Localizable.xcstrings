@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "adyen.card.stored.title" : {
+    "plexy.card.stored.title" : {
       "extractionState" : "manual",
       "localizations" : {
         "da-DK" : {
@@ -36,7 +36,7 @@
         }
       }
     },
-    "adyen.dropIn.stored.title" : {
+    "plexy.dropIn.stored.title" : {
       "extractionState" : "manual",
       "localizations" : {
         "da-DK" : {

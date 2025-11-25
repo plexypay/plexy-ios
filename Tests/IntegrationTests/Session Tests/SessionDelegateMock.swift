@@ -1,58 +1,58 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-@_spi(AdyenInternal) import AdyenActions
-import AdyenComponents
-import AdyenDropIn
-import AdyenSession
+@_spi(PlexyInternal) import Plexy
+@_spi(PlexyInternal) import PlexyActions
+import PlexyComponents
+import PlexyDropIn
+import PlexySession
 
-class SessionDelegateMock: AdyenSessionDelegate {
+class SessionDelegateMock: PlexySessionDelegate {
     
     var handlerMock: SessionAdvancedHandlerMock?
-    var onDidComplete: ((AdyenSessionResult, Component, AdyenSession) -> Void)?
-    var onDidFail: ((Error, Component, AdyenSession) -> Void)?
+    var onDidComplete: ((PlexySessionResult, Component, PlexySession) -> Void)?
+    var onDidFail: ((Error, Component, PlexySession) -> Void)?
     var onDidOpenExternalApplication: (() -> Void)?
     
-    func didComplete(with result: AdyenSessionResult, component: Component, session: AdyenSession) {
+    func didComplete(with result: PlexySessionResult, component: Component, session: PlexySession) {
         onDidComplete?(result, component, session)
     }
     
-    func didFail(with error: Error, from component: Component, session: AdyenSession) {
+    func didFail(with error: Error, from component: Component, session: PlexySession) {
         onDidFail?(error, component, session)
     }
     
-    func didOpenExternalApplication(component: ActionComponent, session: AdyenSession) {
+    func didOpenExternalApplication(component: ActionComponent, session: PlexySession) {
         onDidOpenExternalApplication?()
     }
     
-    func handlerForPayments(in component: PaymentComponent, session: AdyenSession) -> AdyenSessionPaymentsHandler? {
+    func handlerForPayments(in component: PaymentComponent, session: PlexySession) -> PlexySessionPaymentsHandler? {
         handlerMock
     }
     
-    func handlerForAdditionalDetails(in component: ActionComponent, session: AdyenSession) -> AdyenSessionPaymentDetailsHandler? {
+    func handlerForAdditionalDetails(in component: ActionComponent, session: PlexySession) -> PlexySessionPaymentDetailsHandler? {
         handlerMock
     }
 }
 
-class SessionAdvancedHandlerMock: AdyenSessionPaymentsHandler, AdyenSessionPaymentDetailsHandler {
+class SessionAdvancedHandlerMock: PlexySessionPaymentsHandler, PlexySessionPaymentDetailsHandler {
     
-    var onDidSubmit: ((PaymentComponentData, Component, AdyenSession) -> Void)?
-    var onDidProvide: ((ActionComponentData, Component, AdyenSession) -> Void)?
+    var onDidSubmit: ((PaymentComponentData, Component, PlexySession) -> Void)?
+    var onDidProvide: ((ActionComponentData, Component, PlexySession) -> Void)?
     
     func didSubmit(
         _ paymentComponentData: PaymentComponentData,
         from component: Component,
         dropInComponent: AnyDropInComponent?,
-        session: AdyenSession
+        session: PlexySession
     ) {
         onDidSubmit?(paymentComponentData, component, session)
     }
     
-    func didProvide(_ actionComponentData: ActionComponentData, from component: ActionComponent, session: AdyenSession) {
+    func didProvide(_ actionComponentData: ActionComponentData, from component: ActionComponent, session: PlexySession) {
         onDidProvide?(actionComponentData, component, session)
     }
 }

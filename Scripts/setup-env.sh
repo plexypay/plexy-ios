@@ -1,5 +1,5 @@
 #!/bin/sh
-# Setup script for Adyen Checkout iOS development
+# Setup script for Plexy Checkout iOS development
 # This script installs git hooks for various validations
 
 set -e  # Exit on error
@@ -11,7 +11,7 @@ PRE_COMMIT="Scripts/hooks/pre-commit"
 # Pre-commit hook responsibilities:
 # - Validates branch names follow required patterns
 # - Validates 3DS2 SDK versions
-# - Validates Adyen SDK versions
+# - Validates Plexy SDK versions
 
 # Install git hooks
 install_git_hooks() {

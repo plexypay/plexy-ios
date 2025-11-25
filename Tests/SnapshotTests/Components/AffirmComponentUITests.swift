@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2021 Adyen N.V.
+// Copyright (c) 2021 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import XCTest
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 
 class AffirmComponentUITests: XCTestCase {
     
@@ -166,14 +166,14 @@ class AffirmComponentUITests: XCTestCase {
     // MARK: - Private
 
     private enum AffirmViewIdentifier {
-        static let firstName = "AdyenComponents.AffirmComponent.firstNameItem"
-        static let lastName = "AdyenComponents.AffirmComponent.lastNameItem"
-        static let phone = "AdyenComponents.AffirmComponent.phoneNumberItem"
-        static let email = "AdyenComponents.AffirmComponent.emailItem"
-        static let billingAddress = "AdyenComponents.AffirmComponent.addressItem"
-        static let deliveryAddress = "AdyenComponents.AffirmComponent.deliveryAddressItem"
-        static let deliveryAddressToggle = "AdyenComponents.AffirmComponent.deliveryAddressToggleItem"
-        static let payButton = "AdyenComponents.AffirmComponent.payButtonItem.button"
+        static let firstName = "PlexyComponents.AffirmComponent.firstNameItem"
+        static let lastName = "PlexyComponents.AffirmComponent.lastNameItem"
+        static let phone = "PlexyComponents.AffirmComponent.phoneNumberItem"
+        static let email = "PlexyComponents.AffirmComponent.emailItem"
+        static let billingAddress = "PlexyComponents.AffirmComponent.addressItem"
+        static let deliveryAddress = "PlexyComponents.AffirmComponent.deliveryAddressItem"
+        static let deliveryAddressToggle = "PlexyComponents.AffirmComponent.deliveryAddressToggleItem"
+        static let payButton = "PlexyComponents.AffirmComponent.payButtonItem.button"
     }
 
     private var shopperInformation: PrefilledShopperInformation {

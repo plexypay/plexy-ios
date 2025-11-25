@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
+import Plexy
 import Foundation
 
 class PaymentComponentSubject: PaymentComponent {
 
     // MARK: - Properties
 
-    var context: AdyenContext
+    var context: PlexyContext
     var delegate: PaymentComponentDelegate?
     var payment: Payment?
     var order: PartialPaymentOrder?
@@ -20,7 +20,7 @@ class PaymentComponentSubject: PaymentComponent {
     // MARK: - Initializers
 
     public init(
-        context: AdyenContext,
+        context: PlexyContext,
         delegate: PaymentComponentDelegate,
         payment: Payment?,
         order: PartialPaymentOrder?,

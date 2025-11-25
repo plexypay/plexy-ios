@@ -9,12 +9,12 @@
     <key>teamID</key>
     <string>B2NYSS5932</string>
     <key>teamName</key>
-    <string>Adyen N.V.</string>
+    <string>Plexy N.V.</string>
     <key>signingCertificate</key>
-	  <string>iPhone Distribution: Adyen N.V. (B2NYSS5932)</string>
+	  <string>iPhone Distribution: Plexy N.V. (B2NYSS5932)</string>
     <key>provisioningProfiles</key>
     <dict>
-      <key>com.adyen.CheckoutDemoUIKit</key>
+      <key>com.plexy.CheckoutDemoUIKit</key>
       <string>Checkout Demo UIKit Distribution</string>
     </dict>
 </dict>

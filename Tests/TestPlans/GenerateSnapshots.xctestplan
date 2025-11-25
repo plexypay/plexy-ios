@@ -40,7 +40,7 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Adyen.xcodeproj",
+        "containerPath" : "container:Plexy.xcodeproj",
         "identifier" : "81DF94042BAAD8EB0001DCBC",
         "name" : "GenerateSnapshots"
       }

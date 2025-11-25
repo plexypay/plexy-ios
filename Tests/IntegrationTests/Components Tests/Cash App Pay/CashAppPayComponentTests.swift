@@ -1,14 +1,14 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import XCTest
 
-#if canImport(AdyenCashAppPay)
-    @_spi(AdyenInternal) @testable import Adyen
-    @testable import AdyenCashAppPay
+#if canImport(PlexyCashAppPay)
+    @_spi(PlexyInternal) @testable import Plexy
+    @testable import PlexyCashAppPay
     import Foundation
     @testable import PayKit
     import UIKit
@@ -50,7 +50,7 @@ import XCTest
             field: nil
         )
         
-        var context: AdyenContext!
+        var context: PlexyContext!
         
         var oneTimeAction: PaymentAction {
             let moneyAmount = Money(amount: UInt(5000), currency: .USD)
@@ -102,8 +102,8 @@ import XCTest
             
             sut.viewController.loadViewIfNeeded()
 
-            let storeDetailsItemView: FormToggleItemView? = sut.viewController.view.findView(with: "AdyenCashAppPay.CashAppPayComponent.storeDetailsItem")
-            let storeDetailsItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenCashAppPay.CashAppPayComponent.storeDetailsItem.titleLabel")
+            let storeDetailsItemView: FormToggleItemView? = sut.viewController.view.findView(with: "PlexyCashAppPay.CashAppPayComponent.storeDetailsItem")
+            let storeDetailsItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyCashAppPay.CashAppPayComponent.storeDetailsItem.titleLabel")
             
             // Test store card details switch
             XCTAssertEqual(storeDetailsItemView?.backgroundColor, .magenta)
@@ -122,7 +122,7 @@ import XCTest
             
             sut.viewController.loadViewIfNeeded()
 
-            let storeDetailsToggleView: UIView? = sut.viewController.view.findView(with: "AdyenCashAppPay.CashAppPayComponent.storeDetailsItem")
+            let storeDetailsToggleView: UIView? = sut.viewController.view.findView(with: "PlexyCashAppPay.CashAppPayComponent.storeDetailsItem")
             
             XCTAssertNotNil(storeDetailsToggleView)
         }
@@ -134,7 +134,7 @@ import XCTest
             
             sut.viewController.loadViewIfNeeded()
 
-            let storeDetailsToggleView: UIView? = sut.viewController.view.findView(with: "AdyenCashAppPay.CashAppPayComponent.storeDetailsItem")
+            let storeDetailsToggleView: UIView? = sut.viewController.view.findView(with: "PlexyCashAppPay.CashAppPayComponent.storeDetailsItem")
             
             XCTAssertNil(storeDetailsToggleView)
         }
@@ -155,7 +155,7 @@ import XCTest
             
             // Given
             let analyticsProviderMock = AnalyticsProviderMock()
-            let context = AdyenContext(
+            let context = PlexyContext(
                 apiContext: Dummy.apiContext,
                 payment: Dummy.payment,
                 analyticsProvider: analyticsProviderMock

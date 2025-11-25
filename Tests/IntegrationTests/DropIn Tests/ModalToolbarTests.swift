@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
+@testable import PlexyDropIn
 import XCTest
 
 class ModalToolbarTests: XCTestCase {
@@ -22,15 +22,15 @@ class ModalToolbarTests: XCTestCase {
         sut = ModalToolbar(title: "SomeTitle", style: style)
 
         if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 13, minorVersion: 0, patchVersion: 0)) {
-            XCTAssertEqual(self.sut.cancelButton.tintColor.cgColor, UIColor.Adyen.defaultBlue.cgColor)
+            XCTAssertEqual(self.sut.cancelButton.tintColor.cgColor, UIColor.Plexy.defaultBlue.cgColor)
         }
-        XCTAssertEqual(self.sut.titleLabel.textColor, UIColor.Adyen.componentLabel)
-        XCTAssertEqual(self.sut.titleLabel.font, UIFont.AdyenCore.barTitle)
+        XCTAssertEqual(self.sut.titleLabel.textColor, UIColor.Plexy.componentLabel)
+        XCTAssertEqual(self.sut.titleLabel.font, UIFont.PlexyCore.barTitle)
         XCTAssertEqual(self.sut.titleLabel.textAlignment, .natural)
         if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 13, minorVersion: 0, patchVersion: 0)) {
-            XCTAssertEqual(self.sut.tintColor.cgColor, UIColor.Adyen.defaultBlue.cgColor)
+            XCTAssertEqual(self.sut.tintColor.cgColor, UIColor.Plexy.defaultBlue.cgColor)
         }
-        XCTAssertEqual(self.sut.backgroundColor, UIColor.Adyen.componentBackground)
+        XCTAssertEqual(self.sut.backgroundColor, UIColor.Plexy.componentBackground)
     }
 
     func testCustomStyle() {

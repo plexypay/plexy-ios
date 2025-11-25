@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2024 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 import XCTest
 
 class SupportedPaymentMethodLogosViewTests: XCTestCase {
     
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -20,7 +20,7 @@ class SupportedPaymentMethodLogosViewTests: XCTestCase {
     func test_setup() throws {
         let trailingText = "TRAILING_TEXT"
         let supportedLogosView = SupportedPaymentMethodLogosView(
-            imageUrls: [URL(string: "https://adyen.com")!],
+            imageUrls: [URL(string: "https://plexy.com")!],
             trailingText: trailingText
         )
         XCTAssertEqual(supportedLogosView.subviews.count, 0)

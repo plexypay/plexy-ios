@@ -1,24 +1,24 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
-import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
+import PlexyDropIn
 import XCTest
 
 class OnlineBankingComponentUITests: XCTestCase {
 
     private var paymentMethod: OnlineBankingPaymentMethod!
-    private var context: AdyenContext!
+    private var context: PlexyContext!
     private var style: FormComponentStyle!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        paymentMethod = try! AdyenCoder.decode(onlineBankingDictionary) as OnlineBankingPaymentMethod
-        context = AdyenContext(apiContext: Dummy.apiContext, payment: nil)
+        paymentMethod = try! PlexyCoder.decode(onlineBankingDictionary) as OnlineBankingPaymentMethod
+        context = PlexyContext(apiContext: Dummy.apiContext, payment: nil)
         style = FormComponentStyle()
     }
 
@@ -78,7 +78,7 @@ class OnlineBankingComponentUITests: XCTestCase {
         sut.delegate = delegate
 
         // Then
-        let button: SubmitButton! = sut.viewController.view.findView(with: "AdyenComponents.OnlineBankingComponent.continueButton.button")
+        let button: SubmitButton! = sut.viewController.view.findView(with: "PlexyComponents.OnlineBankingComponent.continueButton.button")
 
         let didContinueExpectation = XCTestExpectation(description: "Dummy Expectation")
 
@@ -108,10 +108,10 @@ class OnlineBankingComponentUITests: XCTestCase {
             configuration: config
         )
 
-        UIApplication.shared.adyen.mainKeyWindow?.rootViewController = sut.viewController
+        UIApplication.shared.plexy.mainKeyWindow?.rootViewController = sut.viewController
        
         let button: SubmitButton = try XCTUnwrap(
-            sut.viewController.view.findView(with: "AdyenComponents.OnlineBankingComponent.continueButton.button")
+            sut.viewController.view.findView(with: "PlexyComponents.OnlineBankingComponent.continueButton.button")
         )
 
         try withoutAnimation {

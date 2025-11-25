@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class DokuComponentTests: XCTestCase {
 
-    private var context: AdyenContext!
+    private var context: PlexyContext!
     private var paymentMethod: DokuPaymentMethod!
     private var payment: Payment!
 
@@ -31,7 +31,7 @@ class DokuComponentTests: XCTestCase {
 
     func testLocalizationWithCustomTableName() throws {
         let config = DokuComponent.Configuration(localizationParameters: LocalizationParameters(
-            tableName: "AdyenUIHost",
+            tableName: "PlexyUIHost",
             keySeparator: nil
         ))
         let sut = DokuComponent(
@@ -58,7 +58,7 @@ class DokuComponentTests: XCTestCase {
 
     func testLocalizationWithCustomKeySeparator() throws {
         let config = DokuComponent.Configuration(localizationParameters: LocalizationParameters(
-            tableName: "AdyenUIHostCustomSeparator",
+            tableName: "PlexyUIHostCustomSeparator",
             keySeparator: "_"
         ))
         let sut = DokuComponent(
@@ -67,20 +67,20 @@ class DokuComponentTests: XCTestCase {
             configuration: config
         )
 
-        XCTAssertEqual(sut.firstNameItem?.title, localizedString(LocalizationKey(key: "adyen_firstName"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.firstNameItem?.placeholder, localizedString(LocalizationKey(key: "adyen_firstName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.firstNameItem?.title, localizedString(LocalizationKey(key: "plexy_firstName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.firstNameItem?.placeholder, localizedString(LocalizationKey(key: "plexy_firstName"), sut.configuration.localizationParameters))
         XCTAssertNil(sut.firstNameItem?.validationFailureMessage)
 
-        XCTAssertEqual(sut.lastNameItem?.title, localizedString(LocalizationKey(key: "adyen_lastName"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.lastNameItem?.placeholder, localizedString(LocalizationKey(key: "adyen_lastName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.lastNameItem?.title, localizedString(LocalizationKey(key: "plexy_lastName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.lastNameItem?.placeholder, localizedString(LocalizationKey(key: "plexy_lastName"), sut.configuration.localizationParameters))
         XCTAssertNil(sut.lastNameItem?.validationFailureMessage)
 
-        XCTAssertEqual(sut.emailItem?.title, localizedString(LocalizationKey(key: "adyen_emailItem_title"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.emailItem?.placeholder, localizedString(LocalizationKey(key: "adyen_emailItem_placeHolder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.emailItem?.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_emailItem_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.emailItem?.title, localizedString(LocalizationKey(key: "plexy_emailItem_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.emailItem?.placeholder, localizedString(LocalizationKey(key: "plexy_emailItem_placeHolder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.emailItem?.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_emailItem_invalid"), sut.configuration.localizationParameters))
 
         XCTAssertNotNil(sut.button.title)
-        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "adyen_confirmPurchase"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "plexy_confirmPurchase"), sut.configuration.localizationParameters))
     }
 
     func testBigTitle() {
@@ -94,7 +94,7 @@ class DokuComponentTests: XCTestCase {
 
         wait(for: .milliseconds(300))
         
-        XCTAssertNil(sut.viewController.view.findView(with: "AdyenComponents.DokuComponent.Test name"))
+        XCTAssertNil(sut.viewController.view.findView(with: "PlexyComponents.DokuComponent.Test name"))
         XCTAssertEqual(sut.viewController.title, self.paymentMethod.name)
     }
 
@@ -188,10 +188,10 @@ class DokuComponentTests: XCTestCase {
     // MARK: - Private
 
     private enum DokuViewIdentifier {
-        static let firstName = "AdyenComponents.DokuComponent.firstNameItem"
-        static let lastName = "AdyenComponents.DokuComponent.lastNameItem"
-        static let email = "AdyenComponents.DokuComponent.emailItem"
-        static let payButton = "AdyenComponents.DokuComponent.payButtonItem.button"
+        static let firstName = "PlexyComponents.DokuComponent.firstNameItem"
+        static let lastName = "PlexyComponents.DokuComponent.lastNameItem"
+        static let email = "PlexyComponents.DokuComponent.emailItem"
+        static let payButton = "PlexyComponents.DokuComponent.payButtonItem.button"
     }
 
     private var shopperInformation: PrefilledShopperInformation {

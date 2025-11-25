@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2019 Adyen N.V.
+// Copyright (c) 2019 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
+@_spi(PlexyInternal) import Plexy
 import Foundation
 
-final class FormatterMock: Adyen.Formatter {
+final class FormatterMock: Plexy.Formatter {
     
     var handleFormattedValue: ((_ value: String) -> String)?
     func formattedValue(for value: String) -> String {

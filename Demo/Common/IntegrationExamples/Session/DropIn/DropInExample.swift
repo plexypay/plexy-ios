@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-import AdyenActions
-import AdyenCard
-import AdyenComponents
-import AdyenDropIn
-import AdyenNetworking
-import AdyenSession
+@_spi(PlexyInternal) import Plexy
+import PlexyActions
+import PlexyCard
+import PlexyComponents
+import PlexyDropIn
+import PlexyNetworking
+import PlexySession
 import UIKit
 
 internal final class DropInExample: InitialDataFlowProtocol {
@@ -19,12 +19,12 @@ internal final class DropInExample: InitialDataFlowProtocol {
 
     internal weak var presenter: PresenterExampleProtocol?
 
-    private var session: AdyenSession?
+    private var session: PlexySession?
     private var dropInComponent: DropInComponent?
     
     internal lazy var apiClient = ApiClientHelper.generateApiClient()
     
-    internal lazy var context: AdyenContext = generateContext()
+    internal lazy var context: PlexyContext = generateContext()
     
     // MARK: - Initializers
 
@@ -50,13 +50,13 @@ internal final class DropInExample: InitialDataFlowProtocol {
     
     // MARK: - Networking
 
-    private func loadSession(completion: @escaping (Result<AdyenSession, Error>) -> Void) {
-        requestAdyenSessionConfiguration { [weak self] response in
+    private func loadSession(completion: @escaping (Result<PlexySession, Error>) -> Void) {
+        requestPlexySessionConfiguration { [weak self] response in
             guard let self else { return }
             
             switch response {
             case let .success(config):
-                AdyenSession.initialize(
+                PlexySession.initialize(
                     with: config,
                     delegate: self,
                     presentationDelegate: self,
@@ -71,13 +71,13 @@ internal final class DropInExample: InitialDataFlowProtocol {
     
     // MARK: - Presentation
     
-    private func presentComponent(with session: AdyenSession) {
+    private func presentComponent(with session: PlexySession) {
         let dropIn = dropInComponent(from: session)
         presenter?.present(viewController: dropIn.viewController, completion: nil)
         dropInComponent = dropIn
     }
 
-    private func dropInComponent(from session: AdyenSession) -> DropInComponent {
+    private func dropInComponent(from session: PlexySession) -> DropInComponent {
         let paymentMethods = session.sessionContext.paymentMethods
         let configuration = dropInConfiguration(from: paymentMethods)
         let component = DropInComponent(
@@ -119,13 +119,13 @@ internal final class DropInExample: InitialDataFlowProtocol {
 
 }
 
-extension DropInExample: AdyenSessionDelegate {
+extension DropInExample: PlexySessionDelegate {
 
-    func didComplete(with result: AdyenSessionResult, component: Component, session: AdyenSession) {
+    func didComplete(with result: PlexySessionResult, component: Component, session: PlexySession) {
         dismissAndShowAlert(result.resultCode.isSuccess, result.resultCode.rawValue)
     }
 
-    func didFail(with error: Error, from component: Component, session: AdyenSession) {
+    func didFail(with error: Error, from component: Component, session: PlexySession) {
         if (error as? ComponentError) == .cancelled {
             presenter?.dismiss(completion: nil)
         } else {
@@ -133,12 +133,12 @@ extension DropInExample: AdyenSessionDelegate {
         }
     }
 
-    func didOpenExternalApplication(component: ActionComponent, session: AdyenSession) {}
+    func didOpenExternalApplication(component: ActionComponent, session: PlexySession) {}
 
 }
 
 extension DropInExample: PresentationDelegate {
     internal func present(component: PresentableComponent) {
-        // The implementation of this delegate method is not needed when using AdyenSession as the session handles the presentation
+        // The implementation of this delegate method is not needed when using PlexySession as the session handles the presentation
     }
 }

@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-import Adyen3DS2
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+import Plexy3DS2
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 final class ThreeDS2ServiceLegacyTests: XCTestCase {

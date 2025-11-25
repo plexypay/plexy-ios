@@ -1,19 +1,19 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
-import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
+import PlexyDropIn
 import XCTest
 
 final class BLIKComponentUITests: XCTestCase {
 
     private let payment = Payment(amount: Amount(value: 2, currencyCode: "PLN"), countryCode: "PL")
     private var paymentMethod: BLIKPaymentMethod { BLIKPaymentMethod(type: .blik, name: "test_name") }
-    private var context: AdyenContext { AdyenContext(apiContext: Dummy.apiContext, payment: payment) }
+    private var context: PlexyContext { PlexyContext(apiContext: Dummy.apiContext, payment: payment) }
 
     func testUIConfiguration() {
         var style = FormComponentStyle()
@@ -59,9 +59,9 @@ final class BLIKComponentUITests: XCTestCase {
         
         setupRootViewController(sut.viewController)
 
-        let submitButton: SubmitButton = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.BLIKComponent.payButtonItem.button"))
+        let submitButton: SubmitButton = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.BLIKComponent.payButtonItem.button"))
 
-        let blikCodeView: FormTextInputItemView! = sut.viewController.view.findView(with: "AdyenComponents.BLIKComponent.blikCodeItem")
+        let blikCodeView: FormTextInputItemView! = sut.viewController.view.findView(with: "PlexyComponents.BLIKComponent.blikCodeItem")
         self.populate(textItemView: blikCodeView, with: "123456")
 
         let delegateExpectation = XCTestExpectation(description: "PaymentComponentDelegate must be called when submit button is clicked.")
