@@ -10341,7 +10341,7 @@
 		};
 		E72375CC27AAB7760020DCF9 /* XCRemoteSwiftPackageReference "plexy-wechatpay-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Plexy/plexy-wechatpay-ios";
+			repositoryURL = "https://github.com/plexypay/plexy-wechatpay-ios";
 			requirement = {
 				kind = exactVersion;
 				version = 2.1.0;
@@ -10349,7 +10349,7 @@
 		};
 		F913B3EB26B7FAA8008F6CD2 /* XCRemoteSwiftPackageReference "plexy-networking-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Plexy/plexy-networking-ios";
+			repositoryURL = "https://github.com/plexypay/plexy-networking-ios";
 			requirement = {
 				kind = exactVersion;
 				version = 3.0.1;
@@ -10357,7 +10357,7 @@
 		};
 		F9237D3228CA1E7C004F9929 /* XCRemoteSwiftPackageReference "plexy-3ds2-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Plexy/plexy-3ds2-ios";
+			repositoryURL = "https://github.com/plexypay/plexy-3ds2-ios";
 			requirement = {
 				kind = exactVersion;
 				version = 2.4.3;
@@ -10365,7 +10365,7 @@
 		};
 		F94D65E42B0365C30095D61E /* XCRemoteSwiftPackageReference "plexy-authentication-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Plexy/plexy-authentication-ios";
+			repositoryURL = "https://github.com/plexypay/plexy-authentication-ios";
 			requirement = {
 				kind = exactVersion;
 				version = 3.1.0;

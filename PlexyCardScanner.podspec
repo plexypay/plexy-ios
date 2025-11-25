@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.author = { 'Plexy' => 'support@plexy.com' }
 
-  s.source = { :git => 'https://github.com/Plexy/plexy-ios.git', :tag => '5.20.0' }
+  s.source = { :git => 'https://github.com/plexypay/plexy-ios.git', :tag => '5.20.0' }
   s.source_files = 'PlexyCardScanner/**/*.swift'
   s.framework = 'Foundation'
   s.ios.deployment_target = '12.0'

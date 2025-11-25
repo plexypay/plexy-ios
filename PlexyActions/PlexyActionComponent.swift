@@ -13,7 +13,7 @@ import UIKit
  An action handler component to perform any supported action out of the box.
  
  - SeeAlso:
- [Implementation Reference](https://github.com/Plexy/plexy-ios#handling-an-action)
+ [Implementation Reference](https://github.com/plexypay/plexy-ios#handling-an-action)
  */
 public final class PlexyActionComponent: ActionComponent, ActionHandlingComponent {
     

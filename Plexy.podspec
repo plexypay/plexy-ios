@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://plexy.com'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.author = { 'Plexy' => 'support@plexy.com' }
-  s.source = { :git => 'https://github.com/Plexy/plexy-ios.git', :tag => "#{s.version}" }
+  s.source = { :git => 'https://github.com/plexypay/plexy-ios.git', :tag => "#{s.version}" }
   s.platform = :ios
   s.ios.deployment_target = '12.0'
   s.swift_version = '5.7'

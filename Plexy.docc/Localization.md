@@ -43,7 +43,7 @@ You can override strings for each key and locale.
 
 1.  [Add a string catalog to your project](https://developer.apple.com/documentation/xcode/localizing-and-varying-text-with-a-string-catalog#Add-a-string-catalog-to-your-project) or use your existing one.
 2.  [Add a language to your project](https://developer.apple.com/documentation/xcode/localizing-and-varying-text-with-a-string-catalog#Add-a-language-to-your-project) if necessary.
-3.  Find the key for the string you want to translate in the [list of available strings](https://github.com/Plexy/plexy-ios/blob/develop/Plexy/Assets/Generated/LocalizationKey.swift) and add your custom translation to override it for each desired locale.
+3.  Find the key for the string you want to translate in the [list of available strings](https://github.com/plexypay/plexy-ios/blob/develop/Plexy/Assets/Generated/LocalizationKey.swift) and add your custom translation to override it for each desired locale.
 
 For example, if you want to override the payment button text to **Subscribe for [AMOUNT]**:
 
@@ -62,7 +62,7 @@ You can override strings for each key, and for each language and locale using le
     - English: `en-US.lproj/Localizable.strings`
     - Spanish: `es-ES.lproj/Localizable.strings`
 
-2.  Find the key for the string you want to translate in the [list of available strings](https://github.com/Plexy/plexy-ios/blob/develop/Plexy/Assets/Generated/LocalizationKey.swift) and override it for each desired locale.
+2.  Find the key for the string you want to translate in the [list of available strings](https://github.com/plexypay/plexy-ios/blob/develop/Plexy/Assets/Generated/LocalizationKey.swift) and override it for each desired locale.
 
 For example, if you want to override the payment button text to **Subscribe for [AMOUNT]**:
 

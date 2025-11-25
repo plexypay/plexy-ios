@@ -63,19 +63,19 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/Plexy/plexy-3ds2-ios",
+            url: "https://github.com/plexypay/plexy-3ds2-ios",
             exact: "2.4.3"
         ),
         .package(
-            url: "https://github.com/Plexy/plexy-authentication-ios",
+            url: "https://github.com/plexypay/plexy-authentication-ios",
             exact: "3.1.0"
         ),
         .package(
-            url: "https://github.com/Plexy/plexy-networking-ios",
+            url: "https://github.com/plexypay/plexy-networking-ios",
             exact: "3.0.1"
         ),
         .package(
-            url: "https://github.com/Plexy/plexy-wechatpay-ios",
+            url: "https://github.com/plexypay/plexy-wechatpay-ios",
             exact: "2.2.0"
         ),
         .package(

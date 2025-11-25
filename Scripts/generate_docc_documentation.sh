@@ -86,17 +86,17 @@ let package = Package(
     dependencies: [
         .package(
             name: \"Plexy3DS2\",
-            url: \"https://github.com/Plexy/plexy-3ds2-ios\",
+            url: \"https://github.com/plexypay/plexy-3ds2-ios\",
             .exact(Version(2, 4, 3))
         ),
         .package(
             name: \"PlexyNetworking\",
-            url: \"https://github.com/Plexy/plexy-networking-ios\",
+            url: \"https://github.com/plexypay/plexy-networking-ios\",
             .exact(Version(3, 0, 1))
         ),
         .package(
             name: \"PlexyWeChatPayInternal\",
-            url: \"https://github.com/Plexy/plexy-wechatpay-ios\",
+            url: \"https://github.com/plexypay/plexy-wechatpay-ios\",
             .exact(Version(2, 2, 0))
         ),
         .package(

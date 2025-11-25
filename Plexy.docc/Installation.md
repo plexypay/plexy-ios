@@ -13,7 +13,7 @@ Plexy Components for iOS are available through either CocoaPods, Carthage or Swi
         1. Follow Apple's [Adding Package Dependencies to Your App](
         https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app
         ) guide on how to add a Swift Package dependency.
-        2. Use `https://github.com/Plexy/plexy-ios` as the repository URL.
+        2. Use `https://github.com/plexypay/plexy-ios` as the repository URL.
         3. Specify the version to be at least `4.9.0`.
 
         You can add all modules or select individual modules to add to your integration.
