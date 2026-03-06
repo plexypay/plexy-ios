@@ -1,18 +1,18 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
-import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
+import PlexyDropIn
 import XCTest
 
 final class MBWayComponentUITests: XCTestCase {
 
     private var paymentMethod: MBWayPaymentMethod!
-    private var context: AdyenContext!
+    private var context: PlexyContext!
     private var style: FormComponentStyle!
     private var payment: Payment!
 
@@ -98,7 +98,7 @@ final class MBWayComponentUITests: XCTestCase {
     // MARK: - Private
 
     private enum MBWayViewIdentifier {
-        static let phone = "AdyenComponents.MBWayComponent.phoneNumberItem"
-        static let payButton = "AdyenComponents.MBWayComponent.payButtonItem.button"
+        static let phone = "PlexyComponents.MBWayComponent.phoneNumberItem"
+        static let payButton = "PlexyComponents.MBWayComponent.payButtonItem.button"
     }
 }

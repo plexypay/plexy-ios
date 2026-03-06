@@ -1,15 +1,15 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2024 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@testable @_spi(AdyenInternal) import Adyen
+@testable @_spi(PlexyInternal) import Plexy
 import XCTest
 
 class ImageLoaderTests: XCTestCase {
     
-    private let dummyImageUrl: URL = .init(string: "https://adyen.com")!
+    private let dummyImageUrl: URL = .init(string: "https://plexy.com")!
     
     func test_instantiatingImageLoader_doesNotHaveAnySideEffects() {
         

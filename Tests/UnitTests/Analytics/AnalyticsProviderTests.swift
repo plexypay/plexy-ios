@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2022 Adyen N.V.
+// Copyright (c) 2022 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import XCTest
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenNetworking
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyNetworking
 
 class AnalyticsProviderTests: XCTestCase {
     
@@ -100,7 +100,7 @@ class AnalyticsProviderTests: XCTestCase {
         apiClient.onExecute = { request in
             if let initialAnalyticsdRequest = request as? InitialAnalyticsRequest {
                 XCTAssertNil(initialAnalyticsdRequest.amount)
-                XCTAssertEqual(initialAnalyticsdRequest.version, adyenSdkVersion)
+                XCTAssertEqual(initialAnalyticsdRequest.version, plexySdkVersion)
                 XCTAssertEqual(initialAnalyticsdRequest.platform, "iOS")
                 XCTAssertEqual(initialAnalyticsdRequest.level, "all")
                 analyticsExpectation.fulfill()

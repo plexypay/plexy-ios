@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class GiftCardComponentTests: XCTestCase {
@@ -18,7 +18,7 @@ class GiftCardComponentTests: XCTestCase {
 
     var publicKeyProvider: PublicKeyProviderMock!
 
-    var context: AdyenContext!
+    var context: PlexyContext!
 
     var sut: GiftCardComponent!
 
@@ -27,27 +27,27 @@ class GiftCardComponentTests: XCTestCase {
     var amountToPay: Amount { Dummy.payment.amount }
 
     var errorView: FormErrorItemView? {
-        sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.errorItem")
+        sut.viewController.view.findView(with: "PlexyCard.GiftCardComponent.errorItem")
     }
 
     var numberItemView: FormTextInputItemView? {
-        sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.numberItem")
+        sut.viewController.view.findView(with: "PlexyCard.GiftCardComponent.numberItem")
     }
 
     var securityCodeItemTitleLabel: UILabel? {
-        sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.securityCodeItem.titleLabel")
+        sut.viewController.view.findView(with: "PlexyCard.GiftCardComponent.securityCodeItem.titleLabel")
     }
 
     var securityCodeItemView: FormTextInputItemView? {
-        sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.securityCodeItem")
+        sut.viewController.view.findView(with: "PlexyCard.GiftCardComponent.securityCodeItem")
     }
     
     var expiryDateItemView: FormTextInputItemView? {
-        sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.expiryDateItem")
+        sut.viewController.view.findView(with: "PlexyCard.GiftCardComponent.expiryDateItem")
     }
 
     var payButtonItemViewButton: UIControl? {
-        sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.payButtonItem.button")
+        sut.viewController.view.findView(with: "PlexyCard.GiftCardComponent.payButtonItem.button")
     }
 
     override func setUpWithError() throws {

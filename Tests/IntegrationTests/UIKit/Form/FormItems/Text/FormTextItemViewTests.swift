@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2019 Adyen N.V.
+// Copyright (c) 2019 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class FormTextItemViewTests: XCTestCase {

@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
-import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
+import PlexyDropIn
 import XCTest
 
 class PayToComponentUITests: XCTestCase {
@@ -15,7 +15,7 @@ class PayToComponentUITests: XCTestCase {
         type: .payTo,
         name: "payto"
     )
-    private var context: AdyenContext { Dummy.context }
+    private var context: PlexyContext { Dummy.context }
     private var style: FormComponentStyle { FormComponentStyle() }
 
     override func setUpWithError() throws {
@@ -109,7 +109,7 @@ class PayToComponentUITests: XCTestCase {
             configuration: config
         )
 
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionSegmentedControl"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionSegmentedControl"))
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.sendActions(for: .valueChanged)
 
@@ -148,7 +148,7 @@ class PayToComponentUITests: XCTestCase {
             configuration: config
         )
 
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionSegmentedControl"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionSegmentedControl"))
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.sendActions(for: .valueChanged)
 
@@ -157,7 +157,7 @@ class PayToComponentUITests: XCTestCase {
         let didSubmitExpectation = expectation(description: "PaymentComponentDelegate must be called when submit button is clicked.")
 
         // Then
-        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.continueButton.button"))
+        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.continueButton.button"))
 
         let delegateMock = PaymentComponentDelegateMock()
         sut.delegate = delegateMock
@@ -178,7 +178,7 @@ class PayToComponentUITests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.identifierPicker"))
+        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.identifierPicker"))
         identifierPickerItem.select(value: .init(
             identifier: localizedString(.paytoPayidOptionPhone, config.localizationParameters),
             element: FormStringPickerElement(
@@ -211,7 +211,7 @@ class PayToComponentUITests: XCTestCase {
             configuration: config
         )
 
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionSegmentedControl"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionSegmentedControl"))
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.sendActions(for: .valueChanged)
 
@@ -220,7 +220,7 @@ class PayToComponentUITests: XCTestCase {
         let didSubmitExpectation = expectation(description: "PaymentComponentDelegate must be called when submit button is clicked.")
 
         // Then
-        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.continueButton.button"))
+        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.continueButton.button"))
 
         let delegateMock = PaymentComponentDelegateMock()
         sut.delegate = delegateMock
@@ -230,7 +230,7 @@ class PayToComponentUITests: XCTestCase {
             XCTAssertTrue(component === sut)
             let details = data.paymentMethod as! PayToDetails
             XCTAssertEqual(details.type, .payTo)
-            XCTAssertEqual(details.accountIdentifier, "test@adyen.com")
+            XCTAssertEqual(details.accountIdentifier, "test@plexy.com")
             XCTAssertEqual(details.shopperName?.firstName, "test")
             XCTAssertEqual(details.shopperName?.lastName, "lastname")
 
@@ -242,7 +242,7 @@ class PayToComponentUITests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.identifierPicker"))
+        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.identifierPicker"))
         identifierPickerItem.select(value: .init(
             identifier: localizedString(.paytoPayidOptionEmail, config.localizationParameters),
             element: FormStringPickerElement(
@@ -277,7 +277,7 @@ class PayToComponentUITests: XCTestCase {
             configuration: config
         )
 
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionSegmentedControl"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionSegmentedControl"))
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.sendActions(for: .valueChanged)
 
@@ -286,7 +286,7 @@ class PayToComponentUITests: XCTestCase {
         let didSubmitExpectation = expectation(description: "PaymentComponentDelegate must be called when submit button is clicked.")
 
         // Then
-        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.continueButton.button"))
+        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.continueButton.button"))
 
         let delegateMock = PaymentComponentDelegateMock()
         sut.delegate = delegateMock
@@ -308,7 +308,7 @@ class PayToComponentUITests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.identifierPicker"))
+        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.identifierPicker"))
         identifierPickerItem.select(value: .init(
             identifier: localizedString(LocalizationKey(key: "ABN"), config.localizationParameters),
             element: FormStringPickerElement(
@@ -344,7 +344,7 @@ class PayToComponentUITests: XCTestCase {
             configuration: config
         )
 
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionSegmentedControl"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionSegmentedControl"))
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.sendActions(for: .valueChanged)
 
@@ -353,7 +353,7 @@ class PayToComponentUITests: XCTestCase {
         let didSubmitExpectation = expectation(description: "PaymentComponentDelegate must be called when submit button is clicked.")
 
         // Then
-        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.continueButton.button"))
+        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.continueButton.button"))
 
         let delegateMock = PaymentComponentDelegateMock()
         sut.delegate = delegateMock
@@ -375,7 +375,7 @@ class PayToComponentUITests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.identifierPicker"))
+        let identifierPickerItem: BaseFormPickerItemView<FormStringPickerElement> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.identifierPicker"))
         identifierPickerItem.select(value: .init(
             identifier: localizedString(.paytoPayidLabelOrgid, config.localizationParameters),
             element: FormStringPickerElement(
@@ -414,7 +414,7 @@ class PayToComponentUITests: XCTestCase {
             configuration: config
         )
 
-        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionSegmentedControl"))
+        let segmentedControl: UISegmentedControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionSegmentedControl"))
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.sendActions(for: .valueChanged)
 
@@ -423,7 +423,7 @@ class PayToComponentUITests: XCTestCase {
         let didSubmitExpectation = expectation(description: "PaymentComponentDelegate must be called when submit button is clicked.")
 
         // Then
-        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.continueButton.button"))
+        let continueButton: UIControl = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.continueButton.button"))
 
         let delegateMock = PaymentComponentDelegateMock()
         sut.delegate = delegateMock
@@ -455,28 +455,28 @@ class PayToComponentUITests: XCTestCase {
     }
 
     private func populateMobileNumberField(sut: PayToComponent) throws {
-        let phoneNumberItem: FormPhoneNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.phoneNumberItem"))
+        let phoneNumberItem: FormPhoneNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.phoneNumberItem"))
         self.populate(textItemView: phoneNumberItem, with: "4123466")
     }
 
     private func populateEmailField(sut: PayToComponent) throws {
-        let emailItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.emailTextfield"))
-        self.populate(textItemView: emailItem, with: "test@adyen.com")
+        let emailItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.emailTextfield"))
+        self.populate(textItemView: emailItem, with: "test@plexy.com")
     }
 
     private func populateABNField(sut: PayToComponent) throws {
-        let abnItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.abnTextfield"))
+        let abnItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.abnTextfield"))
         self.populate(textItemView: abnItem, with: "12345678900")
     }
 
     private func populateOrganizationIdField(sut: PayToComponent) throws {
-        let organizationIdItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.organizationIDTextfield"))
+        let organizationIdItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.organizationIDTextfield"))
         self.populate(textItemView: organizationIdItem, with: "123123")
     }
 
     private func populateBSBFields(sut: PayToComponent) throws {
-        let bankStateBranchInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.bankStateBranchTextfield"))
-        let accountNumberInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.accountNumberTextfield"))
+        let bankStateBranchInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.bankStateBranchTextfield"))
+        let accountNumberInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.accountNumberTextfield"))
 
         self.populate(textItemView: bankStateBranchInputItem, with: "123456")
         self.populate(textItemView: accountNumberInputItem, with: "NLAB13343455")
@@ -484,8 +484,8 @@ class PayToComponentUITests: XCTestCase {
     }
 
     private func populateShopperNameField(sut: PayToComponent) throws {
-        let firstNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.firstNameTextfield"))
-        let lastNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.lastNameTextfield"))
+        let firstNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.firstNameTextfield"))
+        let lastNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.lastNameTextfield"))
 
         self.populate(textItemView: firstNameInputItem, with: "test")
         self.populate(textItemView: lastNameInputItem, with: "lastname")

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2020 Adyen N.V.
+// Copyright (c) 2020 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
-import AdyenSwiftUI
+import Plexy
+import PlexySwiftUI
 import SwiftUI
 
 internal struct ComponentsView: View {

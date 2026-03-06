@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 final class DokuComponentUITests: XCTestCase {
 
-    private var context: AdyenContext!
+    private var context: PlexyContext!
     private var paymentMethod: DokuPaymentMethod!
     private var payment: Payment!
     private var style: FormComponentStyle!
@@ -201,10 +201,10 @@ final class DokuComponentUITests: XCTestCase {
     }
 
     private enum DokuViewIdentifier {
-        static let firstName = "AdyenComponents.DokuComponent.firstNameItem"
-        static let lastName = "AdyenComponents.DokuComponent.lastNameItem"
-        static let email = "AdyenComponents.DokuComponent.emailItem"
-        static let payButton = "AdyenComponents.DokuComponent.payButtonItem.button"
+        static let firstName = "PlexyComponents.DokuComponent.firstNameItem"
+        static let lastName = "PlexyComponents.DokuComponent.lastNameItem"
+        static let email = "PlexyComponents.DokuComponent.emailItem"
+        static let payButton = "PlexyComponents.DokuComponent.payButtonItem.button"
     }
 
 }

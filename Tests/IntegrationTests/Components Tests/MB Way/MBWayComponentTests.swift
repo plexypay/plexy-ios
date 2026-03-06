@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class MBWayComponentTests: XCTestCase {
 
-    private var context: AdyenContext!
+    private var context: PlexyContext!
     private var paymentMethod: MBWayPaymentMethod!
     private var payment: Payment!
 
@@ -31,7 +31,7 @@ class MBWayComponentTests: XCTestCase {
     }
 
     func testLocalizationWithCustomTableName() throws {
-        let config = MBWayComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil))
+        let config = MBWayComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil))
         let sut = MBWayComponent(
             paymentMethod: paymentMethod,
             context: context,
@@ -48,19 +48,19 @@ class MBWayComponentTests: XCTestCase {
     }
 
     func testLocalizationWithCustomKeySeparator() throws {
-        let config = MBWayComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_"))
+        let config = MBWayComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_"))
         let sut = MBWayComponent(
             paymentMethod: paymentMethod,
             context: context,
             configuration: config
         )
 
-        XCTAssertEqual(sut.phoneItem?.title, localizedString(LocalizationKey(key: "adyen_phoneNumber_title"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.phoneItem?.placeholder, localizedString(LocalizationKey(key: "adyen_phoneNumber_placeholder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.phoneItem?.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_phoneNumber_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.phoneItem?.title, localizedString(LocalizationKey(key: "plexy_phoneNumber_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.phoneItem?.placeholder, localizedString(LocalizationKey(key: "plexy_phoneNumber_placeholder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.phoneItem?.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_phoneNumber_invalid"), sut.configuration.localizationParameters))
 
         XCTAssertNotNil(sut.button.title)
-        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "adyen_continueTo"), sut.configuration.localizationParameters, paymentMethod.name))
+        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "plexy_continueTo"), sut.configuration.localizationParameters, paymentMethod.name))
     }
 
     func testBigTitle() {
@@ -73,7 +73,7 @@ class MBWayComponentTests: XCTestCase {
 
         wait(for: .milliseconds(300))
         
-        XCTAssertNil(sut.viewController.view.findView(with: "AdyenComponents.MBWayComponent.Test name"))
+        XCTAssertNil(sut.viewController.view.findView(with: "PlexyComponents.MBWayComponent.Test name"))
         XCTAssertEqual(sut.viewController.title, self.paymentMethod.name)
     }
 
@@ -145,11 +145,11 @@ class MBWayComponentTests: XCTestCase {
     // MARK: - Private
 
     private enum MBWayViewIdentifier {
-        static let phone = "AdyenComponents.MBWayComponent.phoneNumberItem"
-        static let phoneTitleLabel = "AdyenComponents.MBWayComponent.phoneNumberItem.titleLabel"
-        static let phoneTextField = "AdyenComponents.MBWayComponent.phoneNumberItem.textField"
-        static let payButton = "AdyenComponents.MBWayComponent.payButtonItem.button"
-        static let payButtonTitleLabel = "AdyenComponents.MBWayComponent.payButtonItem.button.titleLabel"
+        static let phone = "PlexyComponents.MBWayComponent.phoneNumberItem"
+        static let phoneTitleLabel = "PlexyComponents.MBWayComponent.phoneNumberItem.titleLabel"
+        static let phoneTextField = "PlexyComponents.MBWayComponent.phoneNumberItem.textField"
+        static let payButton = "PlexyComponents.MBWayComponent.payButtonItem.button"
+        static let payButtonTitleLabel = "PlexyComponents.MBWayComponent.payButtonItem.button.titleLabel"
     }
 
     private var shopperInformation: PrefilledShopperInformation {

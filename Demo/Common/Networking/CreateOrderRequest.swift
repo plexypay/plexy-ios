@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2021 Adyen N.V.
+// Copyright (c) 2021 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
-import AdyenNetworking
-#if canImport(AdyenCard)
-    import AdyenCard
+import Plexy
+import PlexyNetworking
+#if canImport(PlexyCard)
+    import PlexyCard
 #endif
 import Foundation
 

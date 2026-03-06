@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2024 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@testable @_spi(AdyenInternal) import Adyen
+@testable @_spi(PlexyInternal) import Plexy
 
 class ImageLoaderMock: ImageLoading {
     
@@ -12,9 +12,9 @@ class ImageLoaderMock: ImageLoading {
         url.absoluteString.generateImage()
     }
     
-    var cancellable: AdyenCancellable = CancellableMock(onCancelHandler: {})
+    var cancellable: PlexyCancellable = CancellableMock(onCancelHandler: {})
     
-    func load(url: URL, completion: @escaping ((UIImage?) -> Void)) -> any AdyenCancellable {
+    func load(url: URL, completion: @escaping ((UIImage?) -> Void)) -> any PlexyCancellable {
         DispatchQueue.main.async {
             completion(self.imageProvider(url))
         }

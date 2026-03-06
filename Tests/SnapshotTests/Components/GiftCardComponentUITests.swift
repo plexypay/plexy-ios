@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2024 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenCard
-@testable import AdyenComponents
-import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyCard
+@testable import PlexyComponents
+import PlexyDropIn
 import XCTest
 
 class GiftCardUITests: XCTestCase {
@@ -62,18 +62,18 @@ class GiftCardUITests: XCTestCase {
 private extension GiftCardComponent {
     
     func errorView() throws -> FormErrorItemView {
-        try XCTUnwrap(viewController.view.findView(with: "AdyenCard.GiftCardComponent.errorItem"))
+        try XCTUnwrap(viewController.view.findView(with: "PlexyCard.GiftCardComponent.errorItem"))
     }
 
     func numberItemView() throws -> FormTextInputItemView {
-        try XCTUnwrap(viewController.view.findView(with: "AdyenCard.GiftCardComponent.numberItem"))
+        try XCTUnwrap(viewController.view.findView(with: "PlexyCard.GiftCardComponent.numberItem"))
     }
 
     func securityCodeItemView() throws -> FormTextInputItemView {
-        try XCTUnwrap(viewController.view.findView(with: "AdyenCard.GiftCardComponent.securityCodeItem"))
+        try XCTUnwrap(viewController.view.findView(with: "PlexyCard.GiftCardComponent.securityCodeItem"))
     }
     
     func payButtonItemViewButton() throws -> UIControl {
-        try XCTUnwrap(viewController.view.findView(with: "AdyenCard.GiftCardComponent.payButtonItem.button"))
+        try XCTUnwrap(viewController.view.findView(with: "PlexyCard.GiftCardComponent.payButtonItem.button"))
     }
 }

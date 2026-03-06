@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2019 Adyen N.V.
+// Copyright (c) 2019 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
-import AdyenActions
+import Plexy
+import PlexyActions
 #if canImport(PayKit)
     import PayKit
 #endif
@@ -23,7 +23,7 @@ internal final class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.prefersLargeTitles = true
         
         #if DEBUG
-            AdyenLogging.isEnabled = true
+            PlexyLogging.isEnabled = true
         #endif
         
         let window = UIWindow(frame: UIScreen.main.bounds)

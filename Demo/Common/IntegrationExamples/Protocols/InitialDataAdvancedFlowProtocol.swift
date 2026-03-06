@@ -1,22 +1,22 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-import AdyenNetworking
-import AdyenSession
+@_spi(PlexyInternal) import Plexy
+import PlexyNetworking
+import PlexySession
 
 internal protocol InitialDataAdvancedFlowProtocol: AnyObject {
-    var context: AdyenContext { get }
+    var context: PlexyContext { get }
     var apiClient: APIClientProtocol { get }
     func requestPaymentMethods(
         order: PartialPaymentOrder?,
         amount: Amount,
         completion: @escaping (Result<PaymentMethods, Error>) -> Void
     )
-    func generateContext() -> AdyenContext
+    func generateContext() -> PlexyContext
     func start()
 }
 
@@ -38,10 +38,10 @@ extension InitialDataAdvancedFlowProtocol {
         }
     }
     
-    func generateContext() -> AdyenContext {
+    func generateContext() -> PlexyContext {
         var analyticsConfiguration = AnalyticsConfiguration()
         analyticsConfiguration.isEnabled = ConfigurationConstants.current.analyticsSettings.isEnabled
-        return AdyenContext(
+        return PlexyContext(
             apiContext: ConfigurationConstants.apiContext,
             payment: ConfigurationConstants.current.payment,
             analyticsConfiguration: analyticsConfiguration

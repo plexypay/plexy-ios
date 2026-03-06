@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class PayToComponentTests: XCTestCase {
@@ -15,14 +15,14 @@ class PayToComponentTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = try PayToComponent(
-            paymentMethod: AdyenCoder.decode(payto),
+            paymentMethod: PlexyCoder.decode(payto),
             context: Dummy.context
         )
     }
 
     func test_init() throws {
         let sut = try PayToComponent(
-            paymentMethod: AdyenCoder.decode(payto),
+            paymentMethod: PlexyCoder.decode(payto),
             context: Dummy.context
         )
 
@@ -38,7 +38,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let flowSelectionTitleLabelItem = sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionTitleLabel") as? UILabel
+        let flowSelectionTitleLabelItem = sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionTitleLabel") as? UILabel
 
         // Then
         XCTAssertNotNil(flowSelectionTitleLabelItem, "Flow selection title label should exist")
@@ -49,7 +49,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let flowSelectionItem = sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.flowSelectionSegmentedControl") as? UISegmentedControl
+        let flowSelectionItem = sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.flowSelectionSegmentedControl") as? UISegmentedControl
         flowSelectionItem?.selectedSegmentIndex = 1
 
         // Then
@@ -79,7 +79,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let phoneNumberItem: FormPhoneNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.phoneNumberItem"))
+        let phoneNumberItem: FormPhoneNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.phoneNumberItem"))
 
         // Then
         XCTAssertNotNil(phoneNumberItem, "Phone number item should exist")
@@ -90,7 +90,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let payIdTitleLabelItem = sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.payIdFlowTitleTitleLabel") as? UILabel
+        let payIdTitleLabelItem = sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.payIdFlowTitleTitleLabel") as? UILabel
 
         // Then
         XCTAssertNotNil(payIdTitleLabelItem, "PayId flow title label should exist")
@@ -101,7 +101,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let identifierPickerItem: PayToFormPickerItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.identifierPicker"))
+        let identifierPickerItem: PayToFormPickerItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.identifierPicker"))
 
         // Then
         XCTAssertNotNil(identifierPickerItem, "identifier picker should exist")
@@ -118,7 +118,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let firstNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.firstNameTextfield"))
+        let firstNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.firstNameTextfield"))
 
         // Then
         XCTAssertNotNil(firstNameInputItem, "first name input field should exist")
@@ -134,7 +134,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let lastNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.lastNameTextfield"))
+        let lastNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.lastNameTextfield"))
 
         // Then
         XCTAssertNotNil(lastNameInputItem, "last name input field should exist")
@@ -162,7 +162,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let emailInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.emailTextfield"))
+        let emailInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.emailTextfield"))
 
         // Then
         XCTAssertNotNil(emailInputItem, "email input field should exist")
@@ -192,7 +192,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let abnInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.abnTextfield"))
+        let abnInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.abnTextfield"))
 
         // Then
         XCTAssertNotNil(abnInputItem, "abn input field should exist")
@@ -229,7 +229,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let organizationIDInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.organizationIDTextfield"))
+        let organizationIDInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.organizationIDTextfield"))
 
         // Then
         XCTAssertNotNil(organizationIDInputItem, "organizationID input field should exist")
@@ -258,7 +258,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let accountNumberInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.accountNumberTextfield"))
+        let accountNumberInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.accountNumberTextfield"))
 
         // Then
         XCTAssertNotNil(accountNumberInputItem, "Bank account number input field should exist")
@@ -292,7 +292,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let bankStateNumberInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.bankStateBranchTextfield"))
+        let bankStateNumberInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.bankStateBranchTextfield"))
 
         // Then
         XCTAssertNotNil(bankStateNumberInputItem, "Bank state number input field should exist")
@@ -303,7 +303,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let paymentInstructionTitleLabelItem = sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.paymentInstructionTitleLabel") as? UILabel
+        let paymentInstructionTitleLabelItem = sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.paymentInstructionTitleLabel") as? UILabel
 
         // Then
         XCTAssertNotNil(paymentInstructionTitleLabelItem, "Payment instruction title label should exist")
@@ -314,7 +314,7 @@ class PayToComponentTests: XCTestCase {
         sut.viewController.loadViewIfNeeded()
 
         // Check by accessibility identifier
-        let continueButton: FormButtonItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.continueButton"))
+        let continueButton: FormButtonItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.continueButton"))
 
         // Then
         XCTAssertNotNil(continueButton, "ContinueButton should exist")
@@ -324,12 +324,12 @@ class PayToComponentTests: XCTestCase {
         
         // Given
         let analyticsProviderMock = AnalyticsProviderMock()
-        let context = AdyenContext(
+        let context = PlexyContext(
             apiContext: Dummy.apiContext,
             payment: Dummy.payment,
             analyticsProvider: analyticsProviderMock
         )
-        let paymentMethod: PayToPaymentMethod = try AdyenCoder.decode(payto)
+        let paymentMethod: PayToPaymentMethod = try PlexyCoder.decode(payto)
         let sut = PayToComponent(
             paymentMethod: paymentMethod,
             context: context
@@ -347,7 +347,7 @@ class PayToComponentTests: XCTestCase {
     
     func testValidateGivenValidInputShouldReturnFormViewControllerValidateResult() throws {
         // Given
-        let paymentMethod: PayToPaymentMethod = try AdyenCoder.decode(payto)
+        let paymentMethod: PayToPaymentMethod = try PlexyCoder.decode(payto)
         let configuration = PayToComponent.Configuration(showsSubmitButton: false)
         let sut = PayToComponent(
             paymentMethod: paymentMethod,
@@ -370,7 +370,7 @@ class PayToComponentTests: XCTestCase {
 
     func testValidateGivenInvalidInputShouldReturnFormViewControllerValidateResult() throws {
         // Given
-        let paymentMethod: PayToPaymentMethod = try AdyenCoder.decode(payto)
+        let paymentMethod: PayToPaymentMethod = try PlexyCoder.decode(payto)
         let configuration = PayToComponent.Configuration(showsSubmitButton: false)
         let sut = PayToComponent(
             paymentMethod: paymentMethod,
@@ -413,9 +413,9 @@ class PayToComponentTests: XCTestCase {
     }
     
     private func populateValidFields(sut: PayToComponent) throws {
-        let phoneNumberItem: FormPhoneNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.phoneNumberItem"))
-        let firstNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.firstNameTextfield"))
-        let lastNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.PayToComponent.lastNameTextfield"))
+        let phoneNumberItem: FormPhoneNumberItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.phoneNumberItem"))
+        let firstNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.firstNameTextfield"))
+        let lastNameInputItem: FormTextInputItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.PayToComponent.lastNameTextfield"))
         
         self.populate(textItemView: phoneNumberItem, with: "4123466")
         self.populate(textItemView: firstNameInputItem, with: "test")

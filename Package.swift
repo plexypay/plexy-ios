@@ -4,201 +4,135 @@
 import PackageDescription
 
 let package = Package(
-    name: "Adyen",
+    name: "Plexy",
     defaultLocalization: "en-us",
     platforms: [.iOS(.v12)],
     products: [
         .library(
-            name: "Adyen",
-            targets: ["Adyen"]
+            name: "Plexy",
+            targets: ["Plexy"]
         ),
         .library(
-            name: "AdyenEncryption",
-            targets: ["AdyenEncryption"]
+            name: "PlexyNetworking",
+            targets: ["PlexyNetworking"]
         ),
         .library(
-            name: "AdyenSwiftUI",
-            targets: ["AdyenSwiftUI"]
+            name: "PlexyEncryption",
+            targets: ["PlexyEncryption"]
         ),
         .library(
-            name: "AdyenActions",
-            targets: ["AdyenActions"]
+            name: "PlexySwiftUI",
+            targets: ["PlexySwiftUI"]
         ),
         .library(
-            name: "AdyenCard",
-            targets: ["AdyenCard"]
+            name: "PlexyActions",
+            targets: ["PlexyActions"]
         ),
         .library(
-            name: "AdyenCardScanner",
-            targets: ["AdyenCardScanner"]
+            name: "PlexyCard",
+            targets: ["PlexyCard"]
         ),
         .library(
-            name: "AdyenComponents",
-            targets: ["AdyenComponents"]
+            name: "PlexyCardScanner",
+            targets: ["PlexyCardScanner"]
         ),
         .library(
-            name: "AdyenSession",
-            targets: ["AdyenSession"]
+            name: "PlexyComponents",
+            targets: ["PlexyComponents"]
         ),
         .library(
-            name: "AdyenDropIn",
-            targets: ["AdyenDropIn"]
+            name: "PlexySession",
+            targets: ["PlexySession"]
         ),
         .library(
-            name: "AdyenWeChatPay",
-            targets: ["AdyenWeChatPay"]
-        ),
-        .library(
-            name: "AdyenCashAppPay",
-            targets: ["AdyenCashAppPay"]
-        ),
-        .library(
-            name: "AdyenTwint",
-            targets: ["AdyenTwint"]
-        ),
-        .library(
-            name: "AdyenDelegatedAuthentication",
-            targets: ["AdyenDelegatedAuthentication"]
+            name: "PlexyDropIn",
+            targets: ["PlexyDropIn"]
         )
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/Adyen/adyen-3ds2-ios",
-            exact: "2.4.3"
-        ),
-        .package(
-            url: "https://github.com/Adyen/adyen-authentication-ios",
-            exact: "3.1.0"
-        ),
-        .package(
-            url: "https://github.com/Adyen/adyen-networking-ios",
-            exact: "3.0.1"
-        ),
-        .package(
-            url: "https://github.com/Adyen/adyen-wechatpay-ios",
-            exact: "2.2.0"
-        ),
-        .package(
-            url: "https://github.com/cashapp/cash-app-pay-ios-sdk",
-            exact: "0.6.2"
-        )
-    ],
+    dependencies: [],
     targets: [
         .target(
-            name: "Adyen",
-            dependencies: [.product(name: "AdyenNetworking", package: "adyen-networking-ios")],
-            path: "Adyen",
+            name: "PlexyNetworking",
+            path: "PlexyNetworking",
+            exclude: ["Info.plist"]
+        ),
+        .target(
+            name: "Plexy",
+            dependencies: [.target(name: "PlexyNetworking")],
+            path: "Plexy",
             exclude: [
                 "Info.plist",
-                "Utilities/Non SPM Bundle Extension" // This is to exclude `BundleExtension.swift` file, since swift packages has different code to access internal resources.
+                "Utilities/Non SPM Bundle Extension"
             ],
             resources: [.process("PrivacyInfo.xcprivacy")]
         ),
         .target(
-            name: "AdyenEncryption",
-            path: "AdyenEncryption",
+            name: "PlexyEncryption",
+            path: "PlexyEncryption",
             exclude: ["Info.plist"]
         ),
         .target(
-            name: "AdyenSwiftUI",
+            name: "PlexySwiftUI",
             dependencies: [],
-            path: "AdyenSwiftUI",
+            path: "PlexySwiftUI",
             exclude: ["Info.plist"]
         ),
         .target(
-            name: "AdyenActions",
+            name: "PlexyActions",
             dependencies: [
-                .target(name: "Adyen"),
-                .product(name: "Adyen3DS2", package: "adyen-3ds2-ios")
+                .target(name: "Plexy")
             ],
-            path: "AdyenActions",
+            path: "PlexyActions",
             exclude: [
                 "Info.plist",
-                "Utilities/Non SPM Bundle Extension" // This is to exclude `BundleExtension.swift` file, since swift packages has different code to access internal resources.
+                "Utilities/Non SPM Bundle Extension"
             ]
         ),
         .target(
-            name: "AdyenCard",
+            name: "PlexyCard",
             dependencies: [
-                .target(name: "Adyen"),
-                .target(name: "AdyenEncryption")
+                .target(name: "Plexy"),
+                .target(name: "PlexyEncryption")
             ],
-            path: "AdyenCard",
+            path: "PlexyCard",
             exclude: [
                 "Info.plist",
-                "Utilities/Non SPM Bundle Extension" // This is to exclude `BundleExtension.swift` file, since swift packages has different code to access internal resources.
+                "Utilities/Non SPM Bundle Extension"
             ]
         ),
         .target(
-            name: "AdyenCardScanner",
-            path: "AdyenCardScanner",
+            name: "PlexyCardScanner",
+            path: "PlexyCardScanner",
             exclude: [
                 "Info.plist"
             ]
         ),
         .target(
-            name: "AdyenComponents",
+            name: "PlexyComponents",
             dependencies: [
-                .target(name: "Adyen"),
-                .target(name: "AdyenEncryption")
+                .target(name: "Plexy"),
+                .target(name: "PlexyEncryption")
             ],
-            path: "AdyenComponents",
+            path: "PlexyComponents",
             exclude: ["Info.plist"]
         ),
         .target(
-            name: "AdyenSession",
+            name: "PlexySession",
             dependencies: [
-                .target(name: "Adyen"),
-                .target(name: "AdyenActions")
+                .target(name: "Plexy"),
+                .target(name: "PlexyActions")
             ],
-            path: "AdyenSession",
+            path: "PlexySession",
             exclude: ["Info.plist"]
         ),
         .target(
-            name: "AdyenDropIn",
+            name: "PlexyDropIn",
             dependencies: [
-                .target(name: "AdyenCard"),
-                .target(name: "AdyenComponents"),
-                .target(name: "AdyenActions")
+                .target(name: "PlexyCard"),
+                .target(name: "PlexyComponents"),
+                .target(name: "PlexyActions")
             ],
-            path: "AdyenDropIn",
-            exclude: ["Info.plist"]
-        ),
-        .target(
-            name: "AdyenWeChatPay",
-            dependencies: [
-                .product(name: "AdyenWeChatPayInternal", package: "adyen-wechatpay-ios"),
-                .target(name: "AdyenActions")
-            ],
-            path: "AdyenWeChatPay/WeChatPayActionComponent"
-        ),
-        .target(
-            name: "AdyenCashAppPay",
-            dependencies: [
-                .target(name: "Adyen"),
-                .product(name: "PayKit", package: "cash-app-pay-ios-sdk"),
-                .product(name: "PayKitUI", package: "cash-app-pay-ios-sdk")
-            ],
-            path: "AdyenCashAppPay",
-            exclude: ["Info.plist"]
-        ),
-        .target(
-            name: "AdyenTwint",
-            dependencies: [
-                .target(name: "Adyen"),
-                .target(name: "TwintSDK")
-            ],
-            path: "AdyenTwint",
-            exclude: ["Info.plist"]
-        ),
-        .binaryTarget(
-            name: "TwintSDK",
-            path: "XCFramework/Dynamic/TwintSDK.xcframework"
-        ),
-        .target(
-            name: "AdyenDelegatedAuthentication",
-            dependencies: [.product(name: "AdyenAuthentication", package: "adyen-authentication-ios")],
-            path: "AdyenDelegatedAuthentication",
+            path: "PlexyDropIn",
             exclude: ["Info.plist"]
         )
     ]

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2019 Adyen N.V.
+// Copyright (c) 2019 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
-import AdyenNetworking
+import Plexy
+import PlexyNetworking
 import Foundation
 
 internal struct DemoAPIContext: AnyAPIContext {
@@ -32,9 +32,9 @@ internal enum DemoCheckoutAPIEnvironment: String, AnyAPIEnvironment, CaseIterabl
     internal var baseURL: URL {
         switch self {
         case .beta:
-            return URL(string: "https://checkout-beta.adyen.com/checkout/v\(version)")!
+            return URL(string: "https://checkout-beta.plexy.com/checkout/v\(version)")!
         case .test:
-            return URL(string: "https://checkout-test.adyen.com/v\(version)")!
+            return URL(string: "https://checkout-test.plexy.com/v\(version)")!
         case .local:
             return URL(string: "http://localhost:8080/checkout/v\(version)")!
         }
@@ -51,9 +51,9 @@ internal enum DemoClassicAPIEnvironment: String, AnyAPIEnvironment, CaseIterable
     internal var baseURL: URL {
         switch self {
         case .beta:
-            return URL(string: "https://pal-beta.adyen.com/pal/servlet/")!
+            return URL(string: "https://pal-beta.plexy.com/pal/servlet/")!
         case .test:
-            return URL(string: "https://pal-test.adyen.com/pal/servlet/")!
+            return URL(string: "https://pal-test.plexy.com/pal/servlet/")!
         case .local:
             return URL(string: "http://localhost:8080/pal/servlet/")!
         }

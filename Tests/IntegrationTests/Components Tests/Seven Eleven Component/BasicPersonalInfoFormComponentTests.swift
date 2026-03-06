@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class BasicPersonalInfoFormComponentTests: XCTestCase {
@@ -14,7 +14,7 @@ class BasicPersonalInfoFormComponentTests: XCTestCase {
     let payment = Payment(amount: Amount(value: 2, currencyCode: "IDR"), countryCode: "ID")
 
     func testLocalizationWithCustomTableName() throws {
-        let localization = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        let localization = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
         let config = BasicPersonalInfoFormComponent.Configuration(localizationParameters: localization)
         let sut = SevenElevenComponent(
             paymentMethod: paymentMethod,
@@ -39,27 +39,27 @@ class BasicPersonalInfoFormComponentTests: XCTestCase {
     }
 
     func testLocalizationWithCustomKeySeparator() {
-        let config = BasicPersonalInfoFormComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_"))
+        let config = BasicPersonalInfoFormComponent.Configuration(localizationParameters: LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_"))
         let sut = SevenElevenComponent(
             paymentMethod: paymentMethod,
             context: Dummy.context,
             configuration: config
         )
 
-        XCTAssertEqual(sut.firstNameItem?.title, localizedString(LocalizationKey(key: "adyen_firstName"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.firstNameItem?.placeholder, localizedString(LocalizationKey(key: "adyen_firstName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.firstNameItem?.title, localizedString(LocalizationKey(key: "plexy_firstName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.firstNameItem?.placeholder, localizedString(LocalizationKey(key: "plexy_firstName"), sut.configuration.localizationParameters))
         XCTAssertNil(sut.firstNameItem?.validationFailureMessage)
 
-        XCTAssertEqual(sut.lastNameItem?.title, localizedString(LocalizationKey(key: "adyen_lastName"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.lastNameItem?.placeholder, localizedString(LocalizationKey(key: "adyen_lastName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.lastNameItem?.title, localizedString(LocalizationKey(key: "plexy_lastName"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.lastNameItem?.placeholder, localizedString(LocalizationKey(key: "plexy_lastName"), sut.configuration.localizationParameters))
         XCTAssertNil(sut.lastNameItem?.validationFailureMessage)
 
-        XCTAssertEqual(sut.emailItem?.title, localizedString(LocalizationKey(key: "adyen_emailItem_title"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.emailItem?.placeholder, localizedString(LocalizationKey(key: "adyen_emailItem_placeHolder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.emailItem?.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_emailItem_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.emailItem?.title, localizedString(LocalizationKey(key: "plexy_emailItem_title"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.emailItem?.placeholder, localizedString(LocalizationKey(key: "plexy_emailItem_placeHolder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.emailItem?.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_emailItem_invalid"), sut.configuration.localizationParameters))
 
         XCTAssertNotNil(sut.button.title)
-        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "adyen_confirmPurchase"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "plexy_confirmPurchase"), sut.configuration.localizationParameters))
     }
 
     func testUIConfiguration() {
@@ -230,7 +230,7 @@ class BasicPersonalInfoFormComponentTests: XCTestCase {
 
         wait(for: .milliseconds(300))
         
-        XCTAssertNil(sut.viewController.view.findView(with: "AdyenComponents.BasicPersonalInfoFormComponent.Test name"))
+        XCTAssertNil(sut.viewController.view.findView(with: "PlexyComponents.BasicPersonalInfoFormComponent.Test name"))
         XCTAssertEqual(sut.viewController.title, self.paymentMethod.name)
     }
 
@@ -313,14 +313,14 @@ class BasicPersonalInfoFormComponentTests: XCTestCase {
     // MARK: - Private
 
     private enum ViewIdentifier {
-        static let firstName = "AdyenComponents.BasicPersonalInfoFormComponent.firstNameItem"
-        static let lastName = "AdyenComponents.BasicPersonalInfoFormComponent.lastNameItem"
-        static let phone = "AdyenComponents.BasicPersonalInfoFormComponent.phoneNumberItem"
-        static let phoneTitleLabel = "AdyenComponents.BasicPersonalInfoFormComponent.phoneNumberItem.titleLabel"
-        static let phoneTextField = "AdyenComponents.BasicPersonalInfoFormComponent.phoneNumberItem.textField"
-        static let email = "AdyenComponents.BasicPersonalInfoFormComponent.emailItem"
-        static let payButton = "AdyenComponents.BasicPersonalInfoFormComponent.payButtonItem.button"
-        static let payButtonTitleLabel = "AdyenComponents.BasicPersonalInfoFormComponent.payButtonItem.button.titleLabel"
+        static let firstName = "PlexyComponents.BasicPersonalInfoFormComponent.firstNameItem"
+        static let lastName = "PlexyComponents.BasicPersonalInfoFormComponent.lastNameItem"
+        static let phone = "PlexyComponents.BasicPersonalInfoFormComponent.phoneNumberItem"
+        static let phoneTitleLabel = "PlexyComponents.BasicPersonalInfoFormComponent.phoneNumberItem.titleLabel"
+        static let phoneTextField = "PlexyComponents.BasicPersonalInfoFormComponent.phoneNumberItem.textField"
+        static let email = "PlexyComponents.BasicPersonalInfoFormComponent.emailItem"
+        static let payButton = "PlexyComponents.BasicPersonalInfoFormComponent.payButtonItem.button"
+        static let payButtonTitleLabel = "PlexyComponents.BasicPersonalInfoFormComponent.payButtonItem.button.titleLabel"
     }
 
     private var shopperInformation: PrefilledShopperInformation {

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
-import AdyenCard
+import Plexy
+import PlexyCard
 import SwiftUI
 
 @available(iOS 13.0.0, *)

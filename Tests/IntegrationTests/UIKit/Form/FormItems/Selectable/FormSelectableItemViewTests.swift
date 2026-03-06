@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 private let placeholderText = "Placeholder"
@@ -32,11 +32,11 @@ class FormSelectableItemViewTests: XCTestCase {
         item = nil
         sut = nil
         
-        AdyenAssertion.listener = nil
+        PlexyAssertion.listener = nil
     }
     
     func testSelectionHandler() {
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "'selectionHandler' needs to be provided on 'FormSelectableValueItemMock'")
         }
         sut.selectionButtonTapped()

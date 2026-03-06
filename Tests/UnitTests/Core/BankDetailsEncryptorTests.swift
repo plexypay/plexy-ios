@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2022 Adyen N.V.
+// Copyright (c) 2022 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@testable @_spi(AdyenInternal) import AdyenCard
-@testable import AdyenEncryption
+@testable @_spi(PlexyInternal) import PlexyCard
+@testable import PlexyEncryption
 import XCTest
 
 class BankDetailsEncryptorTests: XCTestCase {

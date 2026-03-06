@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable import PlexyDropIn
 import XCTest
 
 final class PollingHandlerMock: AnyPollingHandler {
     
-    var context: AdyenContext {
+    var context: PlexyContext {
         Dummy.context
     }
 
@@ -55,7 +55,7 @@ class AwaitComponentTests: XCTestCase {
     func testLocalizationWithCustomTableName() {
 
         let sut = AwaitComponent(context: Dummy.context)
-        sut.configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        sut.configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
         let presentationDelegate = PresentationDelegateMock()
         sut.presentationDelegate = presentationDelegate
 
@@ -108,7 +108,7 @@ class AwaitComponentTests: XCTestCase {
 
         let sut = AwaitComponent(context: Dummy.context, awaitComponentBuilder: handlerProvider)
         sut.configuration.style = style
-        sut.configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        sut.configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
 
         let presentationDelegate = PresentationDelegateMock()
         let waitExpectation = expectation(description: "Wait for the presentationDelegate to be called.")

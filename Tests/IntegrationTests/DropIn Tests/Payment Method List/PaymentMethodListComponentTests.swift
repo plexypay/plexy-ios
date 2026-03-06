@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyDropIn
 import XCTest
 
 class PaymentMethodListComponentTests: XCTestCase {
@@ -16,7 +16,7 @@ class PaymentMethodListComponentTests: XCTestCase {
     lazy var regularComponent = PaymentComponentMock(paymentMethod: method2)
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -38,7 +38,7 @@ class PaymentMethodListComponentTests: XCTestCase {
         let regularSectionHeader = ListSectionHeader(title: "title", style: ListSectionHeaderStyle())
         let regularSection = ComponentsSection(header: regularSectionHeader, components: [regularComponent])
         let sut = PaymentMethodListComponent(context: Dummy.context, components: [storedSection, regularSection])
-        sut.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        sut.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
         
         let listViewController = sut.listViewController
         XCTAssertEqual(listViewController.title, localizedString(.paymentMethodsTitle, sut.localizationParameters))
@@ -51,10 +51,10 @@ class PaymentMethodListComponentTests: XCTestCase {
         let regularSectionHeader = ListSectionHeader(title: "title", style: ListSectionHeaderStyle())
         let regularSection = ComponentsSection(header: regularSectionHeader, components: [regularComponent])
         let sut = PaymentMethodListComponent(context: Dummy.context, components: [storedSection, regularSection])
-        sut.localizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        sut.localizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
         
         let listViewController = sut.listViewController
-        XCTAssertEqual(listViewController.title, localizedString(LocalizationKey(key: "adyen_paymentMethods_title"), sut.localizationParameters))
+        XCTAssertEqual(listViewController.title, localizedString(LocalizationKey(key: "plexy_paymentMethods_title"), sut.localizationParameters))
         XCTAssertEqual(listViewController.sections.count, 2)
         XCTAssertEqual(listViewController.sections[1].header?.title, "title")
     }

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyComponents
 import PassKit
 import XCTest
 
@@ -46,7 +46,7 @@ class ApplePayComponentTest: XCTestCase {
         sut = nil
         mockDelegate = nil
         
-        UIApplication.shared.adyen.mainKeyWindow?.rootViewController?.dismiss(animated: false)
+        UIApplication.shared.plexy.mainKeyWindow?.rootViewController?.dismiss(animated: false)
         setupRootViewController(emptyVC)
     }
 

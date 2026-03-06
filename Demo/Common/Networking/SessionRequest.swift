@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2019 Adyen N.V.
+// Copyright (c) 2019 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-import AdyenNetworking
+@_spi(PlexyInternal) import Plexy
+import PlexyNetworking
 import Foundation
 import UIKit
 
@@ -54,7 +54,7 @@ internal struct SessionRequest: APIRequest {
         }
 
         if ConfigurationConstants.current.cardSettings.showsStorePaymentMethodField {
-            AdyenAssertion.assert(
+            PlexyAssertion.assert(
                 message: "API version should be v70 or above to apply card component's store payment method field",
                 condition: ConfigurationConstants.current.apiVersion < 70
             )

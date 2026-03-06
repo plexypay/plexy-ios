@@ -1,22 +1,22 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) import AdyenActions
-import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) import PlexyActions
+import PlexyDropIn
 import SafariServices
 import XCTest
 
 class DropInActionsTests: XCTestCase {
 
-    var context: AdyenContext!
+    var context: PlexyContext!
     var sut: DropInComponent!
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -45,11 +45,11 @@ class DropInActionsTests: XCTestCase {
         )
         
         presentOnRoot(sut.viewController) {
-            let action = Action.redirect(RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "test_data"))
+            let action = Action.redirect(RedirectAction(url: URL(string: "https://www.plexy.com")!, paymentData: "test_data"))
             sut.handle(action)
         }
 
-        wait(until: { sut.viewController.adyen.topPresenter is SFSafariViewController })
+        wait(until: { sut.viewController.plexy.topPresenter is SFSafariViewController })
     }
 
     func testOpenExternalApp() {

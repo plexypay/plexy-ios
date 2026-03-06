@@ -1,16 +1,16 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 import XCTest
 
 class FormPickerItemTests: XCTestCase {
     
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -70,7 +70,7 @@ class FormPickerItemTests: XCTestCase {
         
         let resetValueException = expectation(description: "resetValue() should throw an exception")
         
-        AdyenAssertion.listener = { assertion in
+        PlexyAssertion.listener = { assertion in
             XCTAssertEqual(assertion, "'resetValue()' needs to be implemented on 'FormPickerItem<FormPickerElement>'")
             resetValueException.fulfill()
         }
@@ -83,7 +83,7 @@ class FormPickerItemTests: XCTestCase {
         
         let updateValidationFailureMessageException = expectation(description: "updateValidationFailureMessage() should throw an exception")
         
-        AdyenAssertion.listener = { assertion in
+        PlexyAssertion.listener = { assertion in
             XCTAssertEqual(assertion, "'updateValidationFailureMessage()' needs to be implemented on 'FormPickerItem<FormPickerElement>'")
             updateValidationFailureMessageException.fulfill()
         }
@@ -96,7 +96,7 @@ class FormPickerItemTests: XCTestCase {
         
         let updateFormattedValueException = expectation(description: "updateFormattedValue() should throw an exception")
         
-        AdyenAssertion.listener = { assertion in
+        PlexyAssertion.listener = { assertion in
             XCTAssertEqual(assertion, "'updateFormattedValue()' needs to be implemented on 'FormPickerItem<FormPickerElement>'")
             updateFormattedValueException.fulfill()
         }
@@ -105,6 +105,6 @@ class FormPickerItemTests: XCTestCase {
         
         wait(for: [updateFormattedValueException], timeout: 10)
         
-        AdyenAssertion.listener = nil
+        PlexyAssertion.listener = nil
     }
 }

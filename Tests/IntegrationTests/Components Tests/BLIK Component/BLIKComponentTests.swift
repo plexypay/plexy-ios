@@ -1,18 +1,18 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class BLIKComponentTests: XCTestCase {
 
     lazy var paymentMethod = BLIKPaymentMethod(type: .blik, name: "test_name")
     let payment = Payment(amount: Amount(value: 2, currencyCode: "PLN"), countryCode: "PL")
-    var context: AdyenContext { Dummy.context(with: payment) }
+    var context: PlexyContext { Dummy.context(with: payment) }
     var sut: BLIKComponent!
 
     override func setUp() {
@@ -24,7 +24,7 @@ class BLIKComponentTests: XCTestCase {
     }
 
     func testLocalizationWithCustomTableName() throws {
-        sut.configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        sut.configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
 
         XCTAssertEqual(sut.hintLabelItem.text, localizedString(.blikHelp, sut.configuration.localizationParameters))
 
@@ -37,7 +37,7 @@ class BLIKComponentTests: XCTestCase {
 
     func testLocalizationWithZeroPayment() throws {
         let payment = Payment(amount: Amount(value: 0, currencyCode: "PLN"), countryCode: "PL")
-        let context: AdyenContext = Dummy.context(with: payment)
+        let context: PlexyContext = Dummy.context(with: payment)
         sut = BLIKComponent(paymentMethod: paymentMethod, context: context)
         
         XCTAssertEqual(sut.hintLabelItem.text, localizedString(.blikHelp, sut.configuration.localizationParameters))
@@ -50,15 +50,15 @@ class BLIKComponentTests: XCTestCase {
     }
 
     func testLocalizationWithCustomKeySeparator() {
-        sut.configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        sut.configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
 
-        XCTAssertEqual(sut.hintLabelItem.text, localizedString(LocalizationKey(key: "adyen_blik_help"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.hintLabelItem.text, localizedString(LocalizationKey(key: "plexy_blik_help"), sut.configuration.localizationParameters))
 
-        XCTAssertEqual(sut.codeItem.title, localizedString(LocalizationKey(key: "adyen_blik_code"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.codeItem.placeholder, localizedString(LocalizationKey(key: "adyen_blik_placeholder"), sut.configuration.localizationParameters))
-        XCTAssertEqual(sut.codeItem.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_blik_invalid"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.codeItem.title, localizedString(LocalizationKey(key: "plexy_blik_code"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.codeItem.placeholder, localizedString(LocalizationKey(key: "plexy_blik_placeholder"), sut.configuration.localizationParameters))
+        XCTAssertEqual(sut.codeItem.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_blik_invalid"), sut.configuration.localizationParameters))
 
-        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "adyen_submitButton_formatted"), sut.configuration.localizationParameters, payment.amount.formatted))
+        XCTAssertEqual(sut.button.title, localizedString(LocalizationKey(key: "plexy_submitButton_formatted"), sut.configuration.localizationParameters, payment.amount.formatted))
     }
  
     func testVCTitle() {
@@ -109,7 +109,7 @@ class BLIKComponentTests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let codeItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.BLIKComponent.blikCodeItem"))
+        let codeItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.BLIKComponent.blikCodeItem"))
 
         self.populate(textItemView: codeItemView, with: "123456")
 
@@ -132,7 +132,7 @@ class BLIKComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        let codeItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.BLIKComponent.blikCodeItem"))
+        let codeItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.BLIKComponent.blikCodeItem"))
 
         self.populate(textItemView: codeItemView, with: "123456")
 

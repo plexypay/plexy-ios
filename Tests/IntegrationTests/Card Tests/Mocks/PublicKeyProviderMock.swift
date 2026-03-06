@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-@_spi(AdyenInternal) @testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) import Plexy
+@_spi(PlexyInternal) @testable @_spi(PlexyInternal) import PlexyCard
 
 final class PublicKeyProviderMock: AnyPublicKeyProvider {
     

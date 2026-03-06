@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import Foundation
 import XCTest
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 
 extension XCTestCase {
     
@@ -19,7 +19,7 @@ extension XCTestCase {
     func setupRootViewController(_ viewController: UIViewController) {
         
         let window: UIWindow = {
-            if let mainKeyWindow = UIApplication.shared.adyen.mainKeyWindow {
+            if let mainKeyWindow = UIApplication.shared.plexy.mainKeyWindow {
                 return mainKeyWindow
             }
             
@@ -75,11 +75,11 @@ extension XCTestCase {
     ///
     /// After the block the animation speed gets reset to the previous speed
     func withAnimation(_ speed: TestAnimationSpeed, block: () throws -> Void) throws {
-        let previousLayerSpeed = UIApplication.shared.adyen.mainKeyWindow?.layer.speed ?? 1
+        let previousLayerSpeed = UIApplication.shared.plexy.mainKeyWindow?.layer.speed ?? 1
         
-        UIApplication.shared.adyen.mainKeyWindow?.layer.speed = speed.rawValue
+        UIApplication.shared.plexy.mainKeyWindow?.layer.speed = speed.rawValue
         try block()
-        UIApplication.shared.adyen.mainKeyWindow?.layer.speed = previousLayerSpeed
+        UIApplication.shared.plexy.mainKeyWindow?.layer.speed = previousLayerSpeed
     }
     
     /// Executes a block with UIView animations disabled

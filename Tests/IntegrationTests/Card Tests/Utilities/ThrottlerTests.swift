@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@testable @_spi(AdyenInternal) import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
+@testable @_spi(PlexyInternal) import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class ThrottlerTests: XCTestCase {

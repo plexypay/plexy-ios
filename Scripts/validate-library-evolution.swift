@@ -31,7 +31,7 @@ func infoPlistContent(for frameworkName: String) -> String {
     <array>
         <dict>
             <key>BinaryPath</key>
-            <string>\(frameworkName).framework/Adyen</string>
+            <string>\(frameworkName).framework/Plexy</string>
             <key>DebugSymbolsPath</key>
             <string>dSYMs</string>
             <key>LibraryIdentifier</key>

@@ -1,0 +1,44 @@
+//
+// Copyright (c) 2025 Plexy N.V.
+//
+// This file is open source and available under the MIT license. See the LICENSE file for more info.
+//
+
+@_spi(PlexyInternal) import Plexy
+import Foundation
+
+/// Contains the details supplied by the Qiwi Wallet component.
+public struct QiwiWalletDetails: PaymentMethodDetails {
+    
+    @_spi(PlexyInternal)
+    public var checkoutAttemptId: String?
+    
+    /// The payment method type.
+    public let type: PaymentMethodType
+    
+    /// The telephone number prefix.
+    public let phonePrefix: String
+    
+    /// The telephone number.
+    public let phoneNumber: String
+    
+    /// Initializes the Qiwi Wallet details.
+    ///
+    ///
+    /// - Parameters:
+    ///   - paymentMethod: The Qiwi Wallet payment method.
+    ///   - phonePrefix: The telephone number prefix.
+    ///   - phoneNumber: The telephone number.
+    public init(paymentMethod: PaymentMethod, phonePrefix: String, phoneNumber: String) {
+        self.type = paymentMethod.type
+        self.phonePrefix = phonePrefix
+        self.phoneNumber = phoneNumber
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case type
+        case phonePrefix = "qiwiwallet.telephoneNumberPrefix"
+        case phoneNumber = "qiwiwallet.telephoneNumber"
+    }
+    
+}

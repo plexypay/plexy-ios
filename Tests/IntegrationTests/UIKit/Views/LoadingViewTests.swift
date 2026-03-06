@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2021 Adyen N.V.
+// Copyright (c) 2021 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 import XCTest
 
 class LoadingViewTests: XCTestCase {
@@ -21,7 +21,7 @@ class LoadingViewTests: XCTestCase {
         viewController = UIViewController()
         viewController.view.addSubview(sut)
         viewController.view.backgroundColor = .white
-        sut.adyen.anchor(inside: viewController.view)
+        sut.plexy.anchor(inside: viewController.view)
     }
 
     func testShowingSpinnerDelay() throws {

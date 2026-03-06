@@ -1,21 +1,21 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import SnapshotTesting
 import XCTest
 
 final class IssuerListComponentUITests: XCTestCase {
 
-    private var context: AdyenContext { Dummy.context }
-    private var paymentMethod: IssuerListPaymentMethod { try! AdyenCoder.decode(issuerListDictionary) as IssuerListPaymentMethod }
+    private var context: PlexyContext { Dummy.context }
+    private var paymentMethod: IssuerListPaymentMethod { try! PlexyCoder.decode(issuerListDictionary) as IssuerListPaymentMethod }
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()

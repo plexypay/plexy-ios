@@ -1,20 +1,20 @@
 //
-// Copyright (c) 2021 Adyen N.V.
+// Copyright (c) 2021 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenActions
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyActions
+@testable import PlexyDropIn
 import XCTest
 
 class AssertsTests: XCTestCase {
 
-    var context: AdyenContext!
+    var context: PlexyContext!
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -27,7 +27,7 @@ class AssertsTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        AdyenAssertion.listener = nil
+        PlexyAssertion.listener = nil
         context = nil
         try super.tearDownWithError()
     }
@@ -36,7 +36,7 @@ class AssertsTests: XCTestCase {
         let sut = ListViewController(style: ListComponentStyle())
         let expectation = XCTestExpectation(description: "Dummy Expectation")
 
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "PreferredContentSize is overridden for this view controller.\ngetter - returns content size of scroll view.\nsetter - no implemented.")
             expectation.fulfill()
         }
@@ -55,7 +55,7 @@ class AssertsTests: XCTestCase {
         )
         let expectation = XCTestExpectation(description: "Dummy Expectation")
 
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "PreferredContentSize is overridden for this view controller.\ngetter - returns minimum possible content size.\nsetter - no implemented.")
             expectation.fulfill()
         }
@@ -70,7 +70,7 @@ class AssertsTests: XCTestCase {
         let sut = AwaitViewController(viewModel: AwaitComponentViewModel(icon: "", message: "", spinnerTitle: ""))
         let expectation = XCTestExpectation(description: "Dummy Expectation")
 
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "PreferredContentSize is overridden for this view controller.\ngetter - returns minimum possible content size.\nsetter - no implemented.")
             expectation.fulfill()
         }
@@ -85,7 +85,7 @@ class AssertsTests: XCTestCase {
         let sut = AwaitComponent(context: context)
         let expectation = XCTestExpectation(description: "Dummy Expectation")
 
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "PresentationDelegate is nil. Provide a presentation delegate to AwaitComponent.")
             expectation.fulfill()
         }
@@ -100,7 +100,7 @@ class AssertsTests: XCTestCase {
         let sut = VoucherComponent(context: context)
         let expectation = XCTestExpectation(description: "Dummy Expectation")
 
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "PresentationDelegate is nil. Provide a presentation delegate to VoucherComponent.")
             expectation.fulfill()
         }
@@ -125,7 +125,7 @@ class AssertsTests: XCTestCase {
         let sut = VoucherViewController(voucherView: UIView(), style: VoucherComponentStyle())
         let expectation = XCTestExpectation(description: "Dummy Expectation")
 
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "PreferredContentSize is overridden for this view controller.\ngetter - returns minimum possible content size.\nsetter - no implemented.")
             expectation.fulfill()
         }
@@ -140,7 +140,7 @@ class AssertsTests: XCTestCase {
         let sut = ModalViewController(rootViewController: UIViewController(), navBarType: .regular)
         let expectation = XCTestExpectation(description: "Dummy Expectation")
 
-        AdyenAssertion.listener = { message in
+        PlexyAssertion.listener = { message in
             XCTAssertEqual(message, "PreferredContentSize is overridden for this view controller.\ngetter - returns combined size of an inner content and navigation bar.\nsetter - no implemented.")
             expectation.fulfill()
         }
@@ -152,9 +152,9 @@ class AssertsTests: XCTestCase {
     }
 
     class MockComponent: Component {
-        let context: AdyenContext
+        let context: PlexyContext
         
-        init(context: AdyenContext = Dummy.context) {
+        init(context: PlexyContext = Dummy.context) {
             self.context = context
         }
     }

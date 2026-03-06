@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2021 Adyen N.V.
+// Copyright (c) 2021 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@testable import AdyenEncryption
+@testable import PlexyEncryption
 import XCTest
 
 /// Using test fixtures from [here] (https://tools.ietf.org/id/draft-mcgrew-aead-aes-cbc-hmac-sha2-03.html#rfc.section.2.7)

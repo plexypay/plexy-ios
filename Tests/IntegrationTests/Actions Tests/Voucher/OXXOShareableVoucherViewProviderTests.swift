@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
+@_spi(PlexyInternal) import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
 import XCTest
 
 class OXXOShareableVoucherViewProviderTests: XCTestCase {
@@ -16,7 +16,7 @@ class OXXOShareableVoucherViewProviderTests: XCTestCase {
             environment: Dummy.apiContext.environment
         )
 
-        let oxxoDecoded = try AdyenCoder.decode(oxxoAction) as OXXOVoucherAction
+        let oxxoDecoded = try PlexyCoder.decode(oxxoAction) as OXXOVoucherAction
         let action: VoucherAction = .oxxo(oxxoDecoded)
 
         let sut = viewProvider.provideView(with: action, logo: nil)
@@ -24,31 +24,31 @@ class OXXOShareableVoucherViewProviderTests: XCTestCase {
         let viewController = ADYViewController(view: sut)
         viewController.loadViewIfNeeded()
 
-        let textLabel: UILabel! = sut.findView(by: "adyen.voucher.textLabel")
+        let textLabel: UILabel! = sut.findView(by: "plexy.voucher.textLabel")
         XCTAssertEqual(textLabel.text, "Thank you for your purchase, please use the following information to complete your payment.")
 
-        let amountLabel: UILabel! = sut.findView(by: "adyen.voucher.amountLabel")
+        let amountLabel: UILabel! = sut.findView(by: "plexy.voucher.amountLabel")
         XCTAssertEqual(amountLabel.text, AmountFormatter.formatted(
             amount: oxxoDecoded.totalAmount.value,
             currencyCode: oxxoDecoded.totalAmount.currencyCode
         ))
 
-        let expiryKeyLabel: UILabel! = sut.findView(by: "adyen.voucher.expirationKeyLabel")
+        let expiryKeyLabel: UILabel! = sut.findView(by: "plexy.voucher.expirationKeyLabel")
         XCTAssertEqual(expiryKeyLabel.text, "Expiration Date")
 
-        let expiryValueLabel: UILabel! = sut.findView(by: "adyen.voucher.expirationValueLabel")
+        let expiryValueLabel: UILabel! = sut.findView(by: "plexy.voucher.expirationValueLabel")
         XCTAssertEqual(expiryValueLabel.text, "15/08/2021")
         
-        let shopperReferenceKeyLabel: UILabel! = sut.findView(by: "adyen.voucher.shopperReferenceKeyLabel")
+        let shopperReferenceKeyLabel: UILabel! = sut.findView(by: "plexy.voucher.shopperReferenceKeyLabel")
         XCTAssertEqual(shopperReferenceKeyLabel.text, "Shopper Reference")
 
-        let shopperReferenceValueLabel: UILabel! = sut.findView(by: "adyen.voucher.shopperReferenceValueLabel")
+        let shopperReferenceValueLabel: UILabel! = sut.findView(by: "plexy.voucher.shopperReferenceValueLabel")
         XCTAssertEqual(shopperReferenceValueLabel.text, "Test Order Reference - iOS UIHost")
         
-        let alternativeReferenceKeyLabel: UILabel! = sut.findView(by: "adyen.voucher.alternativeReferenceKeyLabel")
+        let alternativeReferenceKeyLabel: UILabel! = sut.findView(by: "plexy.voucher.alternativeReferenceKeyLabel")
         XCTAssertEqual(alternativeReferenceKeyLabel.text, "Alternative Reference")
 
-        let alternativeReferenceValueLabel: UILabel! = sut.findView(by: "adyen.voucher.alternativeReferenceValueLabel")
+        let alternativeReferenceValueLabel: UILabel! = sut.findView(by: "plexy.voucher.alternativeReferenceValueLabel")
         XCTAssertEqual(alternativeReferenceValueLabel.text, "59168675976701")
     }
 

@@ -1,20 +1,20 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
+@testable import PlexyDropIn
 import XCTest
 
 class DocumentComponentTests: XCTestCase {
     
-    let action: DocumentAction = .init(downloadUrl: URL(string: "www.adyen.com")!, paymentMethodType: .bacs)
+    let action: DocumentAction = .init(downloadUrl: URL(string: "www.plexy.com")!, paymentMethodType: .bacs)
     
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -51,7 +51,7 @@ class DocumentComponentTests: XCTestCase {
             XCTAssertEqual(logo?.layer.cornerRadius, 8)
         }
         
-        sut.handle(DocumentAction(downloadUrl: URL(string: "www.adyen.com")!, paymentMethodType: .bacs))
+        sut.handle(DocumentAction(downloadUrl: URL(string: "www.plexy.com")!, paymentMethodType: .bacs))
         
     }
     
@@ -66,7 +66,7 @@ class DocumentComponentTests: XCTestCase {
         let viewModel = DocumentActionViewModel(
             action: action,
             message: "test",
-            logoURL: URL(string: "www.adyen.com")!,
+            logoURL: URL(string: "www.plexy.com")!,
             buttonTitle: "pdf"
         )
         let style = DocumentComponentStyle()

@@ -1,24 +1,24 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import XCTest
-@_spi(AdyenInternal) @testable import AdyenSession
-@_spi(AdyenInternal) @testable import Adyen
-@_spi(AdyenInternal) @testable import AdyenActions
-import AdyenComponents
-import AdyenDropIn
-import AdyenNetworking
+@_spi(PlexyInternal) @testable import PlexySession
+@_spi(PlexyInternal) @testable import Plexy
+@_spi(PlexyInternal) @testable import PlexyActions
+import PlexyComponents
+import PlexyDropIn
+import PlexyNetworking
 
 class SessionTests: XCTestCase {
 
     var analyticsProviderMock: AnalyticsProviderMock!
-    var context: AdyenContext!
+    var context: PlexyContext!
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -52,7 +52,7 @@ class SessionTests: XCTestCase {
                 issuerListDictionary
             ]
         ]
-        let expectedPaymentMethods = try AdyenCoder.decode(dictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(dictionary) as PaymentMethods
         apiClient.mockedResults = [.success(SessionSetupResponse(
             countryCode: "US",
             shopperLocale: "US",
@@ -62,7 +62,7 @@ class SessionTests: XCTestCase {
             configuration: .init(installmentOptions: nil, enableStoreDetails: false)
         ))]
         let expectation = expectation(description: "Expect session object to be initialized")
-        AdyenSession.initialize(
+        PlexySession.initialize(
             with: .init(
                 sessionIdentifier: "session_id",
                 initialSessionData: "session_data_0",
@@ -92,7 +92,7 @@ class SessionTests: XCTestCase {
     }
     
     func testDidSubmitWithNoActionAndNoOrder() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.last as! MBWayPaymentMethod
         let data = PaymentComponentData(
@@ -132,7 +132,7 @@ class SessionTests: XCTestCase {
         let sessionDelegateMock = SessionDelegateMock()
         sessionDelegateMock.handlerMock = sessionAdvancedHandlerMock
 
-        let paymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let paymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: paymentMethods, delegate: sessionDelegateMock)
 
         let paymentMethod = try XCTUnwrap(paymentMethods.regular.last as? MBWayPaymentMethod)
@@ -160,7 +160,7 @@ class SessionTests: XCTestCase {
         let sessionDelegateMock = SessionDelegateMock()
         sessionDelegateMock.handlerMock = sessionAdvancedHandlerMock
 
-        let paymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let paymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: paymentMethods, delegate: sessionDelegateMock)
 
         let paymentMethod = try XCTUnwrap(paymentMethods.regular.last as? MBWayPaymentMethod)
@@ -196,7 +196,7 @@ class SessionTests: XCTestCase {
     ]
     
     func testDidSubmitWithActionAndNoOrder() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.last as! MBWayPaymentMethod
         let data = PaymentComponentData(
@@ -270,7 +270,7 @@ class SessionTests: XCTestCase {
     }
     
     func testDidSubmitWithOrderAndNoAction() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.last as! MBWayPaymentMethod
         let data = PaymentComponentData(
@@ -352,7 +352,7 @@ class SessionTests: XCTestCase {
     }
     
     func testDidSubmitFailure() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.last as! MBWayPaymentMethod
         let data = PaymentComponentData(
@@ -384,7 +384,7 @@ class SessionTests: XCTestCase {
     }
     
     func testDidSubmitOrderRefused() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         
         let dropInComponent = DropInComponent(
             paymentMethods: expectedPaymentMethods,
@@ -470,7 +470,7 @@ class SessionTests: XCTestCase {
     }
     
     func testCheckBalanceCheckSuccess() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.first as! GiftCardPaymentMethod
         let details = GiftCardDetails(paymentMethod: paymentMethod, encryptedCardNumber: "card", encryptedSecurityCode: "cvc")
@@ -498,7 +498,7 @@ class SessionTests: XCTestCase {
     }
     
     func testBalanceCheckZeroBalance() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.first as! GiftCardPaymentMethod
         let details = GiftCardDetails(paymentMethod: paymentMethod, encryptedCardNumber: "card", encryptedSecurityCode: "cvc")
@@ -525,7 +525,7 @@ class SessionTests: XCTestCase {
     }
     
     func testBalanceCheckFailure() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.first as! GiftCardPaymentMethod
         let details = GiftCardDetails(paymentMethod: paymentMethod, encryptedCardNumber: "card", encryptedSecurityCode: "cvc")
@@ -548,7 +548,7 @@ class SessionTests: XCTestCase {
     }
     
     func testRequestOrderSuccess() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let apiClient = APIClientMock()
         sut.apiClient = SessionAPIClient(apiClient: apiClient, session: sut)
@@ -574,7 +574,7 @@ class SessionTests: XCTestCase {
     }
     
     func testRequestOrderFailure() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let apiClient = APIClientMock()
         sut.apiClient = SessionAPIClient(apiClient: apiClient, session: sut)
@@ -594,7 +594,7 @@ class SessionTests: XCTestCase {
     }
     
     func testCancelOrderSuccess() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let apiClient = APIClientMock()
         sut.apiClient = SessionAPIClient(apiClient: apiClient, session: sut)
@@ -610,7 +610,7 @@ class SessionTests: XCTestCase {
     }
     
     func testCancelOrderFailure() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let apiClient = APIClientMock()
         sut.apiClient = SessionAPIClient(apiClient: apiClient, session: sut)
@@ -635,7 +635,7 @@ class SessionTests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
         
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(
             expectedPaymentMethods: expectedPaymentMethods,
             delegate: sessionDelegate
@@ -667,7 +667,7 @@ class SessionTests: XCTestCase {
             didProvideExpectation.fulfill()
         }
         
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let data = try ActionComponentData(
             details: RedirectDetails(
@@ -680,7 +680,7 @@ class SessionTests: XCTestCase {
     }
     
     func testRemoveStoredPaymentMethodSuccess() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.last as! MBWayPaymentMethod
         
@@ -708,7 +708,7 @@ class SessionTests: XCTestCase {
     }
     
     func testRemoveStoredPaymentMethodFailure() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods)
         let paymentMethod = expectedPaymentMethods.regular.last as! MBWayPaymentMethod
         
@@ -744,7 +744,7 @@ class SessionTests: XCTestCase {
             context: context,
             configuration: config
         )
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionHandlerMock = SessionAdvancedHandlerMock()
         let sessionDelegate = SessionDelegateMock()
         sessionDelegate.handlerMock = sessionHandlerMock
@@ -814,7 +814,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodeAuthorised() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -847,7 +847,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodePending() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -880,7 +880,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodeRefused() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -913,7 +913,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodeCancelled() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -946,7 +946,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodeReceived() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -979,7 +979,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodePresentToShopper() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -1016,7 +1016,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodeError() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -1049,7 +1049,7 @@ class SessionTests: XCTestCase {
     }
     
     func testResultCodeErrorFromAnotherCode() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sessionDelegate = SessionDelegateMock()
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, delegate: sessionDelegate)
         let apiClient = APIClientMock()
@@ -1082,7 +1082,7 @@ class SessionTests: XCTestCase {
     }
     
     func testInstallmentsFromSessionConfig() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let config = try! JSONDecoder().decode(SessionSetupResponse.Configuration.self, from: sessionConfigJson.data(using: .utf8)!)
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, configuration: config)
         let paymentMethod = expectedPaymentMethods.regular[1] as! CardPaymentMethod
@@ -1101,7 +1101,7 @@ class SessionTests: XCTestCase {
     }
     
     func testStorePaymentMethodFieldNotNil() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let config = try! JSONDecoder().decode(SessionSetupResponse.Configuration.self, from: sessionConfigJson.data(using: .utf8)!)
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, configuration: config)
         let paymentMethod = expectedPaymentMethods.regular[1] as! CardPaymentMethod
@@ -1114,12 +1114,12 @@ class SessionTests: XCTestCase {
         let viewController = cardComponent.viewController
         viewController.loadViewIfNeeded()
 
-        XCTAssertNotNil(cardComponent.viewController.view.findView(with: "AdyenCard.CardComponent.storeDetailsItem"))
+        XCTAssertNotNil(cardComponent.viewController.view.findView(with: "PlexyCard.CardComponent.storeDetailsItem"))
         XCTAssertTrue(cardComponent.configuration.showsStorePaymentMethodField)
     }
     
     func testStorePaymentMethodFieldNil() throws {
-        let expectedPaymentMethods = try AdyenCoder.decode(paymentMethodsDictionary) as PaymentMethods
+        let expectedPaymentMethods = try PlexyCoder.decode(paymentMethodsDictionary) as PaymentMethods
         let sut = try initializeSession(expectedPaymentMethods: expectedPaymentMethods, configuration: .init(installmentOptions: nil, enableStoreDetails: false))
         let paymentMethod = expectedPaymentMethods.regular[1] as! CardPaymentMethod
         var cardConfig = CardComponent.Configuration()
@@ -1131,15 +1131,15 @@ class SessionTests: XCTestCase {
         let viewController = cardComponent.viewController
         viewController.loadViewIfNeeded()
 
-        XCTAssertNil(cardComponent.viewController.view.findView(with: "AdyenCard.CardComponent.storeDetailsItem"))
+        XCTAssertNil(cardComponent.viewController.view.findView(with: "PlexyCard.CardComponent.storeDetailsItem"))
         XCTAssertFalse(cardComponent.configuration.showsStorePaymentMethodField)
     }
     
     private func initializeSession(
         expectedPaymentMethods: PaymentMethods,
-        delegate: AdyenSessionDelegate = SessionDelegateMock(),
+        delegate: PlexySessionDelegate = SessionDelegateMock(),
         configuration: SessionSetupResponse.Configuration = .init(installmentOptions: nil, enableStoreDetails: true)
-    ) throws -> AdyenSession {
+    ) throws -> PlexySession {
         let apiClient = APIClientMock()
         apiClient.mockedResults = [.success(
             SessionSetupResponse(
@@ -1154,9 +1154,9 @@ class SessionTests: XCTestCase {
                 configuration: configuration
             )
         )]
-        var sut: AdyenSession!
+        var sut: PlexySession!
         let initializationExpectation = expectation(description: "Expect session object to be initialized")
-        AdyenSession.initialize(
+        PlexySession.initialize(
             with: .init(
                 sessionIdentifier: "session_id",
                 initialSessionData: "session_data_0",

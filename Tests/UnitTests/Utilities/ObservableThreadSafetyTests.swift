@@ -1,22 +1,22 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 import XCTest
 
 /// Tests for thread-safety of the Observable system with NSLock implementation
 /// These tests verify that the Observable's internal locks prevent crashes and data corruption
-class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
+class ObservableThreadSafetyTests: XCTestCase, PlexyObserver {
     
     // MARK: - Dictionary Corruption Tests
 
     // These tests would crash or corrupt data if locks weren't working
     
     func testConcurrentHandlerAdditionDoesNotCorruptDictionary() {
-        let observable = AdyenObservable("test")
+        let observable = PlexyObservable("test")
         let iterations = 1000
         
         // Concurrently add handlers - would crash without proper locking
@@ -38,7 +38,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testConcurrentHandlerRemovalDoesNotCorruptDictionary() {
-        let observable = AdyenObservable("test")
+        let observable = PlexyObservable("test")
         let iterations = 1000
         
         // Add many handlers
@@ -61,7 +61,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testConcurrentAddAndRemoveDoesNotCrash() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         let iterations = 500
         let expectation = expectation(description: "All operations complete")
         expectation.expectedFulfillmentCount = iterations * 2
@@ -86,7 +86,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testConcurrentPublishDoesNotCrashDuringIteration() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         
         // Add handlers that take time to execute
         for _ in 0..<50 {
@@ -106,7 +106,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testConcurrentPublishAndModifyHandlers() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         let duration: TimeInterval = 2.0
         let startTime = Date()
         
@@ -156,7 +156,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     // MARK: - Observer Manager Thread Safety Tests
     
     func testConcurrentObservationAdditionDoesNotCorruptArray() {
-        let observable = AdyenObservable("test")
+        let observable = PlexyObservable("test")
         let iterations = 1000
         
         // Concurrently add observations - would crash without proper locking in ObservationManager
@@ -172,7 +172,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testConcurrentObservationRemovalDoesNotCorruptArray() {
-        let observable = AdyenObservable("test")
+        let observable = PlexyObservable("test")
         let iterations = 500
         
         var observations = [Observation]()
@@ -191,7 +191,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testObservationManagerDeinitCleansUpObservations() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         var handlerCallCount = 0
         
         // Create observer in autoreleasepool so it gets deallocated
@@ -221,7 +221,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testObservationManagerDeinitDuringConcurrentPublish() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         
         autoreleasepool {
             let observer = TestObserver()
@@ -256,7 +256,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testConcurrentObserveAndRemove() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         let duration: TimeInterval = 2.0
         let startTime = Date()
         
@@ -293,7 +293,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     // MARK: - Race Condition Detection Tests
     
     func testPublishWhileAddingHandlersDoesNotSkipHandlers() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         let handlerCount = 100
         
         // Use atomic counter to track handler calls safely
@@ -328,7 +328,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testRemovingHandlerDuringPublishDoesNotCrash() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         
         // Add handlers with slow execution to increase chance of concurrent access
         var tokens = [EventHandlerToken]()
@@ -365,7 +365,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     // MARK: - Memory Safety Tests
     
     func testObservableDeallocationDuringConcurrentAccess() {
-        var observable: AdyenObservable<Int>? = AdyenObservable(0)
+        var observable: PlexyObservable<Int>? = PlexyObservable(0)
         weak var weakObservable = observable
         
         // Add handlers
@@ -394,7 +394,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     }
     
     func testObserverDeallocationDuringConcurrentPublish() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         
         autoreleasepool {
             let observer = TestObserver()
@@ -426,7 +426,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     // MARK: - Stress Tests
     
     func testExtremeConcurrency() {
-        let observable = AdyenObservable(0)
+        let observable = PlexyObservable(0)
         let duration: TimeInterval = 3.0
         let startTime = Date()
         
@@ -480,7 +480,7 @@ class ObservableThreadSafetyTests: XCTestCase, AdyenObserver {
     
     // MARK: - Helper Classes
     
-    class TestObserver: AdyenObserver {
+    class TestObserver: PlexyObserver {
         var value: String = ""
     }
     

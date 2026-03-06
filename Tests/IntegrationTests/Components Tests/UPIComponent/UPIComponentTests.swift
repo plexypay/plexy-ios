@@ -1,18 +1,18 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
 import XCTest
 
 class UPIComponentTests: XCTestCase {
     
     func test_init_withApps() throws {
         let sut = try UPIComponent(
-            paymentMethod: AdyenCoder.decode(upiWithApps),
+            paymentMethod: PlexyCoder.decode(upiWithApps),
             context: Dummy.context
         )
         
@@ -21,7 +21,7 @@ class UPIComponentTests: XCTestCase {
     
     func test_init_withoutApps_shouldSetSelectedItemIdentifierToNil() throws {
         let sut = try UPIComponent(
-            paymentMethod: AdyenCoder.decode(upi),
+            paymentMethod: PlexyCoder.decode(upi),
             context: Dummy.context
         )
         
@@ -30,7 +30,7 @@ class UPIComponentTests: XCTestCase {
 
     func test_paymentMethodType_isUpi() throws {
         let sut = try UPIComponent(
-            paymentMethod: AdyenCoder.decode(upi),
+            paymentMethod: PlexyCoder.decode(upi),
             context: Dummy.context
         )
 
@@ -39,7 +39,7 @@ class UPIComponentTests: XCTestCase {
 
     func test_shouldRequireModalPresentation() throws {
         let sut = try UPIComponent(
-            paymentMethod: AdyenCoder.decode(upi),
+            paymentMethod: PlexyCoder.decode(upi),
             context: Dummy.context
         )
 
@@ -48,7 +48,7 @@ class UPIComponentTests: XCTestCase {
 
     func test_requiresKeyboardInput() throws {
         let sut = try UPIComponent(
-            paymentMethod: AdyenCoder.decode(upi),
+            paymentMethod: PlexyCoder.decode(upi),
             context: Dummy.context
         )
         
@@ -60,7 +60,7 @@ class UPIComponentTests: XCTestCase {
 
     func testSubmit_shouldCallPaymentDelegateDidSubmit() throws {
         // Given
-        let paymentMethod: UPIPaymentMethod = try AdyenCoder.decode(upi)
+        let paymentMethod: UPIPaymentMethod = try PlexyCoder.decode(upi)
         let sut = UPIComponent(
             paymentMethod: paymentMethod,
             context: Dummy.context
@@ -76,7 +76,7 @@ class UPIComponentTests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let vpaInputItem: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.virtualPaymentAddressInputItem"))
+        let vpaInputItem: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.virtualPaymentAddressInputItem"))
         self.populate(textItemView: vpaInputItem, with: "testvpa@icici")
 
         // When
@@ -89,7 +89,7 @@ class UPIComponentTests: XCTestCase {
 
     func testValidateGivenValidInputShouldReturnFormViewControllerValidateResult() throws {
         // Given
-        let paymentMethod: UPIPaymentMethod = try AdyenCoder.decode(upi)
+        let paymentMethod: UPIPaymentMethod = try PlexyCoder.decode(upi)
         let configuration = UPIComponent.Configuration(showsSubmitButton: false)
         let sut = UPIComponent(
             paymentMethod: paymentMethod,
@@ -97,7 +97,7 @@ class UPIComponentTests: XCTestCase {
             configuration: configuration
         )
 
-        let vpaInputItem: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.UPIComponent.virtualPaymentAddressInputItem"))
+        let vpaInputItem: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.UPIComponent.virtualPaymentAddressInputItem"))
         self.populate(textItemView: vpaInputItem, with: "testvpa@icici")
 
         let formViewController = try XCTUnwrap((sut.viewController as? SecuredViewController<FormViewController>)?.childViewController)
@@ -113,7 +113,7 @@ class UPIComponentTests: XCTestCase {
 
     func testValidateGivenInvalidInputShouldReturnFormViewControllerValidateResult() throws {
         // Given
-        let paymentMethod: UPIPaymentMethod = try AdyenCoder.decode(upi)
+        let paymentMethod: UPIPaymentMethod = try PlexyCoder.decode(upi)
         let configuration = UPIComponent.Configuration(showsSubmitButton: false)
         let sut = UPIComponent(
             paymentMethod: paymentMethod,

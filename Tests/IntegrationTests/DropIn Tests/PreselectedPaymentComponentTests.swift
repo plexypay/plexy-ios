@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
+@testable import PlexyDropIn
 import XCTest
 
 class PreselectedPaymentComponentDelegateMock: PreselectedPaymentMethodComponentDelegate {
@@ -33,7 +33,7 @@ class PreselectedPaymentComponentTests: XCTestCase {
     var delegate: PreselectedPaymentComponentDelegateMock!
     
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -69,14 +69,14 @@ class PreselectedPaymentComponentTests: XCTestCase {
     }
     
     func testUIElements() {
-        XCTAssertNotNil(sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.defaultComponent"))
-        XCTAssertNotNil(sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.openAllButton"))
-        XCTAssertNotNil(sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.separator"))
-        XCTAssertNotNil(sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.submitButton"))
+        XCTAssertNotNil(sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.defaultComponent"))
+        XCTAssertNotNil(sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.openAllButton"))
+        XCTAssertNotNil(sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.separator"))
+        XCTAssertNotNil(sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.submitButton"))
     }
     
     func testPressSubmitButton() {
-        let button: SubmitButton! = sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.submitButton.button")
+        let button: SubmitButton! = sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.submitButton.button")
         button.sendActions(for: .touchUpInside)
         
         let expectation = XCTestExpectation(description: "Dummy Expectation")
@@ -92,7 +92,7 @@ class PreselectedPaymentComponentTests: XCTestCase {
 
     func testSubmitButtonLoading() {
         setupRootViewController(sut.viewController)
-        let button: SubmitButton! = sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.submitButton.button")
+        let button: SubmitButton! = sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.submitButton.button")
         XCTAssertFalse(button.showsActivityIndicator)
         sut.startLoading(for: component)
 
@@ -104,7 +104,7 @@ class PreselectedPaymentComponentTests: XCTestCase {
     }
     
     func testPressOpenAllButton() {
-        let button: SubmitButton! = sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.openAllButton.button")
+        let button: SubmitButton! = sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.openAllButton.button")
         button!.sendActions(for: .touchUpInside)
         
         let expectation = XCTestExpectation(description: "Dummy Expectation")
@@ -135,15 +135,15 @@ class PreselectedPaymentComponentTests: XCTestCase {
         setupRootViewController(sut.viewController)
         
         let view = sut.viewController.view!
-        let listView = view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.defaultComponent")
+        let listView = view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.defaultComponent")
         let listViewTitle: UILabel! = listView!.findView(by: "titleLabel")
         let listViewSubtitle: UILabel! = listView!.findView(by: "subtitleLabel")
         
-        let submitButtonContainer = view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.submitButton")
+        let submitButtonContainer = view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.submitButton")
         let submitButton = submitButtonContainer!.findView(by: "button")
         let submitButtonLabel: UILabel! = submitButton!.findView(by: "titleLabel")
         
-        let openAllButtonContainer = view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.openAllButton")
+        let openAllButtonContainer = view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.openAllButton")
         let openAllButton = openAllButtonContainer!.findView(by: "button")
         let openAllButtonLabel: UILabel! = openAllButton!.findView(by: "titleLabel")
         
@@ -170,7 +170,7 @@ class PreselectedPaymentComponentTests: XCTestCase {
         setupRootViewController(sut.viewController)
         sut = PreselectedPaymentMethodComponent(component: component, title: "", style: .init(), listItemStyle: .init())
         
-        let submitButtonContainer = sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.submitButton")
+        let submitButtonContainer = sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.submitButton")
         let submitButton = submitButtonContainer!.findView(by: "button")
         let submitButtonLabel: UILabel! = submitButton!.findView(by: "titleLabel")
         
@@ -184,7 +184,7 @@ class PreselectedPaymentComponentTests: XCTestCase {
         component = StoredPaymentMethodComponent(paymentMethod: getStoredCard(), context: Dummy.context(with: nil))
         sut = PreselectedPaymentMethodComponent(component: component, title: "", style: .init(), listItemStyle: .init())
 
-        let submitButtonContainer = sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.submitButton")
+        let submitButtonContainer = sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.submitButton")
         let submitButton = submitButtonContainer!.findView(by: "button")
         let submitButtonLabel: UILabel! = submitButton!.findView(by: "titleLabel")
 
@@ -199,7 +199,7 @@ class PreselectedPaymentComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
         
-        let listView: ListItemView? = sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.defaultComponent")
+        let listView: ListItemView? = sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.defaultComponent")
         let listViewTitle: UILabel! = listView!.findView(by: "titleLabel")
         
         wait(for: .milliseconds(300))
@@ -213,7 +213,7 @@ class PreselectedPaymentComponentTests: XCTestCase {
         
         setupRootViewController(sut.viewController)
         
-        let listView = sut.viewController.view.findView(with: "AdyenDropIn.PreselectedPaymentMethodComponent.defaultComponent")
+        let listView = sut.viewController.view.findView(with: "PlexyDropIn.PreselectedPaymentMethodComponent.defaultComponent")
         let listViewTitle: UILabel! = listView!.findView(by: "titleLabel")
         let listViewSubtitle: UILabel! = listView!.findView(by: "subtitleLabel")
         
@@ -224,11 +224,11 @@ class PreselectedPaymentComponentTests: XCTestCase {
     }
     
     func getStoredCard() -> StoredCardPaymentMethod {
-        try! AdyenCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
+        try! PlexyCoder.decode(storedCreditCardDictionary) as StoredCardPaymentMethod
     }
     
     func getStoredPaypal() -> StoredPayPalPaymentMethod {
-        try! AdyenCoder.decode(storedPayPalDictionary) as StoredPayPalPaymentMethod
+        try! PlexyCoder.decode(storedPayPalDictionary) as StoredPayPalPaymentMethod
     }
     
 }

@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
 import UIKit
 import XCTest
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 
 public extension UIViewController {
 
@@ -32,8 +32,8 @@ public extension UIViewController {
     ///
     /// - Throws: if there is no rootViewController can be found on the window
     static func topPresenter() throws -> UIViewController {
-        let rootViewController = try XCTUnwrap(UIApplication.shared.adyen.mainKeyWindow?.rootViewController)
-        return rootViewController.adyen.topPresenter
+        let rootViewController = try XCTUnwrap(UIApplication.shared.plexy.mainKeyWindow?.rootViewController)
+        return rootViewController.plexy.topPresenter
     }
 }
 

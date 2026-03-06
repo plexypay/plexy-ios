@@ -1,19 +1,19 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenCard
-@testable import AdyenComponents
-@testable import AdyenDropIn
-#if canImport(AdyenCashAppPay)
-    @testable import AdyenCashAppPay
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyCard
+@testable import PlexyComponents
+@testable import PlexyDropIn
+#if canImport(PlexyCashAppPay)
+    @testable import PlexyCashAppPay
 #endif
 
-#if canImport(AdyenTwint)
-    @testable import AdyenTwint
+#if canImport(PlexyTwint)
+    @testable import PlexyTwint
 #endif
 import PassKit
 import XCTest
@@ -21,7 +21,7 @@ import XCTest
 class ComponentManagerTests: XCTestCase {
 
     var paymentMethods: PaymentMethods {
-        try! AdyenCoder.decode(dictionary) as PaymentMethods
+        try! PlexyCoder.decode(dictionary) as PaymentMethods
     }
     
     let dictionary = [
@@ -78,7 +78,7 @@ class ComponentManagerTests: XCTestCase {
     let numberOfExpectedStoredComponent = 7
 
     var presentationDelegate: PresentationDelegateMock!
-    var context: AdyenContext!
+    var context: PlexyContext!
     var configuration: DropInComponent.Configuration!
 
     override func setUpWithError() throws {
@@ -89,7 +89,7 @@ class ComponentManagerTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        AdyenAssertion.listener = nil
+        PlexyAssertion.listener = nil
         presentationDelegate = nil
         context = nil
         configuration = nil
@@ -197,7 +197,7 @@ class ComponentManagerTests: XCTestCase {
 
         // Then
         let cashAppPayComponent = paymentComponent as? CashAppPayComponent
-        #if canImport(AdyenCashAppPay)
+        #if canImport(PlexyCashAppPay)
             XCTAssertNotNil(cashAppPayComponent)
         #else
             XCTAssertNil(cashAppPayComponent)
@@ -218,7 +218,7 @@ class ComponentManagerTests: XCTestCase {
         let paymentComponent = sut.regularComponents.first { $0.paymentMethod.type.rawValue == "twint" }
 
         // Then
-        #if canImport(AdyenTwint)
+        #if canImport(PlexyTwint)
             let twintComponent = paymentComponent as? TwintComponent
             XCTAssertNotNil(twintComponent)
         #else
@@ -278,7 +278,7 @@ class ComponentManagerTests: XCTestCase {
     }
 
     func testLocalizationWithCustomTableName() throws {
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
 
         let sut = ComponentManager(
             paymentMethods: paymentMethods,
@@ -291,11 +291,11 @@ class ComponentManagerTests: XCTestCase {
         XCTAssertEqual(sut.storedComponents.count, numberOfExpectedStoredComponent)
         XCTAssertEqual(sut.regularComponents.count, numberOfExpectedRegularComponents)
         
-        XCTAssertEqual(sut.storedComponents.compactMap { ($0 as? StoredPaymentMethodComponent)?.configuration.localizationParameters }.filter { $0.tableName == "AdyenUIHost" }.count, 5)
+        XCTAssertEqual(sut.storedComponents.compactMap { ($0 as? StoredPaymentMethodComponent)?.configuration.localizationParameters }.filter { $0.tableName == "PlexyUIHost" }.count, 5)
     }
     
     func testLocalizationWithCustomKeySeparator() throws {
-        configuration.localizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        configuration.localizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
 
         let sut = ComponentManager(
             paymentMethods: paymentMethods,
@@ -651,8 +651,8 @@ class ComponentManagerTests: XCTestCase {
         let expectation = expectation(description: "Access expectation")
         expectation.expectedFulfillmentCount = 1
         
-        AdyenAssertion.listener = { assertion in
-            XCTAssertEqual(assertion, "`@_spi(AdyenInternal) buildComponent(using:)` needs to be implemented on `DummyPaymentMethod`")
+        PlexyAssertion.listener = { assertion in
+            XCTAssertEqual(assertion, "`@_spi(PlexyInternal) buildComponent(using:)` needs to be implemented on `DummyPaymentMethod`")
             expectation.fulfill()
         }
         

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class FormCardNumberItemTests: XCTestCase {
@@ -161,7 +161,7 @@ class FormCardNumberItemTests: XCTestCase {
     }
     
     func testLocalizationWithCustomTableName() {
-        let expectedLocalizationParameters = LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil)
+        let expectedLocalizationParameters = LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil)
         let sut = FormCardNumberItem(cardTypeLogos: [], localizationParameters: expectedLocalizationParameters)
         
         XCTAssertEqual(sut.title, localizedString(.cardNumberItemTitle, expectedLocalizationParameters))
@@ -170,12 +170,12 @@ class FormCardNumberItemTests: XCTestCase {
     }
     
     func testLocalizationWithCustomKeySeparator() {
-        let expectedLocalizationParameters = LocalizationParameters(tableName: "AdyenUIHostCustomSeparator", keySeparator: "_")
+        let expectedLocalizationParameters = LocalizationParameters(tableName: "PlexyUIHostCustomSeparator", keySeparator: "_")
         let sut = FormCardNumberItem(cardTypeLogos: [], localizationParameters: expectedLocalizationParameters)
         
-        XCTAssertEqual(sut.title, localizedString(LocalizationKey(key: "adyen_card_numberItem_title"), expectedLocalizationParameters))
-        XCTAssertEqual(sut.placeholder, localizedString(LocalizationKey(key: "adyen_card_numberItem_placeholder"), expectedLocalizationParameters))
-        XCTAssertEqual(sut.validationFailureMessage, localizedString(LocalizationKey(key: "adyen_card_numberItem_invalid"), expectedLocalizationParameters))
+        XCTAssertEqual(sut.title, localizedString(LocalizationKey(key: "plexy_card_numberItem_title"), expectedLocalizationParameters))
+        XCTAssertEqual(sut.placeholder, localizedString(LocalizationKey(key: "plexy_card_numberItem_placeholder"), expectedLocalizationParameters))
+        XCTAssertEqual(sut.validationFailureMessage, localizedString(LocalizationKey(key: "plexy_card_numberItem_invalid"), expectedLocalizationParameters))
     }
     
     func testCursorMovement() throws {

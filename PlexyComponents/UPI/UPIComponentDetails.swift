@@ -1,0 +1,37 @@
+//
+// Copyright (c) 2023 Plexy N.V.
+//
+// This file is open source and available under the MIT license. See the LICENSE file for more info.
+//
+
+@_spi(PlexyInternal) import Plexy
+
+/// Contains the details supplied by the UPI component.
+public struct UPIComponentDetails: PaymentMethodDetails {
+
+    @_spi(PlexyInternal)
+    public var checkoutAttemptId: String?
+
+    ///  Selected flow type
+    public let type: String
+
+    ///  The entered virtual payment address
+    public let virtualPaymentAddress: String?
+
+    ///  The selected UPI app
+    public let appId: String?
+
+    /// Initializes the UPI Component Details.
+    /// - Parameters:
+    ///   - type: UPI flow type.
+    ///   - virtualPaymentAddress: Virtual payment address entered by user.
+    public init(
+        type: String,
+        virtualPaymentAddress: String? = nil,
+        appId: String? = nil
+    ) {
+        self.type = type
+        self.virtualPaymentAddress = virtualPaymentAddress
+        self.appId = appId
+    }
+}

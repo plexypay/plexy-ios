@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 Adyen N.V.
+// Copyright (c) 2019 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
@@ -250,7 +250,7 @@ let dokuIndomaretAction: [String: Any] = [
         "value": 17408
     ] as [String: Any],
     "expiresAt": "2021-02-02T22:00:00",
-    "merchantName": "Adyen Demo Shop",
+    "merchantName": "Plexy Demo Shop",
     "shopperName": "Qwfqwew Gewgewf",
     "type": "voucher",
     "passCreationToken": "test token".data(using: .utf8)?.base64EncodedString() ?? ""
@@ -270,7 +270,7 @@ let dokuAlfamartAction: [String: Any] = [
         "value": 17408
     ] as [String: Any],
     "expiresAt": "2021-02-02T22:58:00",
-    "merchantName": "Adyen Demo Shop",
+    "merchantName": "Plexy Demo Shop",
     "shopperName": "Qwodihqw Wqodihq",
     "type": "voucher",
     "passCreationToken": "test token".data(using: .utf8)?.base64EncodedString() ?? ""
@@ -321,7 +321,7 @@ let boletoAction: [String: Any] = [
         "currency": "BRL",
         "value": 17408
     ] as [String: Any],
-    "downloadUrl": "https://test.adyen.com/hpp/generationBoleto.shtml?data=BQABAQCGgaWQP0LNLQ0",
+    "downloadUrl": "https://test.plexy.com/hpp/generationBoleto.shtml?data=BQABAQCGgaWQP0LNLQ0",
     "paymentMethodType": "boletobancario_santander",
     "totalAmount": [
         "currency": "BRL",
@@ -333,7 +333,7 @@ let boletoAction: [String: Any] = [
 ]
 
 let oxxoAction: [String: Any] = [
-    "instructionsUrl": "https://checkoutshopper-test.adyen.com/checkoutshopper/voucherInstructions.shtml?txVariant=oxxo&shopperLocale=en_US",
+    "instructionsUrl": "https://checkoutshopper-test.plexy.com/checkoutshopper/voucherInstructions.shtml?txVariant=oxxo&shopperLocale=en_US",
     "passCreationToken": "token",
     "shopperEmail": "checkoutShopperiOS@example.org",
     "paymentMethodType": "oxxo",
@@ -351,7 +351,7 @@ let oxxoAction: [String: Any] = [
     "expiresAt": "2021-08-15T00:00:00",
     "merchantReference": "Test Order Reference - iOS UIHost",
     "reference": "59591686759767012021081500174084",
-    "downloadUrl": "https://test.adyen.com/hpp/generationOxxoVoucher.shtml?data=1G8cQNAQFLrM7phkjS%2BnZRJ2W5K1z6NH9bqplnKsAviVGW%2Fe5W%2FNksob2MPC7BV1Vp5i%2BpSQ22UEeYouvWUFIVWz9%2FSrSQm%2BOnTGszWr6Sn6h3hNCacs%2BIXgGmg6DxxW20hMhSEj1SSL513eiXbKZTjpn%2BZAaRJfTCkP9kklYd5hxOMG6okhByIeMzvfCW718nQXXP%2F6%2F09p7zE3zM5uBQaaXQS9tY3Y80a1lIQytMlv4dIM7ZMLMv6rf18YgbzCOdTO%2B7wmrqR0fyuSLFC5mw2xQYBupKdSajEiIiHdy6Oq1YWrXFRoHnAVA3RLJkwNT3zk203p%2FbADKBJBrTF1ILOAlK5nJ%2FA6R1ioMVt%2F9vQ%3D"
+    "downloadUrl": "https://test.plexy.com/hpp/generationOxxoVoucher.shtml?data=1G8cQNAQFLrM7phkjS%2BnZRJ2W5K1z6NH9bqplnKsAviVGW%2Fe5W%2FNksob2MPC7BV1Vp5i%2BpSQ22UEeYouvWUFIVWz9%2FSrSQm%2BOnTGszWr6Sn6h3hNCacs%2BIXgGmg6DxxW20hMhSEj1SSL513eiXbKZTjpn%2BZAaRJfTCkP9kklYd5hxOMG6okhByIeMzvfCW718nQXXP%2F6%2F09p7zE3zM5uBQaaXQS9tY3Y80a1lIQytMlv4dIM7ZMLMv6rf18YgbzCOdTO%2B7wmrqR0fyuSLFC5mw2xQYBupKdSajEiIiHdy6Oq1YWrXFRoHnAVA3RLJkwNT3zk203p%2FbADKBJBrTF1ILOAlK5nJ%2FA6R1ioMVt%2F9vQ%3D"
 ]
 
 let multibancoVoucher: [String: Any] = [

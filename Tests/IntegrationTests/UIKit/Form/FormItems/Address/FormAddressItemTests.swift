@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 import XCTest
 
 class FormAddressItemTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
-        AdyenAssertion.listener = nil
+        PlexyAssertion.listener = nil
     }
     
     func testHeader() throws {
@@ -26,7 +26,7 @@ class FormAddressItemTests: XCTestCase {
             addressViewModelBuilder: DefaultAddressViewModelBuilder()
         )
         
-        XCTAssertTrue(formAddressItem.flatSubitems.contains { $0.identifier == "Adyen.FormAddressItem.title" })
+        XCTAssertTrue(formAddressItem.flatSubitems.contains { $0.identifier == "Plexy.FormAddressItem.title" })
         
         let formAddressItemWithoutHeader = FormAddressItem(
             initialCountry: "NL",
@@ -38,7 +38,7 @@ class FormAddressItemTests: XCTestCase {
             addressViewModelBuilder: DefaultAddressViewModelBuilder()
         )
 
-        XCTAssertFalse(formAddressItemWithoutHeader.flatSubitems.contains { $0.identifier == "Adyen.FormAddressItem.title" })
+        XCTAssertFalse(formAddressItemWithoutHeader.flatSubitems.contains { $0.identifier == "Plexy.FormAddressItem.title" })
     }
     
     func testCountryPickerItemUpdate() throws {
@@ -71,7 +71,7 @@ class FormAddressItemTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Setting unsupported country should fail")
         
-        AdyenAssertion.listener = { assertion in
+        PlexyAssertion.listener = { assertion in
             XCTAssertEqual(assertion, "The provided country 'XX' is not supported per configuration.")
             expectation.fulfill()
         }
@@ -113,7 +113,7 @@ private class AddressDelegateDummy: SelfRenderingFormItemDelegate {
         self.didUpdateItemsHandler = didUpdateItemsHandler
     }
     
-    func didUpdateItems(_ items: [Adyen.FormItem]) {
+    func didUpdateItems(_ items: [Plexy.FormItem]) {
         didUpdateItemsHandler(items)
     }
 }

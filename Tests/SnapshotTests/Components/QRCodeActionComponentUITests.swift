@@ -1,18 +1,18 @@
 //
-// Copyright (c) 2022 Adyen N.V.
+// Copyright (c) 2022 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenActions
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyActions
+@testable import PlexyDropIn
 import XCTest
 
 class QRCodeActionComponentUITests: XCTestCase {
 
     override func run() {
-        AdyenDependencyValues.runTestWithValues {
+        PlexyDependencyValues.runTestWithValues {
             $0.imageLoader = ImageLoaderMock()
         } perform: {
             super.run()
@@ -148,7 +148,7 @@ private extension QRCodeActionComponentUITests {
 
         style.logoCornerRounding = .fixed(10)
 
-        style.backgroundColor = UIColor.Adyen.componentSeparator
+        style.backgroundColor = UIColor.Plexy.componentSeparator
         
         return style
     }

@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
+@_spi(PlexyInternal) @testable import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 final class CardComponentEventTests: XCTestCase {
@@ -57,7 +57,7 @@ final class CardComponentEventTests: XCTestCase {
         let sut = makeSUT(analyticsProviderMock: analyticsProviderMock)
 
         let cardNumberItemView: FormTextItemView<FormCardNumberItem> = try XCTUnwrap(
-            sut.cardViewController.view.findView(with: "AdyenCard.FormCardNumberContainerItem.numberItem")
+            sut.cardViewController.view.findView(with: "PlexyCard.FormCardNumberContainerItem.numberItem")
         )
 
         testFocusEvents(
@@ -71,7 +71,7 @@ final class CardComponentEventTests: XCTestCase {
         let analyticsProviderMock = AnalyticsProviderMock()
         let sut = makeSUT(analyticsProviderMock: analyticsProviderMock)
 
-        let expiryDateItemView: FormTextInputItemView = try XCTUnwrap(sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.expiryDateItem"))
+        let expiryDateItemView: FormTextInputItemView = try XCTUnwrap(sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.expiryDateItem"))
 
         testFocusEvents(
             for: expiryDateItemView,
@@ -84,7 +84,7 @@ final class CardComponentEventTests: XCTestCase {
         let analyticsProviderMock = AnalyticsProviderMock()
         let sut = makeSUT(analyticsProviderMock: analyticsProviderMock)
 
-        let securityCodeItemView: FormCardSecurityCodeItemView = try XCTUnwrap(sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem"))
+        let securityCodeItemView: FormCardSecurityCodeItemView = try XCTUnwrap(sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.securityCodeItem"))
 
         testFocusEvents(
             for: securityCodeItemView,
@@ -99,7 +99,7 @@ final class CardComponentEventTests: XCTestCase {
         config.showsHolderNameField = true
         let sut = makeSUT(with: config, analyticsProviderMock: analyticsProviderMock)
 
-        let holderNameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.holderNameItem"))
+        let holderNameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.holderNameItem"))
 
         testFocusEvents(
             for: holderNameItemView,
@@ -114,7 +114,7 @@ final class CardComponentEventTests: XCTestCase {
         config.koreanAuthenticationMode = .show
         let sut = makeSUT(with: config, analyticsProviderMock: analyticsProviderMock)
 
-        let kcpItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.additionalAuthCodeItem"))
+        let kcpItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.additionalAuthCodeItem"))
 
         testFocusEvents(
             for: kcpItemView,
@@ -129,7 +129,7 @@ final class CardComponentEventTests: XCTestCase {
         config.koreanAuthenticationMode = .show
         let sut = makeSUT(with: config, analyticsProviderMock: analyticsProviderMock)
 
-        let kcpPasswordItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.additionalAuthPasswordItem"))
+        let kcpPasswordItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.additionalAuthPasswordItem"))
 
         testFocusEvents(
             for: kcpPasswordItemView,
@@ -144,7 +144,7 @@ final class CardComponentEventTests: XCTestCase {
         config.socialSecurityNumberMode = .show
         let sut = makeSUT(with: config, analyticsProviderMock: analyticsProviderMock)
         
-        let socialSecurityItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.socialSecurityNumberItem"))
+        let socialSecurityItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.socialSecurityNumberItem"))
         
         testFocusEvents(
             for: socialSecurityItemView,
@@ -159,7 +159,7 @@ final class CardComponentEventTests: XCTestCase {
         config.billingAddress.mode = .postalCode
         let sut = makeSUT(with: config, analyticsProviderMock: analyticsProviderMock)
         
-        let postalCodeItemView: FormTextItemView<FormPostalCodeItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "AdyenCard.CardComponent.postalCodeItem"))
+        let postalCodeItemView: FormTextItemView<FormPostalCodeItem> = try XCTUnwrap(sut.cardViewController.view.findView(with: "PlexyCard.CardComponent.postalCodeItem"))
         
         testFocusEvents(
             for: postalCodeItemView,

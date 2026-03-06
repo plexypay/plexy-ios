@@ -1,18 +1,18 @@
 //
-// Copyright (c) 2019 Adyen N.V.
+// Copyright (c) 2019 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
+@_spi(PlexyInternal) @testable import Plexy
 import XCTest
 
-class ObservableTests: XCTestCase, AdyenObserver {
+class ObservableTests: XCTestCase, PlexyObserver {
     
     func testBasicObservation() {
         var latestValue: Bool?
         
-        let observable = AdyenObservable(false)
+        let observable = PlexyObservable(false)
         let observation = observe(observable) { newValue in
             latestValue = newValue
         }
@@ -33,7 +33,7 @@ class ObservableTests: XCTestCase, AdyenObserver {
     }
     
     func testMultipleObservations() {
-        let observable = AdyenObservable("")
+        let observable = PlexyObservable("")
         
         var observation1Count = 0
         observe(observable) { _ in
@@ -65,7 +65,7 @@ class ObservableTests: XCTestCase, AdyenObserver {
     }
     
     func testAutomaticObservationRemoval() {
-        let observable = AdyenObservable("")
+        let observable = PlexyObservable("")
         weak var observer: TestObserver?
         var count = 0
         
@@ -94,7 +94,7 @@ class ObservableTests: XCTestCase, AdyenObserver {
     }
     
     func testSettingEqualValue() {
-        let observable = AdyenObservable("")
+        let observable = PlexyObservable("")
         var count = 0
         
         observe(observable) { _ in
@@ -149,12 +149,12 @@ class ObservableTests: XCTestCase, AdyenObserver {
         XCTAssertTrue(receiver.observableObject.boolValue)
     }
 
-    class TestObserver: AdyenObserver {
+    class TestObserver: PlexyObserver {
         var stringValue: String = ""
         var optionalStringValue: String?
 
-        @AdyenObservable("") var observableString: String
-        @AdyenObservable(OtherObject()) var observableObject: OtherObject
+        @PlexyObservable("") var observableString: String
+        @PlexyObservable(OtherObject()) var observableObject: OtherObject
 
     }
 

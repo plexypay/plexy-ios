@@ -1,17 +1,17 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-@testable import AdyenComponents
-@testable import AdyenDropIn
+@_spi(PlexyInternal) @testable import Plexy
+@testable import PlexyComponents
+@testable import PlexyDropIn
 import XCTest
 
 class ACHDirectDebitComponentTests: XCTestCase {
 
-    var context: AdyenContext!
+    var context: PlexyContext!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -40,7 +40,7 @@ class ACHDirectDebitComponentTests: XCTestCase {
         let method = ACHDirectDebitPaymentMethod(type: .achDirectDebit, name: "test_name")
 
         let config = ACHDirectDebitComponent.Configuration(
-            localizationParameters: LocalizationParameters(tableName: "AdyenUIHost", keySeparator: nil),
+            localizationParameters: LocalizationParameters(tableName: "PlexyUIHost", keySeparator: nil),
             billingAddressCountryCodes: ["US", "UK"]
         )
         let sut = ACHDirectDebitComponent(
@@ -112,22 +112,22 @@ class ACHDirectDebitComponentTests: XCTestCase {
         setupRootViewController(sut.viewController)
         wait(for: .milliseconds(300))
         
-        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.holderNameItem")
-        let nameItemViewTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.holderNameItem.titleLabel")
-        let nameItemViewTextField: UITextField? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.holderNameItem.textField")
+        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.holderNameItem")
+        let nameItemViewTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.holderNameItem.titleLabel")
+        let nameItemViewTextField: UITextField? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.holderNameItem.textField")
         
-        let accountNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankAccountNumberItem")
-        let accountNumberItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankAccountNumberItem.titleLabel")
-        let accountNumberItemTextField: UITextField? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankAccountNumberItem.textField")
+        let accountNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankAccountNumberItem")
+        let accountNumberItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankAccountNumberItem.titleLabel")
+        let accountNumberItemTextField: UITextField? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankAccountNumberItem.textField")
         
-        let routingNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankRoutingNumberItem")
-        let routingNumberItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankRoutingNumberItem.titleLabel")
-        let routingNumberItemTextField: UITextField? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankRoutingNumberItem.textField")
+        let routingNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankRoutingNumberItem")
+        let routingNumberItemTitleLabel: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankRoutingNumberItem.titleLabel")
+        let routingNumberItemTextField: UITextField? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankRoutingNumberItem.textField")
         
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.payButtonItem.button")
-        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.payButtonItem.button.titleLabel")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.payButtonItem.button")
+        let payButtonItemViewButtonTitle: UILabel? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.payButtonItem.button.titleLabel")
         
-        XCTAssertNotNil(sut.viewController.view.findView(by: "AdyenComponents.ACHDirectDebitComponent.billingAddressItem"))
+        XCTAssertNotNil(sut.viewController.view.findView(by: "PlexyComponents.ACHDirectDebitComponent.billingAddressItem"))
         
         /// holder name
         XCTAssertEqual(nameItemView?.backgroundColor, .red)
@@ -186,7 +186,7 @@ class ACHDirectDebitComponentTests: XCTestCase {
         // Then
         let view: UIView = sut.viewController.view
         
-        let billingAddressView: FormAddressPickerItemView = try XCTUnwrap(view.findView(by: "AdyenComponents.ACHDirectDebitComponent.billingAddressItem"))
+        let billingAddressView: FormAddressPickerItemView = try XCTUnwrap(view.findView(by: "PlexyComponents.ACHDirectDebitComponent.billingAddressItem"))
         let expectedBillingAddress = shopperInformation.billingAddress
         let billingAddress = billingAddressView.item.value
         XCTAssertEqual(expectedBillingAddress, billingAddress)
@@ -205,7 +205,7 @@ class ACHDirectDebitComponentTests: XCTestCase {
         setupRootViewController(sut.viewController)
         wait(for: .milliseconds(300))
         
-        XCTAssertNil(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.Test name"))
+        XCTAssertNil(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.Test name"))
         XCTAssertEqual(sut.viewController.title, method.name.uppercased())
     }
     
@@ -251,10 +251,10 @@ class ACHDirectDebitComponentTests: XCTestCase {
         setupRootViewController(sut.viewController)
         wait(for: .milliseconds(300))
         
-        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.payButtonItem.button")
-        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.holderNameItem")
-        let accountNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankAccountNumberItem")
-        let routingNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankRoutingNumberItem")
+        let payButtonItemViewButton: UIControl? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.payButtonItem.button")
+        let nameItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.holderNameItem")
+        let accountNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankAccountNumberItem")
+        let routingNumberItemView: FormTextItemView<FormTextInputItem>? = sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankRoutingNumberItem")
 
         payButtonItemViewButton?.sendActions(for: .touchUpInside)
 
@@ -289,10 +289,10 @@ class ACHDirectDebitComponentTests: XCTestCase {
             expectation.fulfill()
         }
         
-        let payButtonItemViewButton: FormButtonItemView = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.payButtonItem"))
-        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.holderNameItem"))
-        let accountNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankAccountNumberItem"))
-        let routingNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankRoutingNumberItem"))
+        let payButtonItemViewButton: FormButtonItemView = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.payButtonItem"))
+        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.holderNameItem"))
+        let accountNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankAccountNumberItem"))
+        let routingNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankRoutingNumberItem"))
 
         self.populate(textItemView: nameItemView, with: "test")
         self.populate(textItemView: accountNumberItemView, with: "123456789")
@@ -310,7 +310,7 @@ class ACHDirectDebitComponentTests: XCTestCase {
         
         // Given
         let analyticsProviderMock = AnalyticsProviderMock()
-        let context = AdyenContext(
+        let context = PlexyContext(
             apiContext: Dummy.apiContext,
             payment: Dummy.payment,
             analyticsProvider: analyticsProviderMock
@@ -355,9 +355,9 @@ class ACHDirectDebitComponentTests: XCTestCase {
             didSubmitExpectation.fulfill()
         }
 
-        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.holderNameItem"))
-        let accountNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankAccountNumberItem"))
-        let routingNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankRoutingNumberItem"))
+        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.holderNameItem"))
+        let accountNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankAccountNumberItem"))
+        let routingNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankRoutingNumberItem"))
 
         self.populate(textItemView: nameItemView, with: "test")
         self.populate(textItemView: accountNumberItemView, with: "123456789")
@@ -387,9 +387,9 @@ class ACHDirectDebitComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.holderNameItem"))
-        let accountNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankAccountNumberItem"))
-        let routingNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "AdyenComponents.ACHDirectDebitComponent.bankRoutingNumberItem"))
+        let nameItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.holderNameItem"))
+        let accountNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankAccountNumberItem"))
+        let routingNumberItemView: FormTextItemView<FormTextInputItem> = try XCTUnwrap(sut.viewController.view.findView(with: "PlexyComponents.ACHDirectDebitComponent.bankRoutingNumberItem"))
 
         self.populate(textItemView: nameItemView, with: "test")
         self.populate(textItemView: accountNumberItemView, with: "123456789")

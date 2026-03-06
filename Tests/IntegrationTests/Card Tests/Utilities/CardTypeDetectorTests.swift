@@ -1,11 +1,11 @@
 //
-// Copyright (c) 2025 Adyen N.V.
+// Copyright (c) 2025 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@testable @_spi(AdyenInternal) import Adyen
-@testable @_spi(AdyenInternal) import AdyenCard
+@testable @_spi(PlexyInternal) import Plexy
+@testable @_spi(PlexyInternal) import PlexyCard
 import XCTest
 
 class CardTypeDetectorTests: XCTestCase {
@@ -66,8 +66,8 @@ class CardTypeDetectorTests: XCTestCase {
         let toDetect: [CardType] = type != nil ? [type!] : []
         
         cardNumbers.forEach { cardNumber in
-            XCTAssertEqual(toDetect.adyen.type(forCardNumber: cardNumber), toDetect.first)
-            XCTAssertEqual(toDetect.adyen.types(forCardNumber: cardNumber), toDetect)
+            XCTAssertEqual(toDetect.plexy.type(forCardNumber: cardNumber), toDetect.first)
+            XCTAssertEqual(toDetect.plexy.types(forCardNumber: cardNumber), toDetect)
         }
     }
 }

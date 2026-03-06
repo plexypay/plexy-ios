@@ -1,13 +1,13 @@
 //
-// Copyright (c) 2020 Adyen N.V.
+// Copyright (c) 2020 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-@_spi(AdyenInternal) @testable import Adyen
-import AdyenActions
-import AdyenComponents
-import AdyenEncryption
+@_spi(PlexyInternal) @testable import Plexy
+import PlexyActions
+import PlexyComponents
+import PlexyEncryption
 import Foundation
 import PassKit
 
@@ -21,16 +21,16 @@ enum Dummy: Error {
     
     internal static let apiContext = try! APIContext(environment: Environment.test, clientKey: "local_DUMMYKEYFORTESTING")
 
-    internal static var context: AdyenContext {
-        AdyenContext(
+    internal static var context: PlexyContext {
+        PlexyContext(
             apiContext: apiContext,
             payment: payment,
             analyticsProvider: AnalyticsProviderMock()
         )
     }
 
-    internal static func context(with payment: Payment?) -> AdyenContext {
-        AdyenContext(
+    internal static func context(with payment: Payment?) -> PlexyContext {
+        PlexyContext(
             apiContext: apiContext,
             payment: payment,
             analyticsProvider: AnalyticsProviderMock()

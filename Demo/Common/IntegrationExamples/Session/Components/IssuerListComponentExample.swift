@@ -1,24 +1,24 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import Adyen
-import AdyenComponents
-import AdyenSession
+import Plexy
+import PlexyComponents
+import PlexySession
 
 internal final class IssuerListComponentExample: InitialDataFlowProtocol {
 
     // MARK: - Properties
 
-    internal var session: AdyenSession?
+    internal var session: PlexySession?
     internal weak var presenter: PresenterExampleProtocol?
     internal var issuerListComponent: IssuerListComponent?
     
     internal lazy var apiClient = ApiClientHelper.generateApiClient()
     
-    internal lazy var context: AdyenContext = generateContext()
+    internal lazy var context: PlexyContext = generateContext()
 
     // MARK: - Initializers
 
@@ -44,12 +44,12 @@ internal final class IssuerListComponentExample: InitialDataFlowProtocol {
 
     // MARK: - Networking
 
-    internal func loadSession(completion: @escaping (Result<AdyenSession, Error>) -> Void) {
-        requestAdyenSessionConfiguration { [weak self] response in
+    internal func loadSession(completion: @escaping (Result<PlexySession, Error>) -> Void) {
+        requestPlexySessionConfiguration { [weak self] response in
             guard let self else { return }
             switch response {
             case let .success(configuration):
-                AdyenSession.initialize(
+                PlexySession.initialize(
                     with: configuration,
                     delegate: self,
                     presentationDelegate: self,
@@ -63,7 +63,7 @@ internal final class IssuerListComponentExample: InitialDataFlowProtocol {
 
     // MARK: Presentation
 
-    internal func presentComponent(with session: AdyenSession) {
+    internal func presentComponent(with session: PlexySession) {
         do {
             let component = try issuerListComponent(from: session)
             let componentViewController = viewController(for: component)
@@ -74,7 +74,7 @@ internal final class IssuerListComponentExample: InitialDataFlowProtocol {
         }
     }
 
-    private func issuerListComponent(from session: AdyenSession) throws -> IssuerListComponent {
+    private func issuerListComponent(from session: PlexySession) throws -> IssuerListComponent {
         let paymentMethods = session.sessionContext.paymentMethods
         guard let paymentMethod = paymentMethods.paymentMethod(ofType: IssuerListPaymentMethod.self) else {
             throw IntegrationError.paymentMethodNotAvailable(paymentMethod: IssuerListPaymentMethod.self)
@@ -105,17 +105,17 @@ internal final class IssuerListComponentExample: InitialDataFlowProtocol {
 
 }
 
-extension IssuerListComponentExample: AdyenSessionDelegate {
+extension IssuerListComponentExample: PlexySessionDelegate {
     
-    func didComplete(with result: AdyenSessionResult, component: Component, session: AdyenSession) {
+    func didComplete(with result: PlexySessionResult, component: Component, session: PlexySession) {
         dismissAndShowAlert(result.resultCode.isSuccess, result.resultCode.rawValue)
     }
 
-    func didFail(with error: Error, from component: Component, session: AdyenSession) {
+    func didFail(with error: Error, from component: Component, session: PlexySession) {
         dismissAndShowAlert(false, error.localizedDescription)
     }
 
-    func didOpenExternalApplication(component: ActionComponent, session: AdyenSession) {
+    func didOpenExternalApplication(component: ActionComponent, session: PlexySession) {
         print(#function)
     }
 }

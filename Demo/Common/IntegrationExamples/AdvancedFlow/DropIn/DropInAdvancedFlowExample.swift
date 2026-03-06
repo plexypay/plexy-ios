@@ -1,12 +1,12 @@
 //
-// Copyright (c) 2023 Adyen N.V.
+// Copyright (c) 2023 Plexy N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
 
-import AdyenActions
-import AdyenComponents
-import AdyenDropIn
+import PlexyActions
+import PlexyComponents
+import PlexyDropIn
 
 internal final class DropInAdvancedFlowExample: InitialDataAdvancedFlowProtocol {
 
@@ -16,7 +16,7 @@ internal final class DropInAdvancedFlowExample: InitialDataAdvancedFlowProtocol 
 
     internal lazy var apiClient = ApiClientHelper.generateApiClient()
 
-    internal lazy var context: AdyenContext = generateContext()
+    internal lazy var context: PlexyContext = generateContext()
 
     // MARK: - Initializers
 
