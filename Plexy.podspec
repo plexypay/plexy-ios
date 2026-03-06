@@ -61,10 +61,6 @@ Pod::Spec.new do |s|
     }
   end
 
-  s.subspec 'CardScanner' do |plugin|
-    plugin.dependency 'PlexyCardScanner'
-  end
-
   s.subspec 'Components' do |plugin|
     plugin.dependency 'Plexy/Core'
     plugin.dependency 'Plexy/Encryption'
