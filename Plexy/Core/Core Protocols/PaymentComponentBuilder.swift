@@ -11,99 +11,99 @@ import Foundation
 public protocol PaymentComponentBuilder: PlexyContextAware {
     
     /// Builds a certain `PaymentComponent` based on a `StoredCardPaymentMethod`.
-    func build(paymentMethod: StoredCardPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: StoredCardPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `StoredPaymentMethod`.
-    func build(paymentMethod: StoredPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: StoredPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `StoredBCMCPaymentMethod`.
-    func build(paymentMethod: StoredBCMCPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: StoredBCMCPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `StoredACHDirectDebitPaymentMethod`.
-    func build(paymentMethod: StoredACHDirectDebitPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: StoredACHDirectDebitPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `CardPaymentMethod`.
-    func build(paymentMethod: CardPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: CardPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `BCMCPaymentMethod`.
-    func build(paymentMethod: BCMCPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: BCMCPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `IssuerListPaymentMethod`.
-    func build(paymentMethod: IssuerListPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: IssuerListPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `SEPADirectDebitPaymentMethod`.
-    func build(paymentMethod: SEPADirectDebitPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: SEPADirectDebitPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `BACSDirectDebitPaymentMethod`.
-    func build(paymentMethod: BACSDirectDebitPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: BACSDirectDebitPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `ACHDirectDebitPaymentMethod`.
-    func build(paymentMethod: ACHDirectDebitPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: ACHDirectDebitPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `ApplePayPaymentMethod`.
-    func build(paymentMethod: ApplePayPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: ApplePayPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `WeChatPayPaymentMethod`.
-    func build(paymentMethod: WeChatPayPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: WeChatPayPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `QiwiWalletPaymentMethod`.
-    func build(paymentMethod: QiwiWalletPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: QiwiWalletPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `MBWayPaymentMethod`.
-    func build(paymentMethod: MBWayPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: MBWayPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `BLIKPaymentMethod`.
-    func build(paymentMethod: BLIKPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: BLIKPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `DokuWalletPaymentMethod`.
-    func build(paymentMethod: DokuPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: DokuPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `EContextPaymentMethod`.
-    func build(paymentMethod: EContextPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: EContextPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `GiftCardPaymentMethod`.
-    func build(paymentMethod: GiftCardPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: GiftCardPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `MealVoucherPaymentMethod`.
-    func build(paymentMethod: MealVoucherPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: MealVoucherPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `BoletoPaymentMethod`.
-    func build(paymentMethod: BoletoPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: BoletoPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `AffirmPaymentMethod`.
-    func build(paymentMethod: AffirmPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: AffirmPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `AtomePaymentMethod`.
-    func build(paymentMethod: AtomePaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: AtomePaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on  `OnlineBankingPaymentMethod`
-    func build(paymentMethod: OnlineBankingPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: OnlineBankingPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `UPIPaymentMethod`.
-    func build(paymentMethod: UPIPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: UPIPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `PayToPaymentMethod`.
-    func build(paymentMethod: PayToPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: PayToPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `StoredPayToPaymentMethod`.
-    func build(paymentMethod: StoredPayToPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: StoredPayToPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `CashAppPayPaymentMethod`.
-    func build(paymentMethod: CashAppPayPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: CashAppPayPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `StoredCashAppPayPaymentMethod`.
-    func build(paymentMethod: StoredCashAppPayPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: StoredCashAppPayPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `TwintPaymentMethod`.
-    func build(paymentMethod: TwintPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: TwintPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on a `StoredTwintPaymentMethod`.
-    func build(paymentMethod: StoredTwintPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: StoredTwintPaymentMethod) -> (any PaymentComponent)?
     
     /// Builds a certain `PaymentComponent` based on a `PayByBankUSPaymentMethod`.
-    func build(paymentMethod: PayByBankUSPaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: PayByBankUSPaymentMethod) -> (any PaymentComponent)?
 
     /// Builds a certain `PaymentComponent` based on any `PaymentMethod`, as a default case.
-    func build(paymentMethod: PaymentMethod) -> PaymentComponent?
+    func build(paymentMethod: PaymentMethod) -> (any PaymentComponent)?
     
 }

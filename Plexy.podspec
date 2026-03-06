@@ -17,14 +17,10 @@ Pod::Spec.new do |s|
   s.default_subspecs = 'Core', 'Components', 'Actions', 'Card', 'Encryption', 'DropIn', 'Session'
   s.pod_target_xcconfig = {'SWIFT_SUPPRESS_WARNINGS' => 'YES' }
 
-  s.subspec 'Networking' do |plugin|
-    plugin.source_files = 'PlexyNetworking/**/*.swift'
-  end
-
   s.subspec 'Core' do |plugin|
     plugin.source_files = 'Plexy/**/*.swift'
     plugin.exclude_files = 'Plexy/**/BundleSPMExtension.swift'
-    plugin.dependency 'Plexy/Networking'
+    plugin.dependency 'PlexyNetworking'
     plugin.resource_bundles = {
         'Plexy' => [
             'Plexy/Assets/**/*.strings',

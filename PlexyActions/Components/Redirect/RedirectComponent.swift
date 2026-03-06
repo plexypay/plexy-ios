@@ -8,8 +8,6 @@
 import PlexyNetworking
 import UIKit
 
-extension RedirectComponent: AnyRedirectComponent {}
-
 /// Handles any redirect Url whether its a web url, an App custom scheme url, or an app universal link.
 public final class RedirectComponent: ActionComponent {
     
