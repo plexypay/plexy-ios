@@ -42,8 +42,8 @@ jobs:
       - name: Build project
         if: matrix.language == 'swift'
         run: |
-          xcodebuild -project Adyen.xcodeproj \
-            -scheme Adyen \
+          xcodebuild -project Plexy.xcodeproj \
+            -scheme Plexy \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.6' \
             SKIP_INSTALL=NO build | xcpretty --utf --color
 
