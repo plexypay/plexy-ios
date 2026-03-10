@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Plexy'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.summary = "Plexy Components for iOS"
   s.description = <<-DESC
     Plexy Components for iOS allows you to accept in-app payments by providing you with the building blocks you need to create a checkout experience.
@@ -17,10 +17,20 @@ Pod::Spec.new do |s|
   s.default_subspecs = 'Core', 'Components', 'Actions', 'Card', 'Encryption', 'DropIn', 'Session'
   s.pod_target_xcconfig = {'SWIFT_SUPPRESS_WARNINGS' => 'YES' }
 
+  s.subspec 'Networking' do |plugin|
+    plugin.source_files = 'PlexyNetworking/**/*.swift'
+    plugin.framework = 'Foundation'
+    plugin.pod_target_xcconfig = {
+      'DEFINES_MODULE' => 'YES',
+      'PRODUCT_MODULE_NAME' => 'PlexyNetworking',
+      'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES'
+    }
+  end
+
   s.subspec 'Core' do |plugin|
     plugin.source_files = 'Plexy/**/*.swift'
     plugin.exclude_files = 'Plexy/**/BundleSPMExtension.swift'
-    plugin.dependency 'PlexyNetworking'
+    plugin.dependency 'Plexy/Networking'
     plugin.resource_bundles = {
         'Plexy' => [
             'Plexy/Assets/**/*.strings',
