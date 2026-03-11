@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Plexy'
-  s.version = '1.0.0'
+  s.version = '4.0.0'
   s.summary = "Plexy Components for iOS"
   s.description = <<-DESC
     Plexy Components for iOS allows you to accept in-app payments by providing you with the building blocks you need to create a checkout experience.

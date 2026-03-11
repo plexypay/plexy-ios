@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'PlexyNetworking'
-  s.version = '1.0.0'
+  s.version = '4.0.0'
   s.summary = "Plexy Networking Module for iOS"
 
   s.homepage = 'https://plexy.money'
