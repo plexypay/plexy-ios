@@ -19,7 +19,7 @@ jobs:
       sonarToken: ${{ secrets.SONAR_TOKEN }}
       destination: "name=iPhone 16,OS=18.6"
       destination_iPad: "name=iPad (10th generation),OS=18.6"
-      project: "Adyen.xcodeproj"
+      project: "Plexy.xcodeproj"
       params: "-derivedDataPath ./DerivedData -skipPackagePluginValidation"
     runs-on: macos-15-xlarge 
 
@@ -32,7 +32,7 @@ jobs:
     - name: Validate Versions
       run: |
         Scripts/validate-3ds2-SDK-version.sh
-        Scripts/validate-Adyen-SDK-version.sh
+        Scripts/validate-Plexy-SDK-version.sh
 
     - name: Select latest Xcode
       uses: maxim-lobanov/setup-xcode@v1
@@ -50,7 +50,7 @@ jobs:
         xcodebuild clean build -project "${{env.project}}" -scheme "${scheme}" ${params} -destination "${{env.destination}}" | xcpretty --utf --color && exit ${PIPESTATUS[0]}
       env:
         params: '${{env.params}}'
-        scheme: 'AdyenUIHost'
+        scheme: 'PlexyUIHost'
         
     - name: 🧪 Unit + Integration Tests
       run: |
@@ -64,7 +64,7 @@ jobs:
           -destination "${{env.destination}}" | xcpretty --utf --color && exit ${PIPESTATUS[0]}
       env:
         params: '${{env.params}}'
-        scheme: 'AdyenUIHost'
+        scheme: 'PlexyUIHost'
         testPlan: 'CI'
         resultPath: 'Test-CI-Result.xcresult'
 

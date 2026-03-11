@@ -50,7 +50,7 @@ targets:
     sources: Source
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.adyen.$PROJECT_NAME
+        PRODUCT_BUNDLE_IDENTIFIER: com.plexy.$PROJECT_NAME
   Tests:
     type: bundle.ui-testing
     platform: iOS
@@ -70,7 +70,7 @@ mkdir -p Source
 
 echo "
 import Foundation
-import Adyen
+import Plexy
 @main
 class EmptyClass {static func main() {}}
 "  > Source/EmptyClass.swift
@@ -88,14 +88,14 @@ then
   target '$PROJECT_NAME' do
     use_frameworks!
 
-    pod 'AdyenCardScanner', :path => '../'
-    pod 'Adyen', :path => '../'
-    pod 'Adyen/CardScanner', :path => '../'
-    pod 'Adyen/Session', :path => '../'
-    pod 'Adyen/SwiftUI', :path => '../'
-    pod 'Adyen/DelegatedAuthentication', :path => '../'
-    pod 'Adyen/CashAppPay', :path => '../'
-    pod 'Adyen/AdyenTwint', :path => '../'
+    pod 'PlexyCardScanner', :path => '../'
+    pod 'Plexy', :path => '../'
+    pod 'Plexy/CardScanner', :path => '../'
+    pod 'Plexy/Session', :path => '../'
+    pod 'Plexy/SwiftUI', :path => '../'
+    pod 'Plexy/DelegatedAuthentication', :path => '../'
+    pod 'Plexy/CashAppPay', :path => '../'
+    pod 'Plexy/PlexyTwint', :path => '../'
   end
 
   post_install do |installer|
@@ -114,14 +114,14 @@ else
   target '$PROJECT_NAME' do
     use_frameworks!
 
-    pod 'AdyenCardScanner', :path => '../'
-    pod 'Adyen', :path => '../'
-    pod 'Adyen/CardScanner', :path => '../'
-    pod 'Adyen/WeChatPay', :path => '../'
-    pod 'Adyen/SwiftUI', :path => '../'
+    pod 'PlexyCardScanner', :path => '../'
+    pod 'Plexy', :path => '../'
+    pod 'Plexy/CardScanner', :path => '../'
+    pod 'Plexy/WeChatPay', :path => '../'
+    pod 'Plexy/SwiftUI', :path => '../'
     pod 'AdyenAuthentication'
-    pod 'Adyen/CashAppPay', :path => '../'
-    pod 'Adyen/AdyenTwint', :path => '../'
+    pod 'Plexy/CashAppPay', :path => '../'
+    pod 'Plexy/PlexyTwint', :path => '../'
   end
 
   post_install do |installer|

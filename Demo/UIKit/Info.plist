@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ADYEN_CLIENT_KEY</key>
-	<string>$(ADYEN_CLIENT_KEY)</string>
-	<key>ADYEN_DEMO_SERVER_API_KEY</key>
-	<string>$(ADYEN_DEMO_SERVER_API_KEY)</string>
-	<key>ADYEN_MERCHANT_ACCOUNT</key>
-	<string>$(ADYEN_MERCHANT_ACCOUNT)</string>
+	<key>PLEXY_CLIENT_KEY</key>
+	<string>$(PLEXY_CLIENT_KEY)</string>
+	<key>PLEXY_DEMO_SERVER_API_KEY</key>
+	<string>$(PLEXY_DEMO_SERVER_API_KEY)</string>
+	<key>PLEXY_MERCHANT_ACCOUNT</key>
+	<string>$(PLEXY_MERCHANT_ACCOUNT)</string>
 	<key>APPLE_PAY_MERCHANT_IDENTIFIER</key>
 	<string>$(APPLE_PAY_MERCHANT_IDENTIFIER)</string>
 	<key>APPLE_TEAM_IDENTIFIER</key>
@@ -60,7 +60,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.adyen.AdyenUIHost</string>
+			<string>com.plexy.PlexyUIHost</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>ui-host</string>

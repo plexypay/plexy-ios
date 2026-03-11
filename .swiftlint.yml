@@ -11,7 +11,7 @@ excluded:
   - .build
   - .index-build
   - Tests
-  - AdyenCardScannerTests
+  - PlexyCardScannerTests
   - Internal
   - Docs
   - Demo

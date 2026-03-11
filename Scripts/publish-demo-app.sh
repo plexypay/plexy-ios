@@ -4,8 +4,8 @@ set -euo pipefail
 # Constants
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_PATH="$SCRIPT_DIR/../Build-Temp"
-ARCHIVE_PATH="$BUILD_PATH/AdyenUIHost.xcarchive"
-IPA_PATH="$BUILD_PATH/AdyenUIHost.ipa"
+ARCHIVE_PATH="$BUILD_PATH/PlexyUIHost.xcarchive"
+IPA_PATH="$BUILD_PATH/PlexyUIHost.ipa"
 EXPORT_OPTIONS_PLIST="$SCRIPT_DIR/exportOptions.plist"
 
 # Input arguments
@@ -29,8 +29,8 @@ fi
 : "${ENVIRONMENT:?Environment variable ENVIRONMENT not set}"
 
 echo "🧹 Cleaning project..."
-xcodebuild clean -project Adyen.xcodeproj \
-  -scheme AdyenUIHost \
+xcodebuild clean -project Plexy.xcodeproj \
+  -scheme PlexyUIHost \
   -sdk iphoneos \
   -configuration Release \
   -skipPackagePluginValidation
@@ -40,19 +40,19 @@ rm -rf "$BUILD_PATH"
 mkdir -p "$BUILD_PATH"
 
 echo "📦 Archiving app (signing disabled)..."
-xcodebuild archive -project Adyen.xcodeproj \
-  -scheme AdyenUIHost \
+xcodebuild archive -project Plexy.xcodeproj \
+  -scheme PlexyUIHost \
   -destination "generic/platform=iOS" \
   -sdk iphoneos \
   -configuration Release \
   -archivePath "$ARCHIVE_PATH" \
   -skipPackagePluginValidation \
   CODE_SIGNING_ALLOWED=NO \
-  ADYEN_CLIENT_KEY="$CLIENT_KEY" \
-  ADYEN_DEMO_SERVER_API_KEY="$DEMO_SERVER_API_KEY" \
-  ADYEN_MERCHANT_ACCOUNT="$MERCHANT_ACCOUNT" \
+  PLEXY_CLIENT_KEY="$CLIENT_KEY" \
+  PLEXY_DEMO_SERVER_API_KEY="$DEMO_SERVER_API_KEY" \
+  PLEXY_MERCHANT_ACCOUNT="$MERCHANT_ACCOUNT" \
   APPLE_TEAM_IDENTIFIER="$APPLE_DEVELOPMENT_TEAM_ID" \
-  APPLE_PAY_MERCHANT_IDENTIFIER="${APPLE_PAY_MERCHANT_IDENTIFIER:-"merchant.com.adyen.test"}"
+  APPLE_PAY_MERCHANT_IDENTIFIER="${APPLE_PAY_MERCHANT_IDENTIFIER:-"merchant.com.plexy.test"}"
 
 echo "📤 Exporting .ipa with manual signing..."
 xcodebuild -exportArchive \
@@ -64,11 +64,11 @@ xcodebuild -exportArchive \
   -authenticationKeyID "$XCODE_AUTHENTICATION_KEY_ID" \
   -authenticationKeyIssuerID "$XCODE_AUTHENTICATION_KEY_ISSUER_ID" \
   -authenticationKeyPath "$AUTH_KEY_PATH" \
-  ADYEN_CLIENT_KEY="$CLIENT_KEY" \
-  ADYEN_DEMO_SERVER_API_KEY="$DEMO_SERVER_API_KEY" \
-  ADYEN_MERCHANT_ACCOUNT="$MERCHANT_ACCOUNT" \
+  PLEXY_CLIENT_KEY="$CLIENT_KEY" \
+  PLEXY_DEMO_SERVER_API_KEY="$DEMO_SERVER_API_KEY" \
+  PLEXY_MERCHANT_ACCOUNT="$MERCHANT_ACCOUNT" \
   APPLE_TEAM_IDENTIFIER="$APPLE_DEVELOPMENT_TEAM_ID" \
-  APPLE_PAY_MERCHANT_IDENTIFIER="${APPLE_PAY_MERCHANT_IDENTIFIER:-"merchant.com.adyen.test"}"
+  APPLE_PAY_MERCHANT_IDENTIFIER="${APPLE_PAY_MERCHANT_IDENTIFIER:-"merchant.com.plexy.test"}"
 
 echo "☁️ Uploading to App Store Connect..."
 xcrun altool --upload-app \

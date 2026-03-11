@@ -21,9 +21,9 @@ The demo app uses xcconfig files for secure secret management. To set up your lo
 
 | Variable Name | Value | Description |
 | ------------- | ----- | ----------- |
-| ADYEN_CLIENT_KEY | your_client_key_here | We use your client key to authenticate requests from your payment environment. [How to get Client key](https://docs.plexy.com/development-resources/client-side-authentication#get-your-client-key) |
-| ADYEN_DEMO_SERVER_API_KEY | your_api_key_here | Each API request that you make to Plexy is processed through an API credential linked to your company account. [How to get API key](https://docs.plexy.com/development-resources/api-credentials#generate-api-key) |
-| ADYEN_MERCHANT_ACCOUNT | your_merchant_account_here | Your Plexy merchant account name. You can also change the merchant identifier in app 'Settings' (top right corner). [How to create MerchantID](https://docs.plexy.com/payment-methods/apple-pay/apple-pay-certificate/ios/#create-merchant-identifier) |
+| PLEXY_CLIENT_KEY | your_client_key_here | We use your client key to authenticate requests from your payment environment. [How to get Client key](https://docs.plexy.com/development-resources/client-side-authentication#get-your-client-key) |
+| PLEXY_DEMO_SERVER_API_KEY | your_api_key_here | Each API request that you make to Plexy is processed through an API credential linked to your company account. [How to get API key](https://docs.plexy.com/development-resources/api-credentials#generate-api-key) |
+| PLEXY_MERCHANT_ACCOUNT | your_merchant_account_here | Your Plexy merchant account name. You can also change the merchant identifier in app 'Settings' (top right corner). [How to create MerchantID](https://docs.plexy.com/payment-methods/apple-pay/apple-pay-certificate/ios/#create-merchant-identifier) |
 | APPLE_TEAM_IDENTIFIER | your_team_id_here | Your Apple Developer Team Identifier. |
 | APPLE_PAY_MERCHANT_IDENTIFIER | your_apple_pay_merchant_id_here | A merchant identifier that uniquely identifies you as a merchant who can accept Apple Pay payments. |
 

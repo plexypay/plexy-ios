@@ -38,23 +38,23 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: \"Adyen\", path: \"../\")
+        .package(name: \"Plexy\", path: \"../\")
     ],
     targets: [
         .target(
             name: \"TempProject\",
             dependencies: [
-                .product(name: \"Adyen\", package: \"Adyen\"),
-                .product(name: \"AdyenActions\", package: \"Adyen\"),
-                .product(name: \"AdyenCard\", package: \"Adyen\"),
-                .product(name: \"AdyenComponents\", package: \"Adyen\"),
-                .product(name: \"AdyenSession\", package: \"Adyen\"),
-                .product(name: \"AdyenWeChatPay\", package: \"Adyen\"),
-                .product(name: \"AdyenSwiftUI\", package: \"Adyen\"),
-                .product(name: \"AdyenCashAppPay\", package: \"Adyen\"),
-                .product(name: \"AdyenTwint\", package: \"Adyen\"),
-                .product(name: \"AdyenDropIn\", package: \"Adyen\"),
-                .product(name: \"AdyenDelegatedAuthentication\", package: \"Adyen\"),
+                .product(name: \"Plexy\", package: \"Plexy\"),
+                .product(name: \"PlexyActions\", package: \"Plexy\"),
+                .product(name: \"PlexyCard\", package: \"Plexy\"),
+                .product(name: \"PlexyComponents\", package: \"Plexy\"),
+                .product(name: \"PlexySession\", package: \"Plexy\"),
+                .product(name: \"PlexyWeChatPay\", package: \"Plexy\"),
+                .product(name: \"PlexySwiftUI\", package: \"Plexy\"),
+                .product(name: \"PlexyCashAppPay\", package: \"Plexy\"),
+                .product(name: \"PlexyTwint\", package: \"Plexy\"),
+                .product(name: \"PlexyDropIn\", package: \"Plexy\"),
+                .product(name: \"PlexyDelegatedAuthentication\", package: \"Plexy\"),
             ]
         )
     ]

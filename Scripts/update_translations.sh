@@ -19,4 +19,4 @@ rm -rf ./translations
 
 echo ""
 echo "# Generating localization keys"
-./Scripts/generate_localization_keys.swift ./Adyen/Assets/en-US.lproj/Localizable.strings ./Adyen/Assets/Generated/LocalizationKey.swift
+./Scripts/generate_localization_keys.swift ./Plexy/Assets/en-US.lproj/Localizable.strings ./Plexy/Assets/Generated/LocalizationKey.swift

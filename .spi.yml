@@ -1,5 +1,5 @@
 version: 1
 builder:
   configs:
-    - documentation_targets: [Adyen, AdyenActions, AdyenCard, AdyenComponents, AdyenSession, AdyenDropIn, AdyenEncryption, AdyenWeChatPay, AdyenCashAppPay, AdyenTwint]
+    - documentation_targets: [Plexy, PlexyActions, PlexyCard, PlexyComponents, PlexySession, PlexyDropIn, PlexyEncryption, PlexyWeChatPay, PlexyCashAppPay, PlexyTwint]
       platform: ios
